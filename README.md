@@ -5,7 +5,7 @@
 2. [Member](#member)
 
 
-## Tech <a name="tech"><a/>
+## Technologies <a name="tech"><a/>
 - ReactJS
 - Apollo
 - GraphQL
