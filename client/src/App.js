@@ -1,7 +1,7 @@
 
 function App() {
   return (
-    <p>Vietflix</p>
+    <p>Vietflix film project</p>
   );
 }
 
