@@ -1,7 +1,10 @@
+import HomePage from "./view/HomePage";
 
 function App() {
   return (
-    <p>Vietflix film project</p>
+    <div>
+      <HomePage />
+    </div>
   );
 }
 
