@@ -22,15 +22,15 @@ code {
 
 .background-image {
   .slick-next {
-    @apply right-5 h-11 w-11;
-    border:1px solid gray;
-    border-radius: 9999px;
+    @apply right-5 h-24 w-8;
+    background: #000;
+    opacity: 40%;
     padding: 0.5rem;
   }
   .slick-prev {
-    @apply left-5 h-11 w-11 z-50;
-    border:1px solid gray;
-    border-radius: 9999px;
+    @apply left-5 h-24 w-8 z-50;
+    background: #000;
+    opacity: 40%;
     padding: 0.5rem;
   }
   .slick-dots {
@@ -54,6 +54,30 @@ code {
     }
   }
 }
+
+.listFilm {
+  .slick-slide {
+    @apply h-56;
+  }
+  .custom-width {
+    @media screen and (min-width: 1024px) {
+      width: 100% !important;
+    }
+    width: 90% !important;
+  }
+  .slick-prev {
+    @media screen and (min-width: 1024px) {
+      left: -3% !important;
+      z-index: 1;
+    }
+  }
+  .slick-next {
+    @media screen and (min-width: 1024px) {
+      right: -3% !important;
+      z-index: 1;
+    }
+  }
+} 
 .circle {
   stroke: red;
   stroke-dasharray: 650;
@@ -107,4 +131,66 @@ code {
     }
     
   }
+}
+.center{
+  .slick-slide{
+    @media screen and (min-width: 1028px) {
+      height: 180px;
+    }
+  }
+    .slick-slide > div {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      margin: auto;
+      padding: 0px;
+      @media screen and (min-width: 1028px) {
+        height: 180px;
+      }
+      @media screen and (min-width: 900px) {
+        width: 90%;
+      }
+    }
+    .slick-slide > div img:focus{
+      border: 0;
+    }
+    .slick-slide > div img{
+      object-fit: cover;
+    }
+    .slick-center{
+      transform: scaleY(1.1);
+      background: rgba(241, 54, 54, 0.365);
+    }
+    .slick-dots {
+      @media screen and (min-width: 1024px) {
+        @apply bottom-10;
+      }
+      @apply bottom-3;
+      li {
+        button {
+          @apply p-0;
+          &:before {
+            @apply text-white opacity-100;
+          }
+        }
+        &:hover::before {
+          @apply text-white;
+        }
+      }
+      .slick-active button:before {
+        @apply text-red-700 text-[12px];
+      }
+    }
+    .slick-prev {
+      @media screen and (min-width: 1024px) {
+        left: -5% !important;
+        z-index: 1;
+      }
+    }
+    .slick-next {
+      @media screen and (min-width: 1024px) {
+        right: -5% !important;
+        z-index: 1;
+      }
+    }
 }

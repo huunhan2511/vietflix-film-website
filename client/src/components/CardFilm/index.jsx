@@ -74,7 +74,7 @@ export default function CardFilm() {
                   </svg>
                   </span>
                 <span className="uppercase text-2xl leading-5 tracking-[0.75rem] text-gray-50">
-                  PLAY NOW
+                  Xem ngay
                 </span>
             </div>
         </div>

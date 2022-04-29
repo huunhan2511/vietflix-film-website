@@ -1,7 +1,10 @@
 import React from 'react';
 import CardFilm from '../../components/CardFilm';
+import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import HeaderSm from '../../components/HeaderSm';
+import ListFilm from '../../components/ListFilm';
+import ListCenter from '../../components/ListFilm/ListCenter';
 import Slide from '../../components/Slide';
 export default function HomePage() {
   return ( 
@@ -20,12 +23,20 @@ export default function HomePage() {
           autoplay={true}
         >
           <CardFilm/>  
-          {/* <CardFilm/>  
-          <CardFilm/>   */}
+          <CardFilm/>  
+          <CardFilm/>  
         </Slide>
       </div>
-      <div class="min-h-screen"> </div>
-      
+      <div class="min-h-screen px-20 py-10"> 
+        <ListFilm title="Thịnh hành "/>
+        <ListFilm title="Mới phát hành "/>
+        <ListCenter title="Nổi bật"/>
+
+        <ListFilm title="Gợi ý cho bạn"/>
+      </div>
+      <div>
+        <Footer/>
+      </div>
     </div>
   )
 }
