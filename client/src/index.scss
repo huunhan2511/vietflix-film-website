@@ -194,3 +194,31 @@ code {
       }
     }
 }
+.Modal {
+  position: fixed;
+  top: 5%;
+  left: 10%;
+  right: 10%;
+  background-color: rgb(16, 15, 15);
+  @media screen and (min-width: 1280px) {
+    left: 26%;
+    right: 26%;
+  }
+  overflow: auto;
+  height: 100%;
+  border-radius: 1.5%;
+}
+.Modal::-webkit-scrollbar {
+  width: 100%;
+  background: transparent; /* make scrollbar transparent */
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(56, 54, 54, 0.5);
+  overflow: hidden;
+}

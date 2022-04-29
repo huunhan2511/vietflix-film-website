@@ -1,4 +1,7 @@
 import React from 'react'
+import DetailFilm from '../DetailFilm'
+import {faCircleExclamation} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function CardFilm() {
     let img = "https://static1.dienanh.net/upload/202201/b21fdd10-3ea0-4352-91b9-700d19859456.jpeg"
@@ -30,6 +33,16 @@ export default function CardFilm() {
                     <span className='text-xl text-white'>
                         Hành động 
                     </span>
+                </span>
+                <span className='mt-5'>
+                  <DetailFilm>
+                    <div className='text-[150%] px-8 py-3 bg-zinc-700 bg-opacity-50'>
+                      <FontAwesomeIcon icon={faCircleExclamation} inverse/>
+                      <span className='ml-2'>
+                        Xem thông tin
+                      </span>
+                    </div>
+                  </DetailFilm>
                 </span>
         
             </div>
