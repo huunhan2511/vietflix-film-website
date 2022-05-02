@@ -6,7 +6,7 @@ import youtube from "../../svg/icons8-youtube.svg";
 import linkedin from "../../svg/icons8-linkedin-2.svg";
 export default function Footer() {
   return (
-    <div className='bg-zinc-900 grid grid-rows-2 place-items-center py-10' >
+    <div className='bg-[#171717] grid grid-rows-2 place-items-center py-10' >
         <div className='grid  grid-cols-5 gap-5'>
             <img className="rounded-full bg-zinc-800 p-2 hover:backdrop-blur-sm hover:bg-red-600" src={facebook}/>
             <img className="rounded-full bg-zinc-800 p-2 hover:backdrop-blur-sm hover:bg-red-600" src={instagram}/>

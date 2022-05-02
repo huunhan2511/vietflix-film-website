@@ -17,7 +17,7 @@ export default function Film() {
                   <div className='cursor-pointer xs:max-w-[5rem] xs:px-1 md:max-w-[7.5rem] px-2 py-1 text-base font-semibold content-center border-red-600 bg-red-600 hover:bg-opacity-70 '>
                           <FontAwesomeIcon icon={faPlay} className=" xs:text-[50%] md:text-[70%] md:mt-3 lg:mt-2 lg:ml-2 lg:text-base"/>
                           <span className='xs:ml-1 md:ml-1 lg:ml-2 text-white xs:text-[50%] md:text-sm lg:text-base'>
-                              Xem ngày
+                              Xem ngay
                           </span>
                   </div>
                   <div className='place-self-center '>

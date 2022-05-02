@@ -24,9 +24,6 @@ module.exports = {
       },
       brightness: {
         25: '.25',
-      },
-      dropShadow:{
-        red: '1px 1px 1px rgba(220, 38, 38)'
       }
       
     },
