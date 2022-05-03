@@ -1,27 +1,26 @@
-import connect from './models/database.js';
+import connect from './mongo/connectDB.js';
 import dotenv from 'dotenv'
 dotenv.config();
-connect();
+connect.connectDB();
 import express from 'express'
 
 import { ApolloServer } from 'apollo-server-express'
-import typeDefs from './grahpql/schemas/schema.js'
-import mutation from './grahpql/resolvers/mutation.js'
-import query from './grahpql/resolvers/query.js'
-import episodeRoute from './routes/episode.route.js';
+import typeDefs from './schema/schema.js'
+import resolvers from './resolver/resolver.js'
+import mongoDataMethods from './mongo/mongoDataMethods.js'
 
-const resolvers = { Query: query, Mutation: mutation};
 const app = express();
-app.use(express.json());
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: () => ({mongoDataMethods})
+})
 await server.start();
 server.applyMiddleware({app});
 
 
-app.use('/episode', episodeRoute);
-
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("[moviebe] running at: localhost:" + PORT + "" + server.graphqlPath));
+app.listen(PORT, () => console.log("running at: localhost:" + PORT + "" + server.graphqlPath));
 
 // server.listen().then(({ url }) => {
 //   console.log(`🚀  Server ready at ${url}`);

@@ -1,4 +1,4 @@
-import Season from '../entities/season.entity.js';
+import Season from '../models/season.entity.js';
 
 /**
  * getAllSeason()
