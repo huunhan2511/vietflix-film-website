@@ -5,7 +5,7 @@ const resolver = {
     hello: () => "hello",
 
     films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms(),
-    film: async (parent, args, context) => await context.mongoDataMethods.getFilmTypeById(args.id),
+    film: async (parent, args, context) => await context.mongoDataMethods.getFilmById(args.id),
 
     genres:async (parent, args, context) => await context.mongoDataMethods.getAllGenres(),
     genre: async (parent, args, context) => await context.mongoDataMethods.getGenreById(args.id),
@@ -24,13 +24,13 @@ const resolver = {
   },
 
   Film: {
-    genre: async (parent, args, context) => await context.mongoDataMethods.getAllGenres({id: {$all: parent.genre}}),
+    genres: async (parent, args, context) => await context.mongoDataMethods.getAllGenres({_id: {$in: parent.genres}}),
     filmType: async (parent, args, context) => await context.mongoDataMethods.getFilmTypeById(parent.filmType),
     filmDetail: async (parent, args, context) => await context.mongoDataMethods.getFilmDetailById(parent.filmDetail),
   },
 
   Genre: {
-    films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms({genre: {$all: parent.id}})
+    films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms({genres: {$in: parent.id}})
   },
 
   FilmType: {
@@ -38,12 +38,12 @@ const resolver = {
   },
 
   FilmDetail: {
-    seasons: async (parent, args, context) => await context.mongoDataMethods.getAllSeasons({id: {$all: parent.seasons}}),
+    seasons: async (parent, args, context) => await context.mongoDataMethods.getAllSeasons({_id: {$in: parent.seasons}}),
     episode: async (parent, args, context) => await context.mongoDataMethods.getEpisodeById(parent.episode),
   },
 
   Season: {
-    episodes: async (parent, args, context) => await context.mongoDataMethods.getAllEpisodes({id: {$all: parent.episodes}}),
+    episodes: async (parent, args, context) =>await context.mongoDataMethods.getAllEpisodes({_id: {$in: parent.episodes}}),
   },
 
   Mutation: {

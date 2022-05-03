@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const filmDetailSchema = new mongoose.Schema({
     total_seasons: {
-        type: String
+        type: Number
     },
     seasons: {
         type: [{

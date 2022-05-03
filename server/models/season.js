@@ -4,7 +4,7 @@ const seasonSchema = new mongoose.Schema({
         type: String,
     },
     total_episodes: {
-        type: String,
+        type: Number,
     },
     episodes: {
         type: [{

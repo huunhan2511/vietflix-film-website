@@ -7,7 +7,7 @@ import Episode from '../models/episode.js'
 
 const mongoDataMethods = {
     getAllFilms: async (conditions = null) => conditions === null ? await Film.find() : await Film.find(conditions),
-    getFilmById: async id => Film.findById(id),
+    getFilmById: async (id) => await Film.findById(id),
 
     getAllGenres: async (conditions = null) => conditions === null ? await Genre.find() : await Genre.find(conditions),
     getGenreById: async id => Genre.findById(id),
@@ -21,10 +21,7 @@ const mongoDataMethods = {
     getAllSeasons: async (conditions = null) => conditions === null ? await Season.find() : await Season.find(conditions),
     getSeasonById: async id => await Season.findById(id),
 
-    getAllEpisodes: async (conditions = null) => {
-      console.log(conditions);
-      return conditions === null ? await Episode.find() : await Episode.find(conditions)
-    },
+    getAllEpisodes: async (conditions = null) => conditions === null ? await Episode.find() : await Episode.find(conditions),
     getEpisodeById: async id => await Episode.findById(id),
 
     //Create

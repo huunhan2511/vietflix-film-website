@@ -5,7 +5,7 @@ const typeDefs = gql`
         id: ID!,
         name: String,
         img: String,
-        genre: [Genre],
+        genres: [Genre],
         filmType: FilmType,
         filmDetail: FilmDetail
     }
@@ -83,14 +83,14 @@ const typeDefs = gql`
     }
 
     input FilmDetailInput {
-        total_seasons: String,
+        total_seasons: Int,
         seasons: [String],
         episode: String
     }
 
     input SeasonInput{
         name: String,
-        total_episodes: String,
+        total_episodes: Int,
         episodes: [String]
     }
 
