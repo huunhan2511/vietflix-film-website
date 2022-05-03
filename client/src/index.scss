@@ -57,7 +57,6 @@ code {
 
 .listFilm {
   .slick-slide {
-    @apply h-56;
   }
   .custom-width {
     @media screen and (min-width: 1024px) {
@@ -199,7 +198,7 @@ code {
   top: 5%;
   left: 10%;
   right: 10%;
-  background-color: rgb(16, 15, 15);
+  background-color: #171717;
   @media screen and (min-width: 1280px) {
     left: 26%;
     right: 26%;
@@ -211,6 +210,7 @@ code {
 .Modal::-webkit-scrollbar {
   width: 100%;
   background: transparent; /* make scrollbar transparent */
+  
 }
 
 .Overlay {
@@ -221,4 +221,17 @@ code {
   bottom: 0;
   background-color: rgba(56, 54, 54, 0.5);
   overflow: hidden;
+}
+.selectSeason{ 
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='30' viewBox='0 0 24 24' width='25' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 5px;
+    font-weight: bold;
+    border: 1px solid #dfdfdf;
+  }
 }

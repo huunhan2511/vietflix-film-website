@@ -2,7 +2,9 @@ import React from 'react'
 import {faXmark,faPlay} from "@fortawesome/free-solid-svg-icons"
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-export default function DetailFilm({children}) {
+import Episode from './Episode';
+import SimilarFilm from './SimilarFilm';
+export default function DetailFilm({children, episode=true }) {
     let img = "https://static1.dienanh.net/upload/202201/b21fdd10-3ea0-4352-91b9-700d19859456.jpeg"
     let [isOpen, setOpen] = React.useState(false);
     const openModal = () => {
@@ -43,7 +45,7 @@ export default function DetailFilm({children}) {
                                 </span>
                             </h3>
                             <span className='text-white xs:text-[150%] xs:text-center sm:text-left sm:text-[200%] md:text-[350%] lg:text[400%] font-semibold'>Moon knight</span>
-                            <div className='p-2 bg-red-600 xs:text-center md:w-[35%] lg:w-[25%] xl:w-[17%]'>
+                            <div className='p-2 bg-red-600 xs:text-center md:w-[35%] lg:w-[25%] xl:w-[20%]'>
                                 <FontAwesomeIcon icon={faPlay} inverse />
                                 <span className='text-white ml-2 font-bold'>Xem ngay</span>
                             </div>
@@ -53,8 +55,19 @@ export default function DetailFilm({children}) {
                 <div className='px-[2%] pt-[5%] flex flex-col'>
                     <span className='text-lg text-white font-semibold'>Tóm tắt phim : </span>
                     <span className='text-lg text-zinc-400 mt-5'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</span>
-                    
+            
                 </div>
+                { episode === true ?
+                <div className='px-[2%] pt-[5%]'>
+                    <Episode/>
+                </div>
+                :
+                <div></div>
+                }
+                <div className='px-[2%] pt-[5%]'>
+                    <SimilarFilm/>
+                </div>
+                <div className='h-14'/>
             </Modal>
         </>
     )
