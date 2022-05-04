@@ -1,14 +1,19 @@
 import mongoose from "mongoose";
 const filmDetailSchema = new mongoose.Schema({
     total_seasons: {
-        type: String
+        type: Number
     },
     seasons: {
-        type: [{type: mongoose.Schema.Types.ObjectId, ref: 'season',}],
-        default : undefined
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'season',
+        }],
+        default : null
     },
     episode: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'episode',
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'episode',
+        default: null
     }
 }, { timestamps: {currentTime: () => (Date.now()+25200000)}, versionKey: false });
 

@@ -1,4 +1,4 @@
-import FilmType from '../entities/film_type.entity.js';
+import FilmType from '../models/film_type.entity.js.js';
 
 /**
  * getAllFilmType()

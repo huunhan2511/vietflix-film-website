@@ -4,10 +4,13 @@ const seasonSchema = new mongoose.Schema({
         type: String,
     },
     total_episodes: {
-        type: String,
+        type: Number,
     },
     episodes: {
-        type: [{type: mongoose.Schema.Types.ObjectId, ref: 'episode'}]
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'episode'
+        }]
     }
 }, { timestamps: {currentTime: () => (Date.now()+25200000)}, versionKey: false });
 

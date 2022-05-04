@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express'
 
 const typeDefs = gql`
     type Film {
-        id: ID,
+        id: ID!,
         name: String,
         img: String,
         genres: [Genre],
@@ -13,16 +13,18 @@ const typeDefs = gql`
     type Genre {
         id: ID,
         name: String,
+        films: [Film]
     }
 
     type FilmType {
         id: ID,
         name: String,
+        films: [Film]
     }
 
     type FilmDetail {
         id: ID,
-        total_seasons: String,
+        total_seasons: Int,
         seasons: [Season],
         episode: Episode
     }
@@ -64,12 +66,12 @@ const typeDefs = gql`
         episode(id: ID): Episode
     }
 
-    input EpisodeInput{
-        id: String,
+    input FilmInput {
         name: String,
-        time: String,
-        link_embed: String,
-        link_m3u8: String
+        img: String,
+        genres: [String],
+        filmType: String,
+        filmDetail: String
     }
 
     input GenreInput{
@@ -80,52 +82,34 @@ const typeDefs = gql`
         name: String
     }
 
-    input SeasonInput{
-        name: String,
-        total_episodes: String,
-        episodes: [String]
-    }
-
     input FilmDetailInput {
-        total_seasons: String,
+        total_seasons: Int,
         seasons: [String],
         episode: String
     }
 
-    input FilmInput {
+    input SeasonInput{
         name: String,
-        img: String,
-        genres: [String],
-        filmType: String,
-        filmDetail: String
+        total_episodes: Int,
+        episodes: [String]
+    }
+
+    input EpisodeInput{
+        id: String,
+        name: String,
+        time: String,
+        link_embed: String,
+        link_m3u8: String
     }
 
     type Mutation{
-        createEpisode(input:EpisodeInput): Episode,
+        createFilm(input:FilmInput): Film,
         createGenre(input:GenreInput): Genre,
         createFilmType(input:FilmTypeInput): FilmType,
-        createSeason(input:SeasonInput): Season,
         createFilmDetail(input:FilmDetailInput): FilmDetail,
-        createFilm(input:FilmInput): Film
+        createSeason(input:SeasonInput): Season,
+        createEpisode(input:EpisodeInput): Episode
     }
 `;
-/*
-type Genre {
-    id: ID,
-    name: String,
-    films: [Film]
-}
-type FilmType {
-        id: ID,
-        name: String,
-        films: [Film]
-    }
 
-type Season {
-        id: ID,
-        name: String,
-        total_episodes: Int,
-        episodes: [ID]
-    }
-*/
 export default typeDefs

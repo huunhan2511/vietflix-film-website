@@ -6,14 +6,18 @@ const filmSchema = new mongoose.Schema({
     img: {
         type: String,
     },
-    genres: {
-        type: [{type: mongoose.Schema.Types.ObjectId, ref: 'genre',}]
-    },
+    genres: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'genre',
+        }
+    ],
     filmType: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'film_type',
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'film_type',
     },
     filmDetail: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'film_detail', 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'film_detail', 
     }
 }, { timestamps: {currentTime: () => (Date.now()+25200000)}, versionKey: false });
 
