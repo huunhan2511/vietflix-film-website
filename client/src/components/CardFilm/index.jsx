@@ -2,8 +2,8 @@ import React from 'react'
 import {faCircleExclamation} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export default function CardFilm({openModal}) {
-    let img = "https://static1.dienanh.net/upload/202201/b21fdd10-3ea0-4352-91b9-700d19859456.jpeg"
+export default function CardFilm({openModal,film}) {
+    let img = film.img;
   return (
     <div className="relative h-80 md:h-[40rem] lg:h-[35rem] xl:h-[55rem] cursor-pointer">
         <img
@@ -19,22 +19,27 @@ export default function CardFilm({openModal}) {
                     SAGO
                   </span>
                 </h3>
-                <span className=" items-center xs:text-[2rem] sm:text-[3rem] md:text-[3rem] lg:text-[4rem] xl:text-[5rem] font-bold opacity-100 text-white">
-                Moon Knight    
+                <span className=" items-center xs:text-[1rem] sm:text-[1rem] md:text-[2rem] lg:text-[3rem] xl:text-[4rem] font-bold opacity-100 text-white">
+                <p className='truncate'>
+                  {film.name}
+                </p>  
                 </span> 
-                <span className='hidden md:block w-[80%] text-xl mb-5'>
+                <span className='hidden md:block w-[80%] sm:text-sm lg:text-xl mb-5'>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
                 </span>
                 <span className='flex gap-8'>
-                    <span className='text-xl text-red-600'>
+                    <span className='sm:test-sm lg:text-xl text-red-600'>
                         Thể loại : 
                     </span>
-                    <span className='text-xl text-white'>
-                        Hành động 
+                    <span className='sm:test-sm lg:text-xl text-white'>
+                       {film.genres.map((item,key)=>{
+                         return item.name+", "
+                       })}
+
                     </span>
                 </span>
                 <span className='mt-5'>
-                  <div className='text-[150%] px-8 py-3 bg-zinc-700 bg-opacity-50' onClick={() => openModal && openModal('5')} >
+                  <div className='text-[150%] px-8 py-3 bg-zinc-700 bg-opacity-50' onClick={() => openModal && openModal(film.id)} >
                       <FontAwesomeIcon icon={faCircleExclamation} inverse/>
                       <span className='ml-2'>
                         Xem thông tin

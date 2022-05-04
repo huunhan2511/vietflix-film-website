@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/client';
 import React from 'react';
 import CardFilm from '../../components/CardFilm';
 import DetailFilm from '../../components/DetailFilm';
@@ -7,7 +8,10 @@ import HeaderSm from '../../components/HeaderSm';
 import ListFilm from '../../components/ListFilm';
 import ListCenter from '../../components/ListFilm/ListCenter';
 import Slide from '../../components/Slide';
+import Query from '../../query';
+import Loading from '../../components/Loading';
 export default function HomePage() {
+  const dataCardFilm = useQuery(Query.qGetAllFilm);
   let [isOpen, setOpen] = React.useState(() => {
       let initState = false || JSON.parse(localStorage.getItem('isOpen'));
       return initState;
@@ -37,9 +41,15 @@ export default function HomePage() {
           dots={true}
           autoplay={true}
         >
-          <CardFilm openModal={openModal}/> 
-          <CardFilm openModal={openModal}/> 
-          <CardFilm openModal={openModal}/>   
+          { dataCardFilm.loading ? 
+            <Loading/>
+            :
+            dataCardFilm.data.films.map((item,key)=>{
+              return(
+                <CardFilm openModal={openModal} film={item} key={key}/> 
+              );
+            })
+          }
         </Slide>
       </div>
       <div className="min-h-screen px-20 py-10"> 

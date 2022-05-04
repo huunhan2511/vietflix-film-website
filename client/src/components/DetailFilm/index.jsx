@@ -4,8 +4,16 @@ import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Episode from './Episode';
 import SimilarFilm from './SimilarFilm';
+import { useQuery } from '@apollo/client';
+import Query from '../../query';
 
-export default function DetailFilm({children, episode=true ,isOpen,closeModal}) {
+export default function DetailFilm({children, episode=true ,isOpen,closeModal,filmId}) {
+    const {loading,error,data} = useQuery(Query.qGetFilm,{
+        variables : {
+            filmId : filmId
+        }
+    })
+    console.log("hehe",data)
     let img = "https://static1.dienanh.net/upload/202201/b21fdd10-3ea0-4352-91b9-700d19859456.jpeg";
     return (
         <>
