@@ -17,7 +17,7 @@ export default function Episode(seasonSelect=true) {
                     <span className='text-white place-self-end'>Mùa 1</span>
                     :
                     <div className = 'selectSeason'>
-                        <select className='bg-neutral-900 text-white px-5 py-2 float-right xs:w-[70%] sm:w-[50%] md:w-[35%]'>
+                        <select className='bg-neutral-900 text-white px-5 py-2 xs:px-5 xs:py-2 float-right xs:w-[70%] sm:w-[50%] md:w-[35%]'>
                         {options.map((item,key)=>{
                             return (
                                     <option className='bg-neutral-900 text-white' key={key} value={item.seasonNumber}>{item.seasonNumber}</option>
@@ -29,18 +29,18 @@ export default function Episode(seasonSelect=true) {
             </div>
             <div className='mt-7'>
                 <div>
-                    <div className='flex text-gray-400 px-10 xs:h-28 md:h-40 gap-4 cursor-pointer hover:bg-zinc-800'>
+                    <div className='flex text-gray-400 px-2 xs:px-10 h-24 xs:h-28 md:h-40 gap-4 cursor-pointer hover:bg-zinc-800'>
                         <div className='flex-initial w-[5%] '>
                         <div className='grid grid-cols-1 place-content-center h-full'>
-                                <span className='text-[250%] font-semibold'>1</span>
+                                <span className='text[100%] xs:text-[250%] font-semibold'>1</span>
                             </div>
                         </div>
                         <div className='flex-initial w-[25%]'>
-                            <img src={img} alt="background" className="h-full w-full py-5" ></img>
+                            <img src={img} alt="background" className="h-full w-full py-4 sm:py-5" ></img>
                         </div>
                         <div className='flex-initial w-[70%]'>
                             <div className='grid grid-cols-1 place-content-center h-full'>
-                                <span className='sm:text-base xs:text-xs'>Lorem Ipsum is 500</span>
+                                <span className='text-xs sm:text-base xs:text-xs'>Lorem Ipsum is 500</span>
                             </div>
                         </div>
                     </div>

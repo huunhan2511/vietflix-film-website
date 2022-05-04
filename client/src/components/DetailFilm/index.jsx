@@ -6,15 +6,13 @@ import Episode from './Episode';
 import SimilarFilm from './SimilarFilm';
 import { useQuery } from '@apollo/client';
 import Query from '../../query';
+import Loading from '../Loading';
 
 export default function DetailFilm({children, episode=true ,isOpen,closeModal,filmId}) {
-    const {loading,error,data} = useQuery(Query.qGetFilm,{
-        variables : {
-            filmId : filmId
-        }
-    })
-    console.log("hehe",data)
-    let img = "https://static1.dienanh.net/upload/202201/b21fdd10-3ea0-4352-91b9-700d19859456.jpeg";
+    console.log(filmId);
+    const {loading,error,data} = useQuery(Query.qGetFilm,{variables:{filmId}})
+    if (loading) return <Loading/>
+    let img = data.film.img;
     return (
         <>
             <Modal
@@ -26,6 +24,7 @@ export default function DetailFilm({children, episode=true ,isOpen,closeModal,fi
                 preventScroll={true}
                 
             >   
+                <>
                 <div className="relative md:h-[55%] cursor-pointer" >
                     <img
                         src={img}
@@ -38,36 +37,40 @@ export default function DetailFilm({children, episode=true ,isOpen,closeModal,fi
                                 <FontAwesomeIcon icon={faXmark} inverse />
                             </div>
                         </div>
-                        <div className='mb-[4%] ml-[2%]n flex flex-col'>
+                        <div className='mb-[10%] ml-[3%] flex flex-col'>
                              <h3 className="hidden lg:flex bg-gradient-to-r w-1/4 h-10 from-[#a20008] opacity-70 border-l-4 border-[#f70000] px-4 items-center">
                                 <span className="items-center text-2xl font-bold opacity-100 text-red-600">
                                     SAGO
                                 </span>
                             </h3>
-                            <span className='text-white xs:text-[150%] xs:text-center sm:text-left sm:text-[200%] md:text-[350%] lg:text[400%] font-semibold'>Moon knight</span>
-                            <div className='p-2 bg-red-600 xs:text-center md:w-[35%] lg:w-[25%] xl:w-[20%]'>
-                                <FontAwesomeIcon icon={faPlay} inverse />
-                                <span className='text-white ml-2 font-bold'>Xem ngay</span>
+                            <span className='text-white text-[150%] xs:text-[150%] sm:text-left sm:text-[200%] md:text-[350%] lg:text[400%] font-semibold'>
+                                {data.film.name}
+                            </span>
+                            <div className=' w-[50%] p-1 sm:p-2 bg-red-600 xs:text-center md:w-[35%] lg:w-[25%] xl:w-[20%] flex items-stretch hover:bg-opacity-60'>
+                                <FontAwesomeIcon icon={faPlay} inverse className='self-center'/>
+                                <span className='text-white ml-2 font-bold self-center'>Xem ngay</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className='px-[2%] pt-[5%] flex flex-col'>
-                    <span className='text-lg text-white font-semibold'>Tóm tắt phim : </span>
-                    <span className='text-lg text-zinc-400 mt-5'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</span>
+                    <span className='sm:text-lg text-white font-semibold'>Tóm tắt phim : </span>
+                    <span className='sm:text-lg text-zinc-400 mt-5'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</span>
             
                 </div>
-                { episode === true ?
+                episode === true ?
                 <div className='px-[2%] pt-[5%]'>
                     <Episode/>
                 </div>
                 :
                 <div></div>
-                }
+                
                 <div className='px-[2%] pt-[5%]'>
                     <SimilarFilm/>
                 </div>
+                </>
                 <div className='h-14'/>
+                
             </Modal>
         </>
     )

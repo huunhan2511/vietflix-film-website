@@ -4,8 +4,8 @@ import SlideCenter from '../../../components/Slide/SlideCenter';
 export default function ListCenter({title}) {
   return (
     <div className='mt-10'>
-      <span className='text-2xl'>{title}</span>
-      <div className='md:px-5'>
+      <span className='text-sm sm:text-2xl font-bold'>{title}</span>
+      <div className='mt-5 md:px-5'>
       <SlideCenter 
         slidesToShow={5}
       >

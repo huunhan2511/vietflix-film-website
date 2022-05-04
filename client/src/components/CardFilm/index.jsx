@@ -5,14 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export default function CardFilm({openModal,film}) {
     let img = film.img;
   return (
-    <div className="relative h-80 md:h-[40rem] lg:h-[35rem] xl:h-[55rem] cursor-pointer">
+    <div className="relative h-96 md:h-[40rem] lg:h-[35rem] xl:h-[55rem] cursor-pointer">
         <img
             src={img}
             alt="background"
             className="brightness-[0.4] h-full w-full"
         />
 
-        <div className="absolute left-0  w-full px-6 lg:top-40 lg:mx-20 md:top-[25%] md:h-[80%]  md:grid md:grid-cols-2 sm:top-20 sm:place-content-center xs:top-12 xs:grid xs:grid-rows-2 xs:place-content-center">
+        <div className="absolute left-0 top-24 w-full px-6 lg:top-40 lg:mx-20 md:top-[25%] md:h-[80%]  md:grid md:grid-cols-2 sm:top-20 sm:place-content-center xs:top-12 xs:grid xs:grid-rows-2 xs:place-content-center">
             <div className="col-span-1 flex flex-col xl:mt-20 xs:place-items-center md:place-items-start">
                 <h3 className="hidden lg:flex bg-gradient-to-r w-1/4 h-10 from-[#a20008] opacity-70 border-l-4 border-[#f70000] mb-5 px-4 items-center">
                   <span className="items-center text-2xl font-bold opacity-100 text-red-600">
@@ -20,14 +20,14 @@ export default function CardFilm({openModal,film}) {
                   </span>
                 </h3>
                 <span className=" items-center xs:text-[1rem] sm:text-[1rem] md:text-[2rem] lg:text-[3rem] xl:text-[4rem] font-bold opacity-100 text-white">
-                <p className='truncate'>
+                <p className='truncate text-center'>
                   {film.name}
                 </p>  
                 </span> 
                 <span className='hidden md:block w-[80%] sm:text-sm lg:text-xl mb-5'>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
                 </span>
-                <span className='flex gap-8'>
+                <span className='flex gap-8 justify-center'>
                     <span className='sm:test-sm lg:text-xl text-red-600'>
                         Thể loại : 
                     </span>
@@ -38,8 +38,8 @@ export default function CardFilm({openModal,film}) {
 
                     </span>
                 </span>
-                <span className='mt-5'>
-                  <div className='text-[150%] px-8 py-3 bg-zinc-700 bg-opacity-50' onClick={() => openModal && openModal(film.id)} >
+                <span className='mt-5 flex justify-center'>
+                  <div className='text-xl px-5 py-2 w-[70%] xs:w-full md:text-[150%] md:px-8 md:py-3 bg-zinc-700 bg-opacity-50 hover:bg-red-600 hover:bg-opacity-50' onClick={() => openModal && openModal(film.id)} >
                       <FontAwesomeIcon icon={faCircleExclamation} inverse/>
                       <span className='ml-2'>
                         Xem thông tin
@@ -48,7 +48,7 @@ export default function CardFilm({openModal,film}) {
                 </span>
         
             </div>
-            <div className="col-span-1 items-center place-content-center lg:mt-[20%] lg:flex md:flex sm:grid sm:grid-flow-col sm:mt-5 xs:mt-5 xs:grid xs:grid-flow-col">
+            <div className="col-span-1 items-center flex place-content-center lg:mt-[20%] lg:flex md:flex sm:grid sm:grid-flow-col sm:mt-5 xs:mt-5 xs:grid xs:grid-flow-col">
                 <span className="playBut mr-5 transition delay-[1000ms] hover:border-none">
                   <svg
                     version="1.1"
@@ -88,7 +88,7 @@ export default function CardFilm({openModal,film}) {
                     />
                   </svg>
                   </span>
-                <span className="uppercase text-2xl leading-5 tracking-[0.75rem] text-gray-50">
+                <span className="uppercase text-base md:text-2xl leading-5 tracking-[0.75rem] text-gray-50">
                   Xem ngay
                 </span>
             </div>

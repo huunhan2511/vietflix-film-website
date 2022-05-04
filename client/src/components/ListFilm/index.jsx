@@ -6,8 +6,8 @@ export default function ListFilm({title,openModal}) {
   return (
     <div className='w-full mt-10'>
       <div className='flex flex-row justify-between'>
-        <span className='text-2xl'>{title}</span>
-        <span className='text-lg'>Xem tất cả</span>
+        <span className='text-xs font-bold sm:text-2xl sm:font-bold'>{title}</span>
+        <span className='text-xs sm:mt-2 sm:text-lg sm:font-light'>Xem tất cả</span>
       </div>
       <div className="list-film mt-7">
         <Slide

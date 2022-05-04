@@ -7,8 +7,8 @@ export default function SimilarFilm() {
             <div>
                 <span className='text-white text-[150%] font-bold '>Nội dung tương tự</span>
             </div>
-            <div className='xs:grid xs:grid-cols-2 lg:grid lg:grid-cols-3 xs:gap-x-2 xs:gap-y-3 lg:gap-x-3 lg:gap-y-5 mt-7 pb-5 cursor-pointer'>
-                <div className='flex flex-col bg-zinc-800 xs:h-64 sm:h-96 lg:h-96'>
+            <div className='grid grid-col-1 xs:grid xs:grid-cols-2 lg:grid lg:grid-cols-3 xs:gap-x-2 xs:gap-y-3 lg:gap-x-3 lg:gap-y-5 mt-7 pb-5 cursor-pointer'>
+                <div className='flex flex-col bg-zinc-800 h-96 xs:h-64 sm:h-96 lg:h-96'>
                     <div className='h-[40%]'>
                         <img src={img} alt="background" className="h-full w-full" ></img>
                     </div>

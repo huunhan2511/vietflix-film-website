@@ -23,6 +23,7 @@ const Query={
         film(id: $filmId) {
           id
           name
+          img
         }
       }
     `
