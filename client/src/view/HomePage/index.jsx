@@ -1,5 +1,6 @@
 import React from 'react';
 import CardFilm from '../../components/CardFilm';
+import DetailFilm from '../../components/DetailFilm';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import HeaderSm from '../../components/HeaderSm';
@@ -7,9 +8,23 @@ import ListFilm from '../../components/ListFilm';
 import ListCenter from '../../components/ListFilm/ListCenter';
 import Slide from '../../components/Slide';
 export default function HomePage() {
+  let [isOpen, setOpen] = React.useState(() => {
+      let initState = false || JSON.parse(localStorage.getItem('isOpen'));
+      return initState;
+  });
+  const openModal = (id) => {
+      console.log(id);
+      setOpen(true);
+      localStorage.setItem('isOpen',true)
+      document.body.style.overflow = 'hidden';
+  }
+  const closeModal = () => {
+      setOpen(false);
+      localStorage.setItem('isOpen',false)    
+      document.body.style.overflow = 'unset';
+  }
   return ( 
-
-    <div class="HomePage min-h-screen mx-auto content-between" >
+    <div className="HomePage min-h-screen mx-auto content-between" >
       <div className='relative'>
         <div className="fixed top-0 z-50 min-w-full backdrop-blur right-0 left-0 shadow">
           <Header ></Header>
@@ -22,21 +37,22 @@ export default function HomePage() {
           dots={true}
           autoplay={true}
         >
-          <CardFilm/>  
-          <CardFilm/>  
-          <CardFilm/>  
+          <CardFilm openModal={openModal}/> 
+          <CardFilm openModal={openModal}/> 
+          <CardFilm openModal={openModal}/>   
         </Slide>
       </div>
-      <div class="min-h-screen px-20 py-10"> 
-        <ListFilm title="Thịnh hành "/>
-        <ListFilm title="Mới phát hành "/>
-        <ListCenter title="Nổi bật"/>
+      <div className="min-h-screen px-20 py-10"> 
+        <ListFilm title="Thịnh hành" openModal={openModal}/>
+        <ListFilm title="Mới phát hành " openModal={openModal}/>
+        <ListCenter title="Nổi bật" />
 
-        <ListFilm title="Gợi ý cho bạn"/>
+        <ListFilm title="Gợi ý cho bạn" openModal={openModal}/>
       </div>
       <div>
         <Footer/>
       </div>
+      <DetailFilm isOpen={isOpen} closeModal={closeModal}/>
     </div>
   )
 }

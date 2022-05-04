@@ -7,14 +7,14 @@ import nextArrow from "../../svg/chevron-right-solid.svg";
 const CustomPreveArrow = (props) => {
   const { className, onClick } = props;
   return (
-      <img className={className} onClick={onClick} src={preveArrow} />
+      <img className={className} onClick={onClick} src={preveArrow} alt='background'/>
   );
 }
 
 const CustomNextArrow = (props) => {
   const { className, onClick } = props;
   return (
-      <img className={className} onClick={onClick} src={nextArrow} />
+      <img className={className} onClick={onClick} src={nextArrow} alt='background'/>
   );
 }
 

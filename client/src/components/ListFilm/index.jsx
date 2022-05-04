@@ -2,7 +2,7 @@ import React from 'react'
 import Film from '../Film'
 import Slide from '../Slide'
 
-export default function ListFilm({title}) {
+export default function ListFilm({title,openModal}) {
   return (
     <div className='w-full mt-10'>
       <div className='flex flex-row justify-between'>
@@ -16,14 +16,14 @@ export default function ListFilm({title}) {
           infinite={false} 
           dots={false}
         >
-          <Film/>
-          <Film/>
-          <Film/>
-          <Film/>
-          <Film/>
-          <Film/>
-          <Film/>
-          <Film/>
+          <Film openModal={openModal}/>
+          <Film openModal={openModal}/>
+          <Film openModal={openModal}/>
+          <Film openModal={openModal}/>
+          <Film openModal={openModal}/>
+          <Film openModal={openModal}/>
+          <Film openModal={openModal}/>
+          <Film openModal={openModal}/>
           
         </Slide>
       </div>

@@ -4,21 +4,13 @@ import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Episode from './Episode';
 import SimilarFilm from './SimilarFilm';
-export default function DetailFilm({children, episode=true }) {
-    let img = "https://static1.dienanh.net/upload/202201/b21fdd10-3ea0-4352-91b9-700d19859456.jpeg"
-    let [isOpen, setOpen] = React.useState(false);
-    const openModal = () => {
-        setOpen(true);
-        document.body.style.overflow = 'hidden';
-    }
-    const closeModal = () => {
-        setOpen(false);
-        document.body.style.overflow = 'unset';
-    }
+
+export default function DetailFilm({children, episode=true ,isOpen,closeModal}) {
+    let img = "https://static1.dienanh.net/upload/202201/b21fdd10-3ea0-4352-91b9-700d19859456.jpeg";
     return (
         <>
-            <span className='' onClick={openModal}>{children}</span>
             <Modal
+                ariaHideApp={false}
                 className="Modal"
                 overlayClassName="Overlay"
                 isOpen={isOpen}

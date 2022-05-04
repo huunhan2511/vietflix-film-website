@@ -35,7 +35,7 @@ export default function HeaderSm() {
         {menuItems.map((item,key)=>{
                 return(
                     <span className="min-w-full p-2" key={key}>
-                        <a className={Setting}>{item.name}</a>
+                        <a href="/#" className={Setting}>{item.name}</a>
                     </span>
                 )
             })}

@@ -2,11 +2,12 @@ import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo, faPlay } from '@fortawesome/free-solid-svg-icons';
 import DetailFilm from '../DetailFilm';
-export default function Film() {
+export default function Film({openModal}) {
     let img = "https://static1.dienanh.net/upload/202201/b21fdd10-3ea0-4352-91b9-700d19859456.jpeg"
   return (
     <div className="relative block mb-2 xs:ml-2 md:ml-6 md:max-w-[90%] lg:w-full group hover:scale-105 transition duration-500 custom-width ">      
         <img
+            alt='background'
             src={img}
             className="h-52 sm:h-52 md:h-44 xl:h-48 brightness-[.45] object-cover group-hover:brightness-25 group-hover:border-l-8 group-hover:border-l-red-500"
           />
@@ -21,11 +22,11 @@ export default function Film() {
                           </span>
                   </div>
                   <div className='place-self-center '>
-                    <DetailFilm>
-                      <div className= 'cursor-pointer xs:text-base md:text-lg rounded-full bg-zinc-600 bg-opacity-50 hover:bg-red-600 hover:bg-opacity-60 xs:px-3 xs:py-1 md:px-5 md:py-2'>
+                      <div className= 'cursor-pointer xs:text-base md:text-lg rounded-full bg-zinc-600 bg-opacity-50 hover:bg-red-600 hover:bg-opacity-60 xs:px-3 xs:py-1 md:px-5 md:py-2'
+                        onClick={() => openModal && openModal('5')}
+                      >
                         <FontAwesomeIcon icon={faInfo}/>
                       </div>
-                    </DetailFilm>
                   </div>
                 </div>
           </div>

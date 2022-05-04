@@ -1,11 +1,12 @@
 import React from 'react'
 import {SearchField} from "@adobe/react-spectrum";
+import { Link } from 'react-router-dom';
 export default function Header() {
     let Setting = "Navigation font-semibold text-base hover:text-red-500 cursor-pointer"
     let menuItems = [
-        {name: 'Trang chủ'},
-        {name: 'Phim lẻ'},
-        {name: 'Phim bộ'}
+        {path: '/',name: 'Trang chủ'},
+        {path:'/phim-le',name: 'Phim lẻ'},
+        {path:'/phim-bo',name:'Phim bộ'}
       ];
   return (
     <div className="Header justify-between hidden lg:flex top-0 left-0 right-0 ">
@@ -18,7 +19,9 @@ export default function Header() {
             {menuItems.map((item,key)=>{
                 return(
                     <div className="text-center" key={key}>
-                        <a className={Setting}>{item.name}</a>
+                      <Link to={item.path}>
+                        <span className={Setting}>{item.name}</span>
+                      </Link>  
                     </div>
                 )
             })}
