@@ -1,17 +1,15 @@
 import { useQuery } from '@apollo/client';
 import React from 'react';
-import CardFilm from '../../components/CardFilm';
 import DetailFilm from '../../components/DetailFilm';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import HeaderSm from '../../components/HeaderSm';
 import ListFilm from '../../components/ListFilm';
-import ListCenter from '../../components/ListFilm/ListCenter';
-import Slide from '../../components/Slide';
 import Query from '../../query';
 import Loading from '../../components/Loading';
-export default function HomePage() {
+export default function MoviePage() {
   const dataCardFilm = useQuery(Query.qGetAllFilm);
+  
   let [isOpen, setOpen] = React.useState(() => {
       let initState = false || JSON.parse(localStorage.getItem('isOpen'));
       return initState;
@@ -41,27 +39,11 @@ export default function HomePage() {
           <Header ></Header>
           <HeaderSm />
         </div>
-        <Slide
-          className="background-image"
-          slideToShow={1}
-          speed={600}
-          dots={true}
-          autoplay={true}
-        >
-          { 
-            dataCardFilm.data.films.map((item,key)=>{
-              return(
-                <CardFilm openModal={openModal} film={item} key={key}/> 
-              );
-            })
-          }
-        </Slide>
+        
       </div>
       <div className="min-h-screen px-20 py-10"> 
         <ListFilm title="Thịnh hành" openModal={openModal}/>
         <ListFilm title="Mới phát hành " openModal={openModal}/>
-        <ListCenter title="Nổi bật" />
-
         <ListFilm title="Gợi ý cho bạn" openModal={openModal}/>
       </div>
       <div>

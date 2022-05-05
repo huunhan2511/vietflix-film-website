@@ -206,6 +206,8 @@ code {
   overflow: auto;
   height: 100%;
   border-radius: 1.5%;
+  outline: none;
+  border: none;
 }
 .Modal::-webkit-scrollbar {
   width: 100%;
@@ -247,8 +249,8 @@ code {
 
   .dot {
     position: relative;
-    width: 2em;
-    height: 2em;
+    width: 1em;
+    height: 1em;
     margin: 0.8em;
     border-radius: 50%;
 

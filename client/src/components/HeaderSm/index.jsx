@@ -2,16 +2,17 @@ import React from 'react'
 import {SearchField,ActionButton} from "@adobe/react-spectrum";
 import ShowMenu from "@spectrum-icons/workflow/ShowMenu";
 import Search from "@spectrum-icons/workflow/Search";
+import { Link } from 'react-router-dom';
 export default function HeaderSm() {
     let menuItems = [
-        {name: 'Trang chủ'},
-        {name: 'Phim lẻ'},
-        {name: 'Phim bộ'}
+        {name: 'Trang chủ',path:"/"},
+        {name: 'Phim lẻ',path:"/phim-le"},
+        {name: 'Phim bộ',path:"/phim-bo"}
       ];
     const [isOpenMenu,setOpenMenu] = React.useState("hidden"); 
     const [isOpenSearch,setOpenSearch] = React.useState("hidden");  
     
-    let Setting = "Navigation font-semibold text-base hover:text-red-500"
+    let Setting = "Navigation font-semibold text-base hover:text-red-500 px-2"
   return (
     <div className="Header lg:hidden">
         <div className="grid grid-cols-5 gap-4 place-items-center">
@@ -21,9 +22,11 @@ export default function HeaderSm() {
             </ActionButton>
             </div>
             <div className="Logo md:p-6 sm:p-4 xs:p-2 col-span-3 text-center">
-            <span className=" font-semibold text-3xl tracking-tight uppercase text-transparent cursor-pointer bg-clip-text bg-gradient-to-r from-[#e50914] to-red-500 md:text-center">
-                SAGO
-            </span>
+                <Link to="/">
+                    <span className=" font-semibold text-3xl tracking-tight uppercase text-transparent cursor-pointer bg-clip-text bg-gradient-to-r from-[#e50914] to-red-500 md:text-center">
+                        SAGO
+                    </span>
+                </Link>
             </div>
             <div className="Seach sm:py-4 xs:p-2 sm:w-5 md:py-6 md:w-5">
                 <ActionButton onPress={()=> isOpenSearch==="hidden" ? setOpenSearch("absolute") : setOpenSearch("hidden")}>
@@ -35,7 +38,10 @@ export default function HeaderSm() {
         {menuItems.map((item,key)=>{
                 return(
                     <span className="min-w-full p-2" key={key}>
-                        <a href="/#" className={Setting}>{item.name}</a>
+                        
+                    <Link to={item.path}>
+                        <p className={Setting}>{item.name}</p>
+                    </Link>
                     </span>
                 )
             })}

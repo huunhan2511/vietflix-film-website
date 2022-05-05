@@ -6,7 +6,7 @@ import {defaultTheme, Provider} from '@adobe/react-spectrum';
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
+  ApolloProvider, 
 } from "@apollo/client";
 const client = new ApolloClient({
   uri: `${process.env.REACT_APP_GRAPHQL}`,

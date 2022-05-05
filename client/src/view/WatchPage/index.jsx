@@ -2,12 +2,15 @@ import React from 'react'
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactPlayer from "react-player";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 export default function WatchPage() {
+  const location = useLocation();
+  console.log(location.state.filmId)
   let navigate = useNavigate();
   const previPage = () =>{
     navigate(-1)
     localStorage.setItem('isOpen',true);
+    localStorage.setItem('filmId',location.state.filmId);
   }
   return (
     <div className="WatchPage min-h-screen mx-auto content-between bg-black" >

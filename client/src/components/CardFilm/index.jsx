@@ -1,9 +1,14 @@
 import React from 'react'
 import {faCircleExclamation} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useNavigate } from 'react-router-dom';
 
 export default function CardFilm({openModal,film}) {
-    let img = film.img;
+  const navigate = useNavigate();
+  let img = film.img;
+  const handleWatching = () =>{
+    navigate("/watch/:id",{state:{filmId:film.id}})
+  }
   return (
     <div className="relative h-96 md:h-[40rem] lg:h-[35rem] xl:h-[55rem] cursor-pointer">
         <img
@@ -19,8 +24,8 @@ export default function CardFilm({openModal,film}) {
                     SAGO
                   </span>
                 </h3>
-                <span className=" items-center xs:text-[1rem] sm:text-[1rem] md:text-[2rem] lg:text-[3rem] xl:text-[4rem] font-bold opacity-100 text-white">
-                <p className='truncate text-center'>
+                <span className=" items-center w-full xs:text-[1rem] sm:text-[1rem] md:text-[2rem] lg:text-[3rem] xl:text-[3rem] font-bold opacity-100 text-white">
+                <p className='md:truncate text-center md:text-left'>
                   {film.name}
                 </p>  
                 </span> 
@@ -48,7 +53,9 @@ export default function CardFilm({openModal,film}) {
                 </span>
         
             </div>
-            <div className="col-span-1 items-center flex place-content-center lg:mt-[20%] lg:flex md:flex sm:grid sm:grid-flow-col sm:mt-5 xs:mt-5 xs:grid xs:grid-flow-col">
+            <div className="col-span-1 items-center flex place-content-center lg:mt-[20%] lg:flex md:flex sm:grid sm:grid-flow-col sm:mt-5 xs:mt-5 xs:grid xs:grid-flow-col"
+              onClick={handleWatching}
+            >
                 <span className="playBut mr-5 transition delay-[1000ms] hover:border-none">
                   <svg
                     version="1.1"
@@ -87,7 +94,7 @@ export default function CardFilm({openModal,film}) {
                       r="103.3"
                     />
                   </svg>
-                  </span>
+                </span>
                 <span className="uppercase text-base md:text-2xl leading-5 tracking-[0.75rem] text-gray-50">
                   Xem ngay
                 </span>

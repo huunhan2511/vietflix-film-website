@@ -7,12 +7,16 @@ import SimilarFilm from './SimilarFilm';
 import { useQuery } from '@apollo/client';
 import Query from '../../query';
 import Loading from '../Loading';
-
-export default function DetailFilm({children, episode=true ,isOpen,closeModal,filmId}) {
+import { useNavigate } from 'react-router-dom';
+export default function DetailFilm({isOpen,closeModal,filmId}) {
+    
+    const navigate = useNavigate();
+    const handleWatching = () =>{
+        navigate("/watch/:id",{state:{filmId:filmId}})
+    }
     console.log(filmId);
     const {loading,error,data} = useQuery(Query.qGetFilm,{variables:{filmId}})
     if (loading) return <Loading/>
-    let img = data.film.img;
     return (
         <>
             <Modal
@@ -24,10 +28,9 @@ export default function DetailFilm({children, episode=true ,isOpen,closeModal,fi
                 preventScroll={true}
                 
             >   
-                <>
                 <div className="relative md:h-[55%] cursor-pointer" >
                     <img
-                        src={img}
+                        src={data.film.img}
                         alt="background"
                         className="h-full w-full"
                     />
@@ -44,9 +47,13 @@ export default function DetailFilm({children, episode=true ,isOpen,closeModal,fi
                                 </span>
                             </h3>
                             <span className='text-white text-[150%] xs:text-[150%] sm:text-left sm:text-[200%] md:text-[350%] lg:text[400%] font-semibold'>
-                                {data.film.name}
+                                <p className='truncate'>
+                                    {data.film.name}
+                                </p>
                             </span>
-                            <div className=' w-[50%] p-1 sm:p-2 bg-red-600 xs:text-center md:w-[35%] lg:w-[25%] xl:w-[20%] flex items-stretch hover:bg-opacity-60'>
+                            <div className=' w-[50%] p-1 sm:p-2 bg-red-600 xs:text-center md:w-[35%] lg:w-[25%] xl:w-[20%] flex items-stretch hover:bg-opacity-60'
+                                onClick={handleWatching}
+                            >
                                 <FontAwesomeIcon icon={faPlay} inverse className='self-center'/>
                                 <span className='text-white ml-2 font-bold self-center'>Xem ngay</span>
                             </div>
@@ -58,17 +65,15 @@ export default function DetailFilm({children, episode=true ,isOpen,closeModal,fi
                     <span className='sm:text-lg text-zinc-400 mt-5'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</span>
             
                 </div>
-                episode === true ?
+                { data.film.filmType.name !== "Movie" &&
                 <div className='px-[2%] pt-[5%]'>
                     <Episode/>
                 </div>
-                :
-                <div></div>
+                }
                 
                 <div className='px-[2%] pt-[5%]'>
                     <SimilarFilm/>
                 </div>
-                </>
                 <div className='h-14'/>
                 
             </Modal>

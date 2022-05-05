@@ -24,6 +24,10 @@ const Query={
           id
           name
           img
+          filmType {
+            id
+            name
+          }
         }
       }
     `

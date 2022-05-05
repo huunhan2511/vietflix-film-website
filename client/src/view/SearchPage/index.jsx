@@ -1,24 +1,24 @@
 import { useQuery } from '@apollo/client';
 import React from 'react';
-import CardFilm from '../../components/CardFilm';
 import DetailFilm from '../../components/DetailFilm';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import HeaderSm from '../../components/HeaderSm';
-import ListFilm from '../../components/ListFilm';
-import ListCenter from '../../components/ListFilm/ListCenter';
-import Slide from '../../components/Slide';
 import Query from '../../query';
 import Loading from '../../components/Loading';
-export default function HomePage() {
+import Film from '../../components/Film';
+import { useLocation } from 'react-router-dom';
+export default function MoviePage() {
+  const location = useLocation();
   const dataCardFilm = useQuery(Query.qGetAllFilm);
+  
   let [isOpen, setOpen] = React.useState(() => {
       let initState = false || JSON.parse(localStorage.getItem('isOpen'));
       return initState;
   });
   const [filmId,setFilmId] = React.useState(()=>{
-    let initState = null || localStorage.getItem('filmId');
-    return initState;
+      let initState = null || localStorage.getItem('filmId');
+      return initState;
   });
   const openModal = (id) => {
       setFilmId(id);
@@ -41,28 +41,18 @@ export default function HomePage() {
           <Header ></Header>
           <HeaderSm />
         </div>
-        <Slide
-          className="background-image"
-          slideToShow={1}
-          speed={600}
-          dots={true}
-          autoplay={true}
-        >
-          { 
-            dataCardFilm.data.films.map((item,key)=>{
-              return(
-                <CardFilm openModal={openModal} film={item} key={key}/> 
-              );
-            })
-          }
-        </Slide>
+        
       </div>
-      <div className="min-h-screen px-20 py-10"> 
-        <ListFilm title="Thịnh hành" openModal={openModal}/>
-        <ListFilm title="Mới phát hành " openModal={openModal}/>
-        <ListCenter title="Nổi bật" />
-
-        <ListFilm title="Gợi ý cho bạn" openModal={openModal}/>
+      <div className="min-h-screen px-20 pt-32 "> 
+        <div className='grid grid-cols-1 gap-y-4 sm:grid sm:grid-cols-2 sm:gap-3 md:grid md:grid-cols-3 xl:grid xl:grid-cols-4grid grid-cols-1 xl:grid xl:grid-cols-4'>
+        {
+            dataCardFilm.data.films.map((film,key)=>{
+                return(
+                    <Film film={film} key={key} openModal={openModal}/>
+                );
+            })
+        }
+        </div>
       </div>
       <div>
         <Footer/>
