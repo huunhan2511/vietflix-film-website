@@ -24,7 +24,7 @@ export default function WatchPage() {
           </div>
         </div>
       </div>
-      <div className="min-h-screen pt-[3%]"> 
+      <div className="min-h-screen pt-[10%] xl:pt-[3%]"> 
         <div className='player-wrapper'> 
         <ReactPlayer
             className="react-player"

@@ -12,7 +12,7 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
     
     const navigate = useNavigate();
     const handleWatching = () =>{
-        navigate("/watch/:id",{state:{filmId:filmId}})
+        navigate(`/watch/${filmId}`,{state:{filmId:filmId}})
     }
     console.log(filmId);
     const {loading,error,data} = useQuery(Query.qGetFilm,{variables:{filmId}})
