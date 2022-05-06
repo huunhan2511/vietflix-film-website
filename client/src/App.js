@@ -8,6 +8,7 @@ const TvShowPage = lazy(()=>import("./view/TvShowPage"));
 const HomePage = lazy(()=>import("./view/HomePage"));
 const WatchPage = lazy(()=>import("./view/WatchPage"));
 const SearchPage = lazy(()=>import("./view/SearchPage"));
+const ViewAll = lazy(()=>import("./view/ViewAll"));
 function App() {
   return (
     <Router>
@@ -37,6 +38,10 @@ function App() {
                 <Route
                   path="/watch/:id"
                   element={<WatchPage/>}
+                />
+                <Route
+                  path="/tat-ca"
+                  element={<ViewAll/>}
                 />
                 <Route
                   path="*"

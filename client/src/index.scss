@@ -287,3 +287,23 @@ code {
     opacity: 0;
   }
 }
+.ModalSimilar {
+  position: fixed;
+  top: 5%;
+  left: 10%;
+  right: 10%;
+  background-color: #171717;
+  @media screen and (min-width: 1280px) {
+    left: 26%;
+    right: 26%;
+  }
+  overflow: auto;
+  height: 100%;
+  border-radius: 1.5%;
+  outline: none;
+  border: none;
+}
+.ModalSimilar::-webkit-scrollbar {
+  width: 100%;
+  background: transparent; /* make scrollbar transparent */
+}

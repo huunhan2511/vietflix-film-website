@@ -7,7 +7,7 @@ export default function CardFilm({openModal,film}) {
   const navigate = useNavigate();
   let img = film.img;
   const handleWatching = () =>{
-    navigate("/watch/:id",{state:{filmId:film.id}})
+    navigate(`/watch/${film.id}`,{state:{filmId:film.id}})
   }
   return (
     <div className="relative h-96 md:h-[40rem] lg:h-[35rem] xl:h-[55rem] cursor-pointer">

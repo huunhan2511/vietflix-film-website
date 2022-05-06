@@ -7,7 +7,7 @@ export default function Film({openModal,film}) {
   const navigate = useNavigate();
   let img = film.img;
   const handleWatching = () =>{
-    navigate("/watch/:id",{state:{filmId:film.id}})
+    navigate(`/watch/${film.id}`,{state:{filmId:film.id}})
   }
   return (
     <div className="relative block mb-2 w-full xs:ml-2 md:ml-6 md:max-w-[90%] lg:w-full group hover:scale-105 transition duration-500 custom-width ">      
