@@ -16,7 +16,7 @@ export default function Episode(seasonSelect=true) {
                     ? 
                     <span className='text-white place-self-end'>Mùa 1</span>
                     :
-                    <div className = 'selectSeason'>
+                    <div className = 'select-season'>
                         <select className='bg-neutral-900 text-white px-5 py-2 xs:px-5 xs:py-2 float-right xs:w-[70%] sm:w-[50%] md:w-[35%]'>
                         {options.map((item,key)=>{
                             return (

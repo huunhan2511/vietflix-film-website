@@ -23,7 +23,7 @@ export default function LoginAdmin() {
           placeholder='Nhập mật khẩu'
           className='w-full p-4 mt-4 outline-none rounded-md text-lg'></input>
 
-          <button className='btnLogIn bg-red-600' onClick={handleLogin}>Đăng nhập</button>
+          <button className='btn-login bg-red-600' onClick={handleLogin}>Đăng nhập</button>
         </div>
     </div>
 
