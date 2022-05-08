@@ -49,7 +49,7 @@ export default function TvShowPage() {
                 Tất cả {location.state.title}
             </span>
         </div> 
-        <div className='grid grid-cols-1 gap-y-4 sm:grid sm:grid-cols-2 sm:gap-3 md:grid md:grid-cols-3 xl:grid xl:grid-cols-4grid grid-cols-1 xl:grid xl:grid-cols-4'>
+        <div className='grid grid-cols-1 gap-y-4 sm:grid sm:grid-cols-2 sm:gap-3 md:grid md:grid-cols-3 xl:grid xl:grid-cols-4'>
         {
             dataCardFilm.data.films.map((film,key)=>{
                 return(

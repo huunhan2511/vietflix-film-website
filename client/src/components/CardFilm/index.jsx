@@ -18,13 +18,13 @@ export default function CardFilm({openModal,film}) {
             className="brightness-[0.4] h-full w-full"
         />
 
-        <div className="absolute left-0 top-24 w-full px-6 lg:top-40 lg:mx-20 md:top-[25%] md:h-[80%]  md:grid md:grid-cols-2 sm:top-20 sm:place-content-center xs:top-12 xs:grid xs:grid-rows-2 xs:place-content-center">
+        <div className="absolute left-0 top-24 w-full px-6 lg:top-40 lg:mx-20 md:top-[25%] md:h-[80%]  md:grid md:grid-cols-2 sm:top-24 sm:place-content-center xs:top-16 xs:grid xs:grid-rows-2 xs:place-content-center">
             <div className="col-span-1 flex flex-col xl:mt-20 xs:place-items-center md:place-items-start">
-                <h3 className="hidden lg:flex bg-gradient-to-r w-1/4 h-10 from-[#999999] border-l-4 mb-5 px-4 items-center">
+                <div className="hidden lg:flex bg-gradient-to-r w-1/5 h-12 from-[#cbcaca7f] mb-5">
                   <span>
                     <img src={logo} alt="logo" />
                   </span>
-                </h3>
+                </div>
                 <span className=" items-center w-full xs:text-[1rem] sm:text-[1rem] md:text-[2rem] lg:text-[3rem] xl:text-[3rem] font-bold opacity-100 text-white">
                 <p className='md:truncate text-center md:text-left'>
                   {film.name}

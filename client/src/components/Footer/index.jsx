@@ -17,7 +17,7 @@ export default function Footer() {
         </div>
         <div className=''>
             <span>
-                <small>© 2021 Copyright: Vietflix</small>
+                <small>© 2022 Copyright: Vietflix</small>
             </span>
         </div>
     </div>

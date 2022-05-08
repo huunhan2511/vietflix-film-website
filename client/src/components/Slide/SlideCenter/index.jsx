@@ -66,7 +66,7 @@ export default function SlideCenter({children,slidesToShow}) {
                     slidesToShow: 1,
                     slidesToScroll: 1,  
                     arrows:false,
-                    dots :true
+                    dots :false
                   }
                 }
               ]
