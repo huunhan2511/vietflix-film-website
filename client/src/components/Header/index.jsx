@@ -1,7 +1,7 @@
 import React from 'react'
 import {SearchField} from "@adobe/react-spectrum";
 import { Link,useNavigate } from 'react-router-dom';
-import logo from "../../img/320x80_black.png";
+import logo from "../../img/320x80.png";
 export default function Header() {
   const navigate = useNavigate();
   let Setting = "Navigation font-semibold text-base hover:text-red-500 cursor-pointer"

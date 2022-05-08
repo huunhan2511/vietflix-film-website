@@ -2,7 +2,7 @@ import React from 'react'
 import {SearchField,ActionButton} from "@adobe/react-spectrum";
 import ShowMenu from "@spectrum-icons/workflow/ShowMenu";
 import Search from "@spectrum-icons/workflow/Search";
-import logo from "../../img/320x80_black.png";
+import logo from "../../img/320x80.png";
 import { Link } from 'react-router-dom';
 export default function HeaderSm() {
     let menuItems = [

@@ -2,7 +2,7 @@ import React from 'react'
 import {faCircleExclamation} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom';
-import logo from "../../img/320x80_black.png";
+import logo from "../../img/320x80.png";
 
 export default function CardFilm({openModal,film}) {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function CardFilm({openModal,film}) {
 
         <div className="absolute left-0 top-24 w-full px-6 lg:top-40 lg:mx-20 md:top-[25%] md:h-[80%]  md:grid md:grid-cols-2 sm:top-20 sm:place-content-center xs:top-12 xs:grid xs:grid-rows-2 xs:place-content-center">
             <div className="col-span-1 flex flex-col xl:mt-20 xs:place-items-center md:place-items-start">
-                <h3 className="hidden lg:flex bg-gradient-to-r w-1/4 h-10 from-[#ffff1aaa] to-[#f01000] opacity-70 border-l-4 border-[#ffff1a] mb-5 px-4 items-center">
+                <h3 className="hidden lg:flex bg-gradient-to-r w-1/4 h-10 from-[#999999] border-l-4 mb-5 px-4 items-center">
                   <span>
                     <img src={logo} alt="logo" />
                   </span>
