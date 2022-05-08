@@ -1,6 +1,7 @@
 import React from 'react'
 import {SearchField} from "@adobe/react-spectrum";
 import { Link,useNavigate } from 'react-router-dom';
+import logo from "../../img/320x80_black.png";
 export default function Header() {
   const navigate = useNavigate();
   let Setting = "Navigation font-semibold text-base hover:text-red-500 cursor-pointer"
@@ -15,10 +16,10 @@ export default function Header() {
   }
   return (
     <div className="Header justify-between hidden lg:flex top-0 left-0 right-0 ">
-        <div className="Logo p-4 w-64">
+        <div className="Logo p-2 w-48">
           <Link to="/">
-          <span className=" font-semibold text-3xl tracking-tight uppercase text-transparent cursor-pointer bg-clip-text bg-gradient-to-r from-[#e50914] to-red-500 md:text-center">
-            SAGO
+          <span>
+            <img src={logo} alt="logo" />
           </span>
           </Link>
         </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import {SearchField,ActionButton} from "@adobe/react-spectrum";
 import ShowMenu from "@spectrum-icons/workflow/ShowMenu";
 import Search from "@spectrum-icons/workflow/Search";
+import logo from "../../img/320x80_black.png";
 import { Link } from 'react-router-dom';
 export default function HeaderSm() {
     let menuItems = [
@@ -21,10 +22,10 @@ export default function HeaderSm() {
                 <ShowMenu/>
             </ActionButton>
             </div>
-            <div className="Logo md:p-6 sm:p-4 xs:p-2 col-span-3 text-center">
+            <div className="Logo md:p-6 sm:p-3 xs:p-2 col-span-3 text-center sm:w-60 xs:w-48 w-44">
                 <Link to="/">
-                    <span className=" font-semibold text-3xl tracking-tight uppercase text-transparent cursor-pointer bg-clip-text bg-gradient-to-r from-[#e50914] to-red-500 md:text-center">
-                        SAGO
+                    <span>
+                        <img src={logo} alt="logo" />
                     </span>
                 </Link>
             </div>
