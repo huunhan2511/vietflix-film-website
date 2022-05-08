@@ -11,7 +11,7 @@ export default function CardFilm({openModal,film}) {
     navigate(`/watch/${film.id}`,{state:{filmId:film.id}})
   }
   return (
-    <div className="relative h-96 md:h-[40rem] lg:h-[35rem] xl:h-[55rem] cursor-pointer">
+    <div className="relative h-96 md:h-screen cursor-pointer">
         <img
             src={img}
             alt="background"
@@ -25,7 +25,7 @@ export default function CardFilm({openModal,film}) {
                     <img src={logo} alt="logo" />
                   </span>
                 </div>
-                <span className=" items-center w-full xs:text-[1rem] sm:text-[1rem] md:text-[2rem] lg:text-[3rem] xl:text-[3rem] font-bold opacity-100 text-white">
+                <span className=" items-center w-full xs:text-[1.5rem] sm:text-[2rem] md:text-[2rem] lg:text-[3rem] xl:text-[3rem] font-bold opacity-100 text-white">
                 <p className='md:truncate text-center md:text-left'>
                   {film.name}
                 </p>  
@@ -37,7 +37,7 @@ export default function CardFilm({openModal,film}) {
                     <span className='sm:test-sm lg:text-xl text-red-600'>
                         Thể loại : 
                     </span>
-                    <span className='sm:test-sm lg:text-xl text-white'>
+                    <span className='text-sm sm:test-sm lg:text-xl text-white'>
                        {film.genres.map((item,key)=>{
                          return item.name+", "
                        })}

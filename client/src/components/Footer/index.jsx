@@ -13,7 +13,6 @@ export default function Footer() {
             <img className="rounded-full bg-zinc-800 p-2 hover:backdrop-blur-sm hover:bg-red-600" src={twitter} alt='background'/>
             <img className="rounded-full bg-zinc-800 p-2 hover:backdrop-blur-sm hover:bg-red-600" src={youtube} alt='background'/>
             <img className="rounded-full bg-zinc-800 p-2 hover:backdrop-blur-sm hover:bg-red-600" src={linkedin} alt='background'/>
-            
         </div>
         <div className=''>
             <span>
