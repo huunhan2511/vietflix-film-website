@@ -26,6 +26,5 @@ export default function LoginAdmin() {
           <button className='btn-login bg-red-600' onClick={handleLogin}>Đăng nhập</button>
         </div>
     </div>
-
   )
 }
