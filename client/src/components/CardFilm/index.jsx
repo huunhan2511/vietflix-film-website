@@ -10,6 +10,7 @@ export default function CardFilm({openModal,film}) {
   const handleWatching = () =>{
     navigate(`/watch/${film.id}`,{state:{filmId:film.id}})
   }
+  
   return (
     <div className="relative h-96 md:h-screen cursor-pointer">
         <img

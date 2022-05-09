@@ -14,7 +14,6 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
     const handleWatching = () =>{
         navigate(`/watch/${filmId}`,{state:{filmId:filmId}})
     }
-    console.log(filmId);
     const {loading,error,data} = useQuery(Query.qGetFilm,{variables:{filmId}})
     if (loading) return <Loading/>
     return (
@@ -65,9 +64,11 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
                     <span className='sm:text-lg text-zinc-400 mt-5'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</span>
             
                 </div>
-                { data.film.filmType.name !== "Movie" &&
+                { 
+                data.film.filmType.name !== "Movie" 
+                &&
                 <div className='px-[2%] pt-[5%]'>
-                    <Episode/>
+                    <Episode />
                 </div>
                 }
                 
