@@ -7,9 +7,7 @@ import HeaderSm from '../../components/HeaderSm';
 import Query from '../../query';
 import Loading from '../../components/Loading';
 import Film from '../../components/Film';
-import { useLocation } from 'react-router-dom';
-export default function MoviePage() {
-  const location = useLocation();
+export default function SearchPage() {
   const dataCardFilm = useQuery(Query.qGetAllFilm);
   
   let [isOpen, setOpen] = React.useState(() => {
@@ -44,7 +42,7 @@ export default function MoviePage() {
         
       </div>
       <div className="min-h-screen px-20 pt-32 "> 
-        <div className='grid grid-cols-1 gap-y-4 sm:grid sm:grid-cols-2 sm:gap-3 md:grid md:grid-cols-3 xl:grid xl:grid-cols-4grid grid-cols-1 xl:grid xl:grid-cols-4'>
+        <div className='grid grid-cols-1 gap-y-4 sm:grid sm:grid-cols-2 sm:gap-3 md:grid md:grid-cols-3 xl:grid xl:grid-cols-4'>
         {
             dataCardFilm.data.films.map((film,key)=>{
                 return(

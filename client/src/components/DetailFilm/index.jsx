@@ -8,6 +8,7 @@ import { useQuery } from '@apollo/client';
 import Query from '../../query';
 import Loading from '../Loading';
 import { useNavigate } from 'react-router-dom';
+import logo from "../../img/320x80.png";
 export default function DetailFilm({isOpen,closeModal,filmId}) {
     
     const navigate = useNavigate();
@@ -24,7 +25,6 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
                 overlayClassName="Overlay"
                 isOpen={isOpen}
                 onRequestClose={closeModal}
-                preventScroll={true}
                 
             >   
                 <div className="relative md:h-[55%] cursor-pointer" >
@@ -40,11 +40,11 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
                             </div>
                         </div>
                         <div className='mb-[10%] ml-[3%] flex flex-col'>
-                             <h3 className="hidden lg:flex bg-gradient-to-r w-1/4 h-10 from-[#a20008] opacity-70 border-l-4 border-[#f70000] px-4 items-center">
-                                <span className="items-center text-2xl font-bold opacity-100 text-red-600">
-                                    SAGO
+                            <div className="hidden lg:flex bg-gradient-to-r w-1/5 h-12 from-[#cbcaca7f]">
+                                <span>
+                                    <img src={logo} alt="logo" />
                                 </span>
-                            </h3>
+                            </div>
                             <span className='text-white text-[150%] xs:text-[150%] sm:text-left sm:text-[200%] md:text-[350%] lg:text[400%] font-semibold'>
                                 <p className='truncate'>
                                     {data.film.name}

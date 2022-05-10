@@ -22,7 +22,7 @@ export default function Banner() {
                             </p>
                         </span>
                         <span className='hidden sm:flex text-white max-h-full text-[50%] xs:text-xs md:text-sm xl:text-[150%]'>
-                            <p className='break-words'>
+                            <p className='break-words description'>
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam delectus totam perspiciatis molestias ratione accusantium ullam, quam recusandae exercitationem dolor harum accusamus sunt illo perferendis consequuntur iure, maxime eum sint?
                             </p>
                         </span>

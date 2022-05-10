@@ -30,6 +30,23 @@ const Query={
           }
         }
       }
+    `,
+    qGetFilmQuantity: gql`
+    query qGetFilmQuantity($quantity: Int){
+      films(quantity: $quantity){
+        id
+          name
+          img
+          genres {
+            id
+            name
+          }
+          filmType {
+            id
+            name
+          }
+      }
+    }
     `
 }
 export default Query

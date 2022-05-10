@@ -12,7 +12,7 @@ import Query from '../../query';
 import Loading from '../../components/Loading';
 import Banner from '../../components/Banner';
 export default function HomePage() {
-  const dataCardFilm = useQuery(Query.qGetAllFilm);
+  const dataFilms = useQuery(Query.qGetAllFilm);
   let [isOpen, setOpen] = React.useState(() => {
       let initState = false || JSON.parse(localStorage.getItem('isOpen'));
       return initState;
@@ -34,7 +34,7 @@ export default function HomePage() {
       document.body.style.overflow = 'unset';
   }
   
-  if (dataCardFilm.loading) return <Loading/>
+  if (dataFilms.loading) return <Loading/>
   return ( 
     <div className="HomePage min-h-screen mx-auto content-between" >
       <div className='relative'>
@@ -50,7 +50,7 @@ export default function HomePage() {
           autoplay={true}
         >
           { 
-            dataCardFilm.data.films.map((item,key)=>{
+            dataFilms.data.films.map((item,key)=>{
               return(
                 <CardFilm openModal={openModal} film={item} key={key}/> 
               );

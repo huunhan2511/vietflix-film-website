@@ -10,7 +10,12 @@ import {
 } from "@apollo/client";
 const client = new ApolloClient({
   uri: `${process.env.REACT_APP_GRAPHQL}`,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  defaultOptions: {
+    watchQuery: {
+      nextFetchPolicy: 'cache-first',
+    },
+  },
 });
 ReactDOM.render(
   <React.StrictMode>
