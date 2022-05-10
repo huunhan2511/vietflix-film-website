@@ -5,8 +5,8 @@ import FilmDetail from '../models/filmDetail.js'
 import Season from '../models/season.js'
 import Episode from '../models/episode.js'
 
-const mongoDataMethods = {
-    getAllFilms: async (conditions = null) => conditions === null ? await Film.find() : await Film.find(conditions),
+const mongoDataMethods = { 
+    getAllFilms: async (quantity = null) => quantity === null ? await Film.find().sort('-createdAt') : await Film.find().sort('-createdAt').limit(quantity),
     getFilmById: async (id) => await Film.findById(id),
 
     getAllGenres: async (conditions = null) => conditions === null ? await Genre.find() : await Genre.find(conditions),
@@ -53,6 +53,33 @@ const mongoDataMethods = {
     createEpisode: async args => {
 		const newEpisode = new Episode(args.input)
 		return await newEpisode.save()
+	},
+  //Update
+    updateFilm: async args => {
+		return await Film.findOneAndUpdate({_id: args.input.id}, args.input, { returnDocument: 'after' })
+	},
+
+    updateGenre: async args => {
+		return await Genre.findOneAndUpdate({_id: args.input.id}, args.input, { returnDocument: 'after' })
+	},
+
+    updateFilmType: async args => {
+		return await FilmType.findOneAndUpdate({_id: args.input.id}, args.input, { returnDocument: 'after' })
+	},
+
+    updateFilmDetail: async args => {
+		return await FilmDetail.findOneAndUpdate({_id: args.input.id}, args.input, { returnDocument: 'after' })
+	},
+
+    updateSeason: async args => {
+		return await Season.findOneAndUpdate({_id: args.input.id}, args.input, { returnDocument: 'after' })
+	},
+
+    updateEpisode: async args => {
+		return await Episode.findOneAndUpdate({_id: args.input.id}, args.input, { returnDocument: 'after' })
+	},
+    updateEpisodes: async args => {
+		  return await Episode.insertMany(args.input)
 	},
 }
 

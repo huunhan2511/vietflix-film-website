@@ -7,7 +7,8 @@ const typeDefs = gql`
         img: String,
         genres: [Genre],
         filmType: FilmType,
-        filmDetail: FilmDetail
+        filmDetail: FilmDetail,
+        description: String
     }
 
     type Genre {
@@ -47,7 +48,7 @@ const typeDefs = gql`
     type Query {
         hello: String,
 
-        films: [Film]
+        films(quantity: Int): [Film]
         film(id: ID): Film
 
         genres: [Genre]
@@ -67,28 +68,34 @@ const typeDefs = gql`
     }
 
     input FilmInput {
+        id: String,
         name: String,
         img: String,
         genres: [String],
         filmType: String,
-        filmDetail: String
+        filmDetail: String,
+        description: String
     }
 
     input GenreInput{
+        id: String,
         name: String
     }
 
     input FilmTypeInput{
+        id: String,
         name: String
     }
 
     input FilmDetailInput {
+        id: String,
         total_seasons: Int,
         seasons: [String],
         episode: String
     }
 
     input SeasonInput{
+        id: String,
         name: String,
         total_episodes: Int,
         episodes: [String]
@@ -108,7 +115,15 @@ const typeDefs = gql`
         createFilmType(input:FilmTypeInput): FilmType,
         createFilmDetail(input:FilmDetailInput): FilmDetail,
         createSeason(input:SeasonInput): Season,
-        createEpisode(input:EpisodeInput): Episode
+        createEpisode(input:EpisodeInput): Episode,
+
+        updateFilm(input:FilmInput): Film,
+        updateGenre(input:GenreInput): Genre,
+        updateFilmType(input:FilmTypeInput): FilmType,
+        updateFilmDetail(input:FilmDetailInput): FilmDetail,
+        updateSeason(input:SeasonInput): Season,
+        updateEpisode(input:EpisodeInput): Episode,
+        updateEpisodes(input:[EpisodeInput]): [Episode],
     }
 `;
 
