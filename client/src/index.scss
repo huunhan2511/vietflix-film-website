@@ -296,9 +296,8 @@ code {
   margin-top: 1rem;
 }
 
-.sideBarAdmin {
-  display: flex;
-  justify-content: space-between;
-  height: 100vh;
-  background-color: #141414;
+.ant-layout-sider {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
 }
