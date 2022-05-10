@@ -10,6 +10,7 @@ import ListCenter from '../../components/ListFilm/ListCenter';
 import Slide from '../../components/Slide';
 import Query from '../../query';
 import Loading from '../../components/Loading';
+import Banner from '../../components/Banner';
 export default function HomePage() {
   const dataCardFilm = useQuery(Query.qGetAllFilm);
   let [isOpen, setOpen] = React.useState(() => {
@@ -59,9 +60,10 @@ export default function HomePage() {
       </div>
       <div className="min-h-screen px-20 py-10"> 
         <ListFilm title="Thịnh hành" openModal={openModal}/>
+        
+        <Banner/>
         <ListFilm title="Mới phát hành " openModal={openModal}/>
         <ListCenter title="Nổi bật" />
-
         <ListFilm title="Gợi ý cho bạn" openModal={openModal}/>
       </div>
       <div>
