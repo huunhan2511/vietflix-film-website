@@ -21,7 +21,3 @@ server.applyMiddleware({app});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("running at: localhost:" + PORT + "" + server.graphqlPath));
-
-// server.listen().then(({ url }) => {
-//   console.log(`🚀  Server ready at ${url}`);
-// });

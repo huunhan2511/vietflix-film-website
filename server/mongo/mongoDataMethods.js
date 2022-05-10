@@ -6,7 +6,7 @@ import Season from '../models/season.js'
 import Episode from '../models/episode.js'
 
 const mongoDataMethods = { 
-    getAllFilms: async (quantity = null) => quantity === null ? await Film.find().sort('-createdAt') : await Film.find().sort('-createdAt').limit(quantity),
+    getAllFilms: async (conditions = null) => conditions === null ? await Film.find() : await Film.find(conditions),
     getFilmById: async (id) => await Film.findById(id),
 
     getAllGenres: async (conditions = null) => conditions === null ? await Genre.find() : await Genre.find(conditions),

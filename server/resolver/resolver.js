@@ -4,7 +4,7 @@ const resolver = {
   Query: {
     hello: () => "hello",
 
-    films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms(args.quantity),
+    films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms(),
     film: async (parent, args, context) => await context.mongoDataMethods.getFilmById(args.id),
 
     genres:async (parent, args, context) => await context.mongoDataMethods.getAllGenres(),
