@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
-export default function LoginAdmin() {
+export default function LoginPage() {
   const navigate = useNavigate();
   const handleLogin = () => {
     localStorage.setItem('token',"abc");
