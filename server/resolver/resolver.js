@@ -4,7 +4,7 @@ const resolver = {
   Query: {
     hello: () => "hello",
 
-    films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms(),
+    films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms(args.quantity),
     film: async (parent, args, context) => await context.mongoDataMethods.getFilmById(args.id),
 
     genres:async (parent, args, context) => await context.mongoDataMethods.getAllGenres(),
@@ -53,7 +53,14 @@ const resolver = {
     createFilmDetail: async (parent, args, context) => await context.mongoDataMethods.createFilmDetail(args),
     createSeason: async (parent, args, context) => await context.mongoDataMethods.createSeason(args),
     createEpisode: async (parent, args, context) => await context.mongoDataMethods.createEpisode(args),
-  }
+
+    updateFilm: async (parent, args, context) => await context.mongoDataMethods.updateFilm(args),
+    updateGenre: async (parent, args, context) => await context.mongoDataMethods.updateGenre(args),
+    updateFilmType: async (parent, args, context) => await context.mongoDataMethods.updateFilmType(args),
+    updateFilmDetail: async (parent, args, context) => await context.mongoDataMethods.updateFilmDetail(args),
+    updateSeason: async (parent, args, context) => await context.mongoDataMethods.updateSeason(args),
+    updateEpisode: async (parent, args, context) => await context.mongoDataMethods.updateEpisode(args),
+    updateEpisodes: async (parent, args, context) => await context.mongoDataMethods.updateEpisodes(args)}
 }
     
 

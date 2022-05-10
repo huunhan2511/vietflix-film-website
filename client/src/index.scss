@@ -137,6 +137,10 @@ code {
       height: 180px;
     }
   }
+    .slick-track div:focus{
+      outline: none;
+      border: none;
+    }
     .slick-slide > div {
       display: grid;
       place-items: center;
@@ -149,9 +153,6 @@ code {
       @media screen and (min-width: 900px) {
         width: 90%;
       }
-    }
-    .slick-slide > div img:focus{
-      border: 0;
     }
     .slick-slide > div img{
       object-fit: cover;
@@ -296,8 +297,24 @@ code {
   margin-top: 1rem;
 }
 
+
 .ant-layout-sider {
   width: 100% !important;
   max-width: 100% !important;
   min-width: 100% !important;
+}
+.sideBarAdmin {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: #141414;
+}
+.card-banner{
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+
 }

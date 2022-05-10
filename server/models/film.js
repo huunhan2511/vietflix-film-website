@@ -18,6 +18,9 @@ const filmSchema = new mongoose.Schema({
     filmDetail: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'film_detail', 
+    },
+    description: {
+        type: String,
     }
 }, { timestamps: {currentTime: () => (Date.now()+25200000)}, versionKey: false });
 
