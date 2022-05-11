@@ -1,9 +1,11 @@
 
 import React, { Suspense, lazy } from "react";
+import "antd/dist/antd.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./components/Loading";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
-const HomeAdminPage = lazy(()=> import("./view/Admin/HomePage"));
+const HomeAdmin = lazy(()=> import("./view/Admin/HomeAdmin"));
+const MovieAdmin = lazy(()=>import("./view/Admin/MovieAdmin"));
 const LoginAdminPage = lazy(()=>import("./view/Admin/LoginPage"));
 const NotFound = lazy(()=>import("./view/NotFound"));
 const MoviePage = lazy(()=>import("./view/MoviePage"));
@@ -50,9 +52,12 @@ function App() {
                     path="*"
                     element={<NotFound/>}
                   />
+                  
                   <Route path="/admin" element={<ProtectedRoutes/>}>
-                    <Route path="/admin" element={<HomeAdminPage/>}/>
+                    <Route path="/admin" element={<HomeAdmin/>}/>
+                    <Route path="phim-le" element={<MovieAdmin/>}/>                    
                   </Route>
+
                   <Route
                     path="/login-admin"
                     element={<LoginAdminPage/>}
