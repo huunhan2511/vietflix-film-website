@@ -1,5 +1,4 @@
 import React from 'react'
-import { Picker,Item } from '@adobe/react-spectrum'
 let options=[
     { seasonNumber: "Mùa 1" },
     { seasonNumber: "Mùa 2" }
@@ -7,7 +6,6 @@ let options=[
 
 export default function Episode(seasonSelect=true) {
     let img = "https://static1.dienanh.net/upload/202201/b21fdd10-3ea0-4352-91b9-700d19859456.jpeg"
-    let [season,setSeason] = React.useState(options[0]);
     return (
         <div className='flex flex-col'>
             <div className='grid grid-cols-2 justify-between'>

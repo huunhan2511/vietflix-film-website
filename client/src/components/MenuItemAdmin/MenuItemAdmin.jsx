@@ -28,7 +28,7 @@ export function MenuItemAdmin() {
             </Menu.Item>
             <SubMenu key="sub1" icon={<BarsOutlined />} title="Phim lẻ">
                 <Menu.Item key="/admin/list-movie" icon={<EyeOutlined />}>
-                    <Link to="/admin/list-movie">Danh sách phim lẻ</Link>
+                    <Link to="/admin/phim-le">Danh sách phim lẻ</Link>
                 </Menu.Item>
                 <Menu.Item key="/admin/add-movie" icon={<PlusOutlined />}>
                     <Link to="/admin/add-movie">Thêm phim lẻ</Link>
