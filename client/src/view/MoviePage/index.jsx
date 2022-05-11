@@ -7,6 +7,7 @@ import HeaderSm from '../../components/HeaderSm';
 import ListFilm from '../../components/ListFilm';
 import Query from '../../query';
 import Loading from '../../components/Loading';
+import Mylayout from '../../components/Mylayout';
 export default function MoviePage() {
   const dataCardFilm = useQuery(Query.qGetAllFilm);
   
@@ -33,23 +34,18 @@ export default function MoviePage() {
   
   if (dataCardFilm.loading) return <Loading/>
   return ( 
-    <div className="HomePage min-h-screen mx-auto content-between" >
-      <div className='relative'>
-        <div className="fixed top-0 z-50 min-w-full backdrop-blur right-0 left-0 shadow">
-          <Header ></Header>
-          <HeaderSm />
+    <Mylayout>
+      <div className="py-32 px-20">
+        <span className='xl:text-[300%] md:text-[300%] xs:text-[200%] font-bold border-l-red-600 border-l-8'>
+          Danh sách phim lẻ
+        </span>
+        <div> 
+          <ListFilm title="Thịnh hành" openModal={openModal}/>
+          <ListFilm title="Mới phát hành " openModal={openModal}/>
+          <ListFilm title="Gợi ý cho bạn" openModal={openModal}/>
         </div>
-        
-      </div>
-      <div className="min-h-screen px-20 py-10"> 
-        <ListFilm title="Thịnh hành" openModal={openModal}/>
-        <ListFilm title="Mới phát hành " openModal={openModal}/>
-        <ListFilm title="Gợi ý cho bạn" openModal={openModal}/>
-      </div>
-      <div>
-        <Footer/>
       </div>
       {filmId!==null && <DetailFilm isOpen={isOpen} closeModal={closeModal} filmId={filmId}/>}
-    </div>
+    </Mylayout>
   )
 }
