@@ -13,7 +13,7 @@ export default function HeaderSm() {
     const [isOpenMenu,setOpenMenu] = React.useState("hidden"); 
     const [isOpenSearch,setOpenSearch] = React.useState("hidden");  
     
-    let Setting = "Navigation font-semibold text-base hover:text-red-500 px-2"
+    let Setting = "Navigation font-semibold text-base hover:text-red-500 px-2 text-white"
   return (
     <div className="Header lg:hidden">
         <div className="grid grid-cols-5 gap-4 place-items-center">

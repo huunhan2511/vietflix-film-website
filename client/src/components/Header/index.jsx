@@ -4,14 +4,15 @@ import { Link,useNavigate } from 'react-router-dom';
 import logo from "../../img/320x80.png";
 export default function Header() {
   const navigate = useNavigate();
-  let Setting = "Navigation font-semibold text-base hover:text-red-500 cursor-pointer"
+  let Setting = "Navigation font-semibold text-base hover:text-red-500 cursor-pointer text-white"
   let menuItems = [
       {path: '/',name: 'Trang chủ'},
       {path:'/phim-le',name: 'Phim lẻ'},
       {path:'/phim-bo',name:'Phim bộ'}
     ];
-  let [currentSearch, setCurrentSearch] = React.useState('');
+  let [currentSearch, setCurrentSearch] = React.useState();
   const submitSearch = ()=>{
+    console.log(currentSearch)
     navigate("/tim-kiem",{state:{inputSearch : currentSearch}})
   }
   return (
