@@ -11,7 +11,10 @@ const BCRYPT_SALT = 10;
 import token from '../jwt/jwtToken.js'
 
 const mongoDataMethods = { 
-    getAllFilms: async (conditions = null) => conditions === null ? await Film.find() : await Film.find(conditions),
+    getAllFilms: {
+		where: async (conditions = null) => conditions === null ? await Film.find().sort('-createdAt') : await Film.find(conditions).sort('-createdAt'),
+		limit: async (quantity = null) => quantity === null ? await Film.find().sort('-createdAt') : await Film.find().sort('-createdAt').limit(quantity)
+	},
     getFilmById: async (id) => await Film.findById(id),
 
     getAllGenres: async (conditions = null) => conditions === null ? await Genre.find() : await Genre.find(conditions),

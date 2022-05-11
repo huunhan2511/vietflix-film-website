@@ -2,7 +2,7 @@ const resolver = {
   Query: {
     hello: () => "hello",
 
-    films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms(),
+    films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms.limit(args.quantity),
     film: async (parent, args, context) => await context.mongoDataMethods.getFilmById(args.id),
 
     genres:async (parent, args, context) => await context.mongoDataMethods.getAllGenres(),
@@ -28,11 +28,11 @@ const resolver = {
   },
 
   Genre: {
-    films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms({genres: {$in: parent.id}})
+    films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms.where({genres: {$in: parent.id}})
   },
 
   FilmType: {
-    films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms({filmType: parent.id})
+    films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms.where({filmType: parent.id})
   },
 
   FilmDetail: {
