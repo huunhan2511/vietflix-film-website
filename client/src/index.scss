@@ -320,3 +320,57 @@ code {
 .description{
   text-shadow: black 2px 2px 3px;
 }
+
+.header-content-admin {
+  height: 8%;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  padding: 1.25rem;
+  border-bottom: 1px solid #141414;
+}
+
+.ant-input {
+  background-color: #141414 !important;
+  border: none !important;
+  color: #fff !important;
+  margin: 1.25rem 1.25rem 0 1.25rem !important;
+  width: 97.3% !important;
+  height: 5%;
+  resize: none;
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector, .ant-cascader-menu-item:hover, .ant-cascader-menu-item-active {
+  background-color: #141414 !important;
+  border: none !important;
+}
+
+.ant-cascader-menu {
+  border: none !important;
+}
+.ant-cascader-dropdown {
+  background-color: #141414 !important;
+  color: #fff !important;
+}
+
+.ant-btn {
+  margin: 1rem 1rem 0 1rem !important;
+}
+
+.ant-upload, .ant-upload-btn {
+  height: 33% !important;
+  width: 97.3% !important;
+  margin: 1rem 1rem 0 1rem !important;
+  background-color: #141414 !important;
+  outline: none;
+}
+
+.ant-upload-drag {
+  border: none !important;
+}
+
+.ant-upload-text, .ant-upload-hint{
+  color: #fff !important;
+}

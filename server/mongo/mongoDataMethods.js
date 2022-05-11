@@ -5,10 +5,11 @@ import FilmDetail from '../models/filmDetail.js'
 import Season from '../models/season.js'
 import Episode from '../models/episode.js'
 import Admin from '../models/admin.js'
-import { ApolloError} from "apollo-server-express";
-import bcrypt from 'bcrypt';
-const BCRYPT_SALT = 10;
+import { ApolloError } from "apollo-server-express"
+import bcrypt from 'bcrypt'
 import token from '../jwt/jwtToken.js'
+import dotenv from 'dotenv'
+dotenv.config();
 
 const mongoDataMethods = { 
     getAllFilms: {
@@ -67,7 +68,8 @@ const mongoDataMethods = {
 		const newAdmin = new Admin(args.input)
 		if(await Admin.findOne({username: newAdmin.username}))
 			throw new ApolloError('Username '+ newAdmin.username +' đã tồn tại, vui lòng sử dụng username khác', 'USERNAME ALREADY EXISTS')
-		newAdmin.password = bcrypt.hashSync(newAdmin.password, BCRYPT_SALT)
+			const BCRYPT_SALT = process.env.BCRYPT_SALT || 10
+		newAdmin.password = bcrypt.hashSync(newAdmin.password, Number(BCRYPT_SALT))
 		return await newAdmin.save()
 	},
 
@@ -75,12 +77,16 @@ const mongoDataMethods = {
 		const loginInput = args.input
 		let isExistAdmin = await Admin.findOne({username: loginInput.username})
 		if(isExistAdmin && bcrypt.compareSync(loginInput.password, isExistAdmin.password)) {
-			return {token: token.createToken(isExistAdmin)}
+			return {
+				admin: isExistAdmin,
+				token: token.createToken(isExistAdmin)
+			}
 		}
 		else {
 			throw new ApolloError('Username và password không trùng khớp', 'USERNAME AND PASSWORD INCORRECT')
 		}
 	},
+	
   //Update
     updateFilm: async args => {
 		return await Film.findOneAndUpdate({_id: args.input.id}, args.input, { returnDocument: 'after' })
