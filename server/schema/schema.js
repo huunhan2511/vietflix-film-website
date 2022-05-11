@@ -47,16 +47,18 @@ const typeDefs = gql`
 
     type Admin {
         id: ID,
+        name: String,
         username: String,
         password: String,
     }
 
     type Token {
+        admin: Admin,
         token: String,
     }
 
     type Query {
-        hello: String,
+        hello: String
 
         films(quantity: Int): [Film]
         film(id: ID): Film
@@ -120,6 +122,7 @@ const typeDefs = gql`
     }
 
     input createAdmin{
+        name: String,
         username: String,
         password: String
     }
