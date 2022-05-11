@@ -1,9 +1,13 @@
 import jwt from 'jsonwebtoken';
+import { ApolloError} from "apollo-server-express";
+import Admin from '../models/admin.js'
+import dotenv from 'dotenv'
+dotenv.config();
 
 const token = {
     createToken: admin => {
-        const tokenLife = 60 * 60 * 6 * 1000;
-        const SECRET_KEY = "Vietflix"
+        const tokenLife = process.env.tokenLife || 3600*6
+        const SECRET_KEY = process.env.SECRET_KEY || "Vietflix"
         const accessUser = {
             id: admin._id
         };
@@ -13,6 +17,28 @@ const token = {
             { expiresIn: tokenLife }
         );
         return accessToken;
+    },
+
+    verifyToken: async (req) => {
+        let authorization = req.headers.authorization
+        if (!authorization) {
+            throw new ApolloError('Từ chối truy cập', 'ACCESS DENIED')
+        } else {
+            try {
+                const decodedToken = verify(token, SECRET);
+                if (!decodedToken) throw new ApolloError('Từ chối truy cập', 'ACCESS DENIED')
+                else {
+                    let authAdmin = await Admin.findById(decodedToken.id)
+                    if (authAdmin) {
+                        return next()
+                    } else {
+                        throw new ApolloError('Từ chối truy cập', 'ACCESS DENIED')
+                    }
+                }
+            } catch (error) {
+                throw new ApolloError('Từ chối truy cập', 'ACCESS DENIED')
+            }
+        }
     }
 }
 
