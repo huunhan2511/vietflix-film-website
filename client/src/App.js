@@ -15,6 +15,10 @@ const WatchPage = lazy(()=>import("./view/WatchPage"));
 const SearchPage = lazy(()=>import("./view/SearchPage"));
 const ViewAll = lazy(()=>import("./view/ViewAll"));
 function App() {
+  React.useEffect(() => {
+    localStorage.clear();
+  }, [])
+  
   return (
     <Router>
         <Suspense

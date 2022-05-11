@@ -5,9 +5,8 @@ import ReactPlayer from "react-player";
 import {useLocation, useNavigate} from "react-router-dom";
 export default function WatchPage() {
   const location = useLocation();
-  console.log(location.state.filmId)
   let navigate = useNavigate();
-  const previPage = () =>{
+  const previPage = () => {
     navigate(-1)
     localStorage.setItem('isOpen',true);
     localStorage.setItem('filmId',location.state.filmId);
