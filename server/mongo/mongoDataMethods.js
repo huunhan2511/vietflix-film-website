@@ -4,6 +4,11 @@ import FilmType from '../models/filmType.js'
 import FilmDetail from '../models/filmDetail.js'
 import Season from '../models/season.js'
 import Episode from '../models/episode.js'
+import Admin from '../models/admin.js'
+import { ApolloError} from "apollo-server-express";
+import bcrypt from 'bcrypt';
+const BCRYPT_SALT = 10;
+import token from '../jwt/jwtToken.js'
 
 const mongoDataMethods = { 
     getAllFilms: async (conditions = null) => conditions === null ? await Film.find() : await Film.find(conditions),
@@ -54,6 +59,25 @@ const mongoDataMethods = {
 		const newEpisode = new Episode(args.input)
 		return await newEpisode.save()
 	},
+
+	createAdmin: async args => {
+		const newAdmin = new Admin(args.input)
+		if(await Admin.findOne({username: newAdmin.username}))
+			throw new ApolloError('Username '+ newAdmin.username +' đã tồn tại, vui lòng sử dụng username khác', 'USERNAME ALREADY EXISTS')
+		newAdmin.password = bcrypt.hashSync(newAdmin.password, BCRYPT_SALT)
+		return await newAdmin.save()
+	},
+
+	loginAdmin: async args => {
+		const loginInput = args.input
+		let isExistAdmin = await Admin.findOne({username: loginInput.username})
+		if(isExistAdmin && bcrypt.compareSync(loginInput.password, isExistAdmin.password)) {
+			return {token: token.createToken(isExistAdmin)}
+		}
+		else {
+			throw new ApolloError('Username và password không trùng khớp', 'USERNAME AND PASSWORD INCORRECT')
+		}
+	},
   //Update
     updateFilm: async args => {
 		return await Film.findOneAndUpdate({_id: args.input.id}, args.input, { returnDocument: 'after' })
@@ -79,7 +103,7 @@ const mongoDataMethods = {
 		return await Episode.findOneAndUpdate({_id: args.input.id}, args.input, { returnDocument: 'after' })
 	},
     updateEpisodes: async args => {
-		  return await Episode.insertMany(args.input)
+		return await Episode.insertMany(args.input)
 	},
 }
 

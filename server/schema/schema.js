@@ -45,6 +45,16 @@ const typeDefs = gql`
         link_m3u8: String
     }
 
+    type Admin {
+        id: ID,
+        username: String,
+        password: String,
+    }
+
+    type Token {
+        token: String,
+    }
+
     type Query {
         hello: String,
 
@@ -109,6 +119,16 @@ const typeDefs = gql`
         link_m3u8: String
     }
 
+    input createAdmin{
+        username: String,
+        password: String
+    }
+
+    input loginAdmin{
+        username: String,
+        password: String
+    }
+
     type Mutation{
         createFilm(input:FilmInput): Film,
         createGenre(input:GenreInput): Genre,
@@ -116,6 +136,9 @@ const typeDefs = gql`
         createFilmDetail(input:FilmDetailInput): FilmDetail,
         createSeason(input:SeasonInput): Season,
         createEpisode(input:EpisodeInput): Episode,
+
+        createAdmin(input: createAdmin): Admin,
+        loginAdmin(input: loginAdmin): Token,
 
         updateFilm(input:FilmInput): Film,
         updateGenre(input:GenreInput): Genre,

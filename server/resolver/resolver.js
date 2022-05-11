@@ -1,5 +1,3 @@
-import data from '../dummyData/data.js';
-
 const resolver = {
   Query: {
     hello: () => "hello",
@@ -53,6 +51,9 @@ const resolver = {
     createFilmDetail: async (parent, args, context) => await context.mongoDataMethods.createFilmDetail(args),
     createSeason: async (parent, args, context) => await context.mongoDataMethods.createSeason(args),
     createEpisode: async (parent, args, context) => await context.mongoDataMethods.createEpisode(args),
+
+    createAdmin: async (parent, args, context) => await context.mongoDataMethods.createAdmin(args),
+    loginAdmin: async (parent, args, context) => await context.mongoDataMethods.loginAdmin(args),
 
     updateFilm: async (parent, args, context) => await context.mongoDataMethods.updateFilm(args),
     updateGenre: async (parent, args, context) => await context.mongoDataMethods.updateGenre(args),
