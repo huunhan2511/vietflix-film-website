@@ -14,7 +14,13 @@ dotenv.config();
 const mongoDataMethods = { 
     getAllFilms: {
 		where: async (conditions = null) => conditions === null ? await Film.find().sort('-createdAt') : await Film.find(conditions).sort('-createdAt'),
-		limit: async (quantity = null) => quantity === null ? await Film.find().sort('-createdAt') : await Film.find().sort('-createdAt').limit(quantity)
+		films: async (conditions = null) => {
+			console.log(conditions.search);
+			return conditions === null ? await Film.find().sort('-createdAt') :
+				conditions.quantity ? await Film.find().sort('-createdAt').limit(conditions.quantity) :
+			await Film.find({slug: new RegExp(conditions.search.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").split(" ").join("-"), 'i')})
+			.sort('-createdAt')
+		}
 	},
     getFilmById: async (id) => await Film.findById(id),
 
@@ -36,6 +42,8 @@ const mongoDataMethods = {
     //Create
     createFilm: async args => {
 		const newFilm = new Film(args.input)
+		newFilm.slug = newFilm.name.toLowerCase().replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|{|}|\||\\/g,"").split(" ").join("-")
+		newFilm.slug = newFilm.slug.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D")
 		return await newFilm.save()
 	},
 

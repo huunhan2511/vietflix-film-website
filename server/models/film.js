@@ -3,6 +3,9 @@ const filmSchema = new mongoose.Schema({
     name: {
         type: String,
     },
+    slug: {
+        type: String,
+    },
     img: {
         type: String,
     },
