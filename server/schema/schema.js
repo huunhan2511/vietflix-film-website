@@ -4,6 +4,7 @@ const typeDefs = gql`
     type Film {
         id: ID!,
         name: String,
+        slug: String,
         img: String,
         genres: [Genre],
         filmType: FilmType,
@@ -60,7 +61,7 @@ const typeDefs = gql`
     type Query {
         hello: String
 
-        films(quantity: Int): [Film]
+        films(quantity: Int, search: String): [Film]
         film(id: ID): Film
 
         genres: [Genre]
