@@ -322,24 +322,21 @@ code {
 }
 
 .header-content-admin {
-  height: 8%;
   display: flex;
   align-items: center;
   font-weight: 700;
   font-size: 1.5rem;
   line-height: 2rem;
   padding: 1.25rem;
-  border-bottom: 1px solid #141414;
+  border-bottom: 2px solid #141414;
 }
 
 .ant-input {
   background-color: #141414 !important;
   border: none !important;
   color: #fff !important;
-  margin: 1.25rem 1.25rem 0 1.25rem !important;
-  width: 97.3% !important;
-  height: 5%;
   resize: none;
+  margin-top: 1.5rem !important;
 }
 
 .ant-select:not(.ant-select-customize-input) .ant-select-selector, .ant-cascader-menu-item:hover, .ant-cascader-menu-item-active {
@@ -347,7 +344,7 @@ code {
   border: none !important;
 }
 
-.ant-cascader-menu {
+.ant-cascader-menu, .ant-upload-drag {
   border: none !important;
 }
 .ant-cascader-dropdown {
@@ -360,15 +357,9 @@ code {
 }
 
 .ant-upload, .ant-upload-btn {
-  height: 33% !important;
-  width: 97.3% !important;
-  margin: 1rem 1rem 0 1rem !important;
+  margin-top: 1.5rem !important;
   background-color: #141414 !important;
   outline: none;
-}
-
-.ant-upload-drag {
-  border: none !important;
 }
 
 .ant-upload-text, .ant-upload-hint{
