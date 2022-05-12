@@ -15,7 +15,6 @@ const mongoDataMethods = {
     getAllFilms: {
 		where: async (conditions = null) => conditions === null ? await Film.find().sort('-createdAt') : await Film.find(conditions).sort('-createdAt'),
 		films: async (conditions = null) => {
-			console.log(conditions.search);
 			return conditions === null ? await Film.find().sort('-createdAt') :
 				conditions.quantity ? await Film.find().sort('-createdAt').limit(conditions.quantity) :
 			await Film.find({slug: new RegExp(conditions.search.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").split(" ").join("-"), 'i')})

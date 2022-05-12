@@ -7,6 +7,8 @@ const Query={
           id
           name
           img
+          description
+          slug
           genres {
             id
             name
@@ -47,6 +49,17 @@ const Query={
           }
       }
     }
+    `,
+    qSearhFilm : gql`
+      query qSearchFilm($search: String) {
+        films(search: $search) {
+          id
+          name
+          slug
+          img
+          description
+        }
+      }
     `
 }
 export default Query

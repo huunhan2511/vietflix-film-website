@@ -9,8 +9,10 @@ import Query from '../../query';
 import Loading from '../../components/Loading';
 import Mylayout from '../../components/Mylayout';
 import Banner from '../../components/Banner';
+import { useNavigate } from 'react-router-dom';
 export default function HomePage() {
   const dataCardFilm = useQuery(Query.qGetAllFilm);
+  const navigate = useNavigate();
   let [isOpen, setOpen] = React.useState(() => {
     let initState = false || JSON.parse(localStorage.getItem('isOpen'));
     return initState;
@@ -32,6 +34,9 @@ const closeModal = () => {
   document.body.style.overflow = 'unset';
 }
   if (dataCardFilm.loading) return <Loading/>
+  if (dataCardFilm.error){
+    navigate('/NotFound')
+  }
   return ( 
     <Mylayout>
       <div>
@@ -54,7 +59,6 @@ const closeModal = () => {
           <ListFilm title="Thịnh hành" openModal={openModal}/>
           <Banner/>
           <ListFilm title="Mới phát hành " openModal={openModal}/>
-          <ListCenter title="Nổi bật" />
           <ListCenter title="Nổi bật" />
 
           <ListFilm title="Gợi ý cho bạn" openModal={openModal}/>

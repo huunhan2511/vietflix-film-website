@@ -18,7 +18,7 @@ const SearchPage = lazy(()=>import("./view/SearchPage"));
 const ViewAll = lazy(()=>import("./view/ViewAll"));
 function App() {
   React.useEffect(() => {
-    localStorage.clear();
+    localStorage.removeItem('filmId')
   }, [])
   
   return (

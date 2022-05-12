@@ -1,9 +1,6 @@
 import { useQuery } from '@apollo/client';
 import React from 'react';
 import DetailFilm from '../../components/DetailFilm';
-import Footer from '../../components/Footer';
-import Header from '../../components/Header';
-import HeaderSm from '../../components/HeaderSm';
 import ListFilm from '../../components/ListFilm';
 import Query from '../../query';
 import Loading from '../../components/Loading';

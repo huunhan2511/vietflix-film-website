@@ -12,7 +12,6 @@ export default function Header() {
     ];
   let [currentSearch, setCurrentSearch] = React.useState();
   const submitSearch = ()=>{
-    console.log(currentSearch)
     navigate("/tim-kiem",{state:{inputSearch : currentSearch}})
   }
   return (

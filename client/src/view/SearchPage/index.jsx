@@ -4,12 +4,13 @@ import DetailFilm from '../../components/DetailFilm';
 import Query from '../../query';
 import Loading from '../../components/Loading';
 import Film from '../../components/Film';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Mylayout from '../../components/Mylayout';
 export default function SearchPage() {
   const location = useLocation();
-  const dataCardFilm = useQuery(Query.qGetAllFilm);
-  
+  const navigate = useNavigate();
+  let search = location.state.inputSearch;
+  const searchFilm = useQuery(Query.qSearhFilm,{variables:{search},fetchPolicy:"no-cache"})
   let [isOpen, setOpen] = React.useState(() => {
       let initState = false || JSON.parse(localStorage.getItem('isOpen'));
       return initState;
@@ -31,7 +32,11 @@ export default function SearchPage() {
       document.body.style.overflow = 'unset';
   }
   
-  if (dataCardFilm.loading) return <Loading/>
+  if (searchFilm.loading) return <Loading/>
+  if (searchFilm.error){
+    navigate('/NotFound')
+  }
+  console.log(searchFilm.data.films)
   return ( 
     <Mylayout>
       <div className="px-20 py-32"> 
@@ -42,7 +47,7 @@ export default function SearchPage() {
         </div>
         <div className='grid grid-cols-1 gap-y-4 sm:grid sm:grid-cols-2 sm:gap-3 md:grid md:grid-cols-3 xl:grid xl:grid-cols-3 2xl:grid 2xl:grid-cols-4 mt-3'>
         {
-            dataCardFilm.data.films.map((film,key)=>{
+            searchFilm.data.films.map((film,key)=>{
                 return(
                     <Film film={film} key={key} openModal={openModal}/>
                 );
