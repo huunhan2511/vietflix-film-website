@@ -11,7 +11,7 @@ export function AddEpisode() {
                 <Input placeholder='time' size='large' type={'date'}></Input>
                 <Input placeholder='Đường dẫn (mp4) của phim' size='large'></Input>
                 <Input placeholder='Đường dẫn (m3u8) của phim' size='large'></Input>
-                <button className='btn-login bg-red-600'> Thêm tập </button>
+                <button className='btn-admin'> Thêm tập </button>
                 </div>
             </div>
         </>

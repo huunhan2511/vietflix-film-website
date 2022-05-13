@@ -15,9 +15,9 @@ const optionsEpisodeCascader = [
       value: 'ep3',
     },
   ];
-  const onChange = value => {
+const onChange = value => {
     console.log(value);
-    };
+};
 export function AddSeasion() {
     
     return (
@@ -39,7 +39,7 @@ export function AddSeasion() {
                     multiple
                     maxTagCount="responsive"
                     showCheckedStrategy={SHOW_CHILD}/>
-                    <button className='btn-login bg-red-600'> Thêm mùa </button>
+                    <button className='btn-admin'> Thêm mùa </button>
                 </div>
             </div>
         </>

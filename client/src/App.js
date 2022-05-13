@@ -7,7 +7,8 @@ import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
 const HomeAdmin = lazy(()=> import("./view/Admin/HomeAdmin"));
 const MovieAdmin = lazy(()=>import("./view/Admin/MovieAdmin"));
 const TvShowAdmin = lazy(()=>import("./view/Admin/TvShowAdmin"));
-const AddTvShowAdmin = lazy(()=>import("./view/Admin/AddTvShowAdmin"));
+const AddTvShowAdmin = lazy(()=>import("./view/Admin/AddTvShow"));
+const AddMovieAdmin = lazy(()=>import("./view/Admin/AddMovie"));
 const LoginAdminPage = lazy(()=>import("./view/Admin/LoginPage"));
 const NotFound = lazy(()=>import("./view/NotFound"));
 const MoviePage = lazy(()=>import("./view/MoviePage"));
@@ -62,6 +63,7 @@ function App() {
                   <Route path="/admin" element={<ProtectedRoutes/>}>
                     <Route path="/admin" element={<HomeAdmin/>}/>
                     <Route path="phim-le" element={<MovieAdmin/>}/>
+                    <Route path="them-phim-le" element={< AddMovieAdmin/>} />
                     <Route path='phim-bo' element={<TvShowAdmin />}/>
                     <Route path='them-phim-bo' element={<AddTvShowAdmin />}/>               
                   </Route>

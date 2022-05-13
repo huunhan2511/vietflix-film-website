@@ -289,12 +289,12 @@ code {
   }
 }
 
-.btn-login {
+.btn-admin {
   padding: 0.75rem;
   border-radius: 0.375rem;
-  width: 33.33%;
   font-size: medium;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  background-color: #DC2626;
 }
 
 
@@ -344,24 +344,27 @@ code {
   border: none !important;
 }
 
-.ant-cascader-menu, .ant-upload-drag {
-  border: none !important;
-}
 .ant-cascader-dropdown {
   background-color: #141414 !important;
   color: #fff !important;
 }
 
-.ant-btn {
-  margin: 1rem 1rem 0 1rem !important;
-}
-
-.ant-upload, .ant-upload-btn {
-  margin-top: 1.5rem !important;
-  background-color: #141414 !important;
-  outline: none;
-}
-
-.ant-upload-text, .ant-upload-hint{
+.ant-upload-list-item, .anticon, .ant-modal-title {
   color: #fff !important;
+}
+
+.ant-btn-primary, .ant-btn-primary:focus {
+  background-color: #DC2626 !important;
+  border: none;
+}
+.ant-modal-header, .ant-modal-footer {
+  background-color: #191919 !important;
+}
+
+.ant-modal-header {
+  border-bottom: 2px solid #141414 !important;
+}
+
+.ant-modal-footer {
+  border-top: 2px solid #141414 !important;
 }
