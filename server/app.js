@@ -13,11 +13,11 @@ const app = express();
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: () => ({mongoDataMethods})
+    // UNDER CONSTRUCED FOR AUTHORIZATION
+    context: ({req},res) => ({req, mongoDataMethods})
 })
 await server.start();
 server.applyMiddleware({app});
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("running at: localhost:" + PORT + "" + server.graphqlPath));

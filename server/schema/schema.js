@@ -57,9 +57,12 @@ const typeDefs = gql`
         admin: Admin,
         token: String,
     }
-
+    type Headers {
+        authorization: String
+    }
     type Query {
         hello: String
+        headers: Headers
 
         films(quantity: Int, search: String): [Film]
         film(id: ID): Film
