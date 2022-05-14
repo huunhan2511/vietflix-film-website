@@ -14,9 +14,9 @@ export default function Film({openModal,film}) {
         <img
             alt='background'
             src={img}
-            className="h-52 sm:h-52 md:h-44 lg:h-48 xl:h-56 brightness-[.45] object-cover group-hover:brightness-25 group-hover:border-l-8 group-hover:border-l-red-500 w-full"
+            className="h-52 sm:h-52 md:h-44 lg:h-48 xl:h-44 2xl:h-56 brightness-[.45] object-cover group-hover:brightness-25 group-hover:border-l-8 group-hover:border-l-red-500 w-full"
           />
-          <div className="absolute top-10 left-3 xs:left-2 sm:left-3 lg:left-9 xs:top-10 sm:top-10 md:top-5 lg:top-5 xl:top-10 flex flex-col w-full ">
+          <div className="absolute top-10 left-3 xs:left-2 sm:left-3 lg:left-9 xs:top-10 sm:top-10 md:top-5 lg:top-5 xl:top-3 2xl:top-10 flex flex-col w-full ">
                 <span className="sm:text-base md:text-lg max-w-[80%] text-white font-semibold">
                   <p className='truncate'>
                     {film.name}

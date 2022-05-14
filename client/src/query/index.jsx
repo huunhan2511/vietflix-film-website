@@ -35,10 +35,12 @@ const Query={
     `,
     qGetFilmQuantity: gql`
     query qGetFilmQuantity($quantity: Int){
-      films(quantity: $quantity){
-        id
+      films(quantity: $quantity) {
+          id
           name
           img
+          description
+          slug
           genres {
             id
             name
@@ -58,6 +60,42 @@ const Query={
           slug
           img
           description
+        }
+      }
+    `,
+    qGetAllGenre : gql`
+      query qGetAllGenre{
+        genres{
+          id
+          name
+          films {
+            id
+            name
+            slug
+            img
+            filmType {
+              id
+              name
+            }
+          }
+        }
+      }
+    `,
+    qGetGenreId : gql`
+      query qGetGenreId($genreId: ID) {
+        genre(id: $genreId) {
+          id
+          name
+          films {
+            id
+            name
+            slug
+            img
+            filmType {
+              id
+              name
+            }
+          }
         }
       }
     `

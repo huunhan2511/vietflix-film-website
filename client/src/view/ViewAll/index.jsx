@@ -7,10 +7,12 @@ import HeaderSm from '../../components/HeaderSm';
 import Query from '../../query';
 import Loading from '../../components/Loading';
 import Film from '../../components/Film';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 export default function TvShowPage() {
   const location = useLocation();  
-  const dataCardFilm = useQuery(Query.qGetAllFilm);
+  const navigate = useNavigate();
+  const [genreId,setGenreId] = React.useState(location.state.genreId);
+  const dataFilm = useQuery(Query.qGetGenreId,{variables:{genreId}});
   
   let [isOpen, setOpen] = React.useState(() => {
       let initState = false || JSON.parse(localStorage.getItem('isOpen'));
@@ -33,7 +35,10 @@ export default function TvShowPage() {
       document.body.style.overflow = 'unset';
   }
   
-  if (dataCardFilm.loading) return <Loading/>
+  if (dataFilm.loading) return <Loading/>
+  if (dataFilm.loading) {
+    navigate('/error')
+  }
   return ( 
     <div className="HomePage min-h-screen mx-auto content-between" >
       <div className='relative'>
@@ -46,17 +51,17 @@ export default function TvShowPage() {
       <div className="min-h-screen px-20 py-20">
         <div className='py-5'>
             <span className='text-base sm:text-[200%] uppercase font-bold'>
-                Tất cả {location.state.title}
+                Danh sách {location.state.filmType !== null && location.state.filmType === "TV Show" ? 'Phim bộ' : "Phim lẻ"} thể loại {location.state.title}
             </span>
         </div> 
         <div className='grid grid-cols-1 gap-y-4 sm:grid sm:grid-cols-2 sm:gap-3 md:grid md:grid-cols-3 xl:grid xl:grid-cols-4'>
         {
-            dataCardFilm.data.films.map((film,key)=>{
-                return(
-                    <Film film={film} key={key} openModal={openModal}/>
-                );
-            })
-        }
+                  dataFilm.data.genre.films.filter(film=> film.filmType.name === location.state.filmType).map((film,key)=>{
+                    return(
+                        <Film openModal={openModal} film={film} key={key}/>
+                    )
+                  })
+                }
         </div>
       </div>
       <div>

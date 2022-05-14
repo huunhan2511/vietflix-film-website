@@ -17,6 +17,9 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
     }
     const {loading,error,data} = useQuery(Query.qGetFilm,{variables:{filmId}})
     if (loading) return <Loading/>
+    if (error) {
+        navigate('/error')
+    }
     return (
         <>
             <Modal

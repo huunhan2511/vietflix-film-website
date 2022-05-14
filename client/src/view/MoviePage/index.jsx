@@ -5,9 +5,10 @@ import ListFilm from '../../components/ListFilm';
 import Query from '../../query';
 import Loading from '../../components/Loading';
 import Mylayout from '../../components/Mylayout';
+import { useNavigate } from 'react-router-dom';
 export default function MoviePage() {
-  const dataCardFilm = useQuery(Query.qGetAllFilm);
-  
+  const genre = useQuery(Query.qGetAllGenre);
+  const navigate = useNavigate();
   let [isOpen, setOpen] = React.useState(() => {
       let initState = false || JSON.parse(localStorage.getItem('isOpen'));
       return initState;
@@ -29,7 +30,10 @@ export default function MoviePage() {
       document.body.style.overflow = 'unset';
   }
   
-  if (dataCardFilm.loading) return <Loading/>
+  if (genre.loading) return <Loading/>
+  if (genre.error) {
+    navigate("/error")
+  }
   return ( 
     <Mylayout>
       <div className="py-32 px-20">
@@ -37,9 +41,13 @@ export default function MoviePage() {
           Danh sách phim lẻ
         </span>
         <div> 
-          <ListFilm title="Thịnh hành" openModal={openModal}/>
-          <ListFilm title="Mới phát hành " openModal={openModal}/>
-          <ListFilm title="Gợi ý cho bạn" openModal={openModal}/>
+        {
+            genre.data.genres.map((genre,key)=>{
+              return(
+                <ListFilm key={key} title={genre.name} genreId={genre.id} openModal={openModal} filmType="Movie"/>            
+              )
+            })
+          }
         </div>
       </div>
       {filmId!==null && <DetailFilm isOpen={isOpen} closeModal={closeModal} filmId={filmId}/>}
