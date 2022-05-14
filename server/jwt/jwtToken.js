@@ -20,27 +20,6 @@ const token = {
         return accessToken;
     },
 
-    verifyToken: async (req) => {
-        let authorization = req.headers.authorization
-        if (!authorization) {
-            throw new ApolloError('Từ chối truy cập', 'ACCESS DENIED')
-        } else {
-            try {
-                const decodedToken = verify(token, SECRET);
-                if (!decodedToken) throw new ApolloError('Từ chối truy cập', 'ACCESS DENIED')
-                else {
-                    let authAdmin = await Admin.findById(decodedToken.id)
-                    if (authAdmin) {
-                        return next()
-                    } else {
-                        throw new ApolloError('Từ chối truy cập', 'ACCESS DENIED')
-                    }
-                }
-            } catch (error) {
-                throw new ApolloError('Từ chối truy cập', 'ACCESS DENIED')
-            }
-        }
-    },
     // UNDER CONSTRUCED FOR AUTHORIZATION
     verify: async req => {
         let authorization = req.headers.authorization

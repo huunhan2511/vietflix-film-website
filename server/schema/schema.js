@@ -1,17 +1,17 @@
 import { gql } from 'apollo-server-express'
 
 const typeDefs = gql`
+    directive @isAuth(reason: String = "No longer supported"    ) on FIELD_DEFINITION | OBJECT
     type Film {
-        id: ID!,
-        name: String,
-        slug: String,
-        img: String,
-        genres: [Genre],
-        filmType: FilmType,
-        filmDetail: FilmDetail,
+        id: ID!
+        name: String
+        slug: String 
+        img: String
+        genres: [Genre]
+        filmType: FilmType
+        filmDetail: FilmDetail
         description: String
     }
-
     type Genre {
         id: ID,
         name: String,
@@ -61,7 +61,7 @@ const typeDefs = gql`
         authorization: String
     }
     type Query {
-        hello: String
+        hello: String 
         headers: Headers
 
         films(quantity: Int, search: String): [Film]
@@ -83,7 +83,7 @@ const typeDefs = gql`
         episode(id: ID): Episode
     }
 
-    input FilmInput {
+    input FilmInput{
         id: String,
         name: String,
         img: String,
@@ -137,23 +137,23 @@ const typeDefs = gql`
     }
 
     type Mutation{
-        createFilm(input:FilmInput): Film,
-        createGenre(input:GenreInput): Genre,
-        createFilmType(input:FilmTypeInput): FilmType,
-        createFilmDetail(input:FilmDetailInput): FilmDetail,
-        createSeason(input:SeasonInput): Season,
-        createEpisode(input:EpisodeInput): Episode,
+        createFilm(input:FilmInput): Film, @isAuth
+        createGenre(input:GenreInput): Genre, @isAuth
+        createFilmType(input:FilmTypeInput): FilmType, @isAuth
+        createFilmDetail(input:FilmDetailInput): FilmDetail, @isAuth
+        createSeason(input:SeasonInput): Season, @isAuth
+        createEpisode(input:EpisodeInput): Episode, @isAuth
 
-        createAdmin(input: createAdmin): Admin,
+        createAdmin(input: createAdmin): Admin, @isAuth
         loginAdmin(input: loginAdmin): Token,
 
-        updateFilm(input:FilmInput): Film,
-        updateGenre(input:GenreInput): Genre,
-        updateFilmType(input:FilmTypeInput): FilmType,
-        updateFilmDetail(input:FilmDetailInput): FilmDetail,
-        updateSeason(input:SeasonInput): Season,
-        updateEpisode(input:EpisodeInput): Episode,
-        updateEpisodes(input:[EpisodeInput]): [Episode],
+        updateFilm(input:FilmInput): Film, @isAuth
+        updateGenre(input:GenreInput): Genre, @isAuth
+        updateFilmType(input:FilmTypeInput): FilmType, @isAuth
+        updateFilmDetail(input:FilmDetailInput): FilmDetail, @isAuth
+        updateSeason(input:SeasonInput): Season, @isAuth
+        updateEpisode(input:EpisodeInput): Episode, @isAuth
+        updateEpisodes(input:[EpisodeInput]): [Episode], @isAuth
     }
 `;
 

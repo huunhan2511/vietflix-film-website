@@ -1,6 +1,6 @@
 const resolver = {
   Query: {
-    hello: () => "hello",
+    hello: (parent, args, context) => "hello",
     headers: (_, __, context) => context.req.headers,
 
     films: async (parent, args, context) => !args.quantity  && !args.search ? await context.mongoDataMethods.getAllFilms.films() : await context.mongoDataMethods.getAllFilms.films(args),
@@ -51,10 +51,7 @@ const resolver = {
     createFilmType: async (parent, args, context) => await context.mongoDataMethods.createFilmType(args),
     createFilmDetail: async (parent, args, context) => await context.mongoDataMethods.createFilmDetail(args),
     createSeason: async (parent, args, context) => await context.mongoDataMethods.createSeason(args),
-
-    // UNDER CONSTRUCED FOR AUTHORIZATION
-    createEpisode: async (parent, args, context) => await context.mongoDataMethods.isAuth(args, context.req, context.mongoDataMethods.createEpisode),
-    // ----------------------------------
+    createEpisode: async (parent, args, context) => await context.mongoDataMethods.createEpisode(args),
 
     createAdmin: async (parent, args, context) => await context.mongoDataMethods.createAdmin(args),
     loginAdmin: async (parent, args, context) => await context.mongoDataMethods.loginAdmin(args),

@@ -121,11 +121,6 @@ const mongoDataMethods = {
     updateEpisodes: async args => {
 		return await Episode.insertMany(args.input)
 	},
-	// UNDER CONSTRUCED FOR AUTHORIZATION
-	isAuth: async (args, ctx, callback) => {
-		let authorized = await token.verify(ctx);
-		return authorized instanceof Error ? authorized : callback(args);
-	},
 }
 
 export default mongoDataMethods

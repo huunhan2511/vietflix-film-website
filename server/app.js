@@ -8,11 +8,16 @@ import { ApolloServer } from 'apollo-server-express'
 import typeDefs from './schema/schema.js'
 import resolvers from './resolver/resolver.js'
 import mongoDataMethods from './mongo/mongoDataMethods.js'
+import IsAuthDirective from './directives/isAuth.js'
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import isAuth from './directives/isAuth.js'
+
+let schema = makeExecutableSchema({typeDefs, resolvers});
+schema = isAuth(schema,'isAuth');
 
 const app = express();
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema,
     // UNDER CONSTRUCED FOR AUTHORIZATION
     context: ({req},res) => ({req, mongoDataMethods})
 })
