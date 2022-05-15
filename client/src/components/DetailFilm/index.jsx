@@ -15,7 +15,7 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
     const handleWatching = () =>{
         navigate(`/watch/${filmId}`,{state:{filmId:filmId}})
     }
-    const {loading,error,data} = useQuery(Query.qGetFilm,{variables:{filmId}})
+    const {loading,error,data} = useQuery(Query.qGetDetailFilm,{variables:{filmId}})
     if (loading) return <Loading/>
     if (error) {
         navigate('/error')
@@ -28,7 +28,6 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
                 overlayClassName="Overlay"
                 isOpen={isOpen}
                 onRequestClose={closeModal}
-                
             >   
                 <div className="relative md:h-[55%] cursor-pointer" >
                     <img
@@ -68,10 +67,10 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
             
                 </div>
                 { 
-                data.film.filmType.name !== "Movie" 
+                data.film.filmDetail.seasons.length 
                 &&
                 <div className='px-[2%] pt-[5%]'>
-                    <Episode />
+                    <Episode seasons={data.film.filmDetail.seasons} />
                 </div>
                 }
                 

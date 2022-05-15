@@ -4,15 +4,20 @@ let options=[
     { seasonNumber: "Mùa 2" }
 ]
 
-export default function Episode(seasonSelect=true) {
+export default function Episode({seasonSelect=true,seasons}) {
+    console.log(seasons[0].Episode);
     let img = "https://static1.dienanh.net/upload/202201/b21fdd10-3ea0-4352-91b9-700d19859456.jpeg"
     return (
         <div className='flex flex-col'>
-            <div className='grid grid-cols-2 justify-between'>
-                <span className='text-white text-[150%] font-bold '>Tập</span>
-                {seasonSelect === false
+            <div className='flex flex-row gap-2 md:gap- md:grid md:grid-cols-2 justify-between'>
+                <span className='text-white text-[100%] md:text-[150%] font-bold '>Tập</span>
+                {seasons.length === 1 
                     ? 
-                    <span className='text-white place-self-end'>Mùa 1</span>
+                    <span className='text-white text-[100%]  md:text-[150%] font-bold place-self-end '>
+                        <p className='text-ellipsis'>
+                        {seasons[0].name}
+                        </p>
+                    </span>
                     :
                     <div className = 'select-season'>
                         <select className='bg-neutral-900 text-white px-5 py-2 xs:px-5 xs:py-2 float-right xs:w-[70%] sm:w-[50%] md:w-[35%]'>
@@ -38,7 +43,9 @@ export default function Episode(seasonSelect=true) {
                         </div>
                         <div className='flex-initial w-[70%]'>
                             <div className='grid grid-cols-1 place-content-center h-full'>
-                                <span className='text-xs sm:text-base xs:text-xs'>Lorem Ipsum is 500</span>
+                                <span className='text-xs sm:text-base xs:text-xs'>
+                                    Lorem Ipsum is 500
+                                </span>
                             </div>
                         </div>
                     </div>

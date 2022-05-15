@@ -33,6 +33,40 @@ const Query={
         }
       }
     `,
+    qGetDetailFilm: gql`
+    query qGetFilm($filmId: ID) {
+        film(id: $filmId) {
+          id
+          name
+          img
+          description
+          slug
+          filmType {
+            id
+            name
+          }
+          genres {
+            id
+            name
+          }
+          filmDetail {
+            id
+            seasons {
+              id
+              name
+              total_episodes
+              episodes {
+                id
+                name
+                time
+                link_embed
+                link_m3u8
+              }
+            }
+          }
+        }
+      }
+    `,
     qGetFilmQuantity: gql`
     query qGetFilmQuantity($quantity: Int){
       films(quantity: $quantity) {
@@ -98,6 +132,46 @@ const Query={
           }
         }
       }
+    `,
+    qGetMoive : gql`
+    query qGetMoive($filmId: ID) {
+      film(id: $filmId) {
+        id
+        name
+        filmDetail {
+          id
+          episode {
+            id
+            name
+            time
+            link_embed
+            link_m3u8
+          }
+        }
+      }
+    }
+    `,
+    qGetTvShow : gql`
+    query qGetTvShow($filmId: ID) {
+      film(id: $filmId) {
+        id
+        name
+        filmDetail {
+          id
+          seasons {
+            id
+            name
+            episodes {
+              name
+              id
+              time
+              link_embed
+              link_m3u8
+            }
+          }
+        }
+      }
+    }
     `
 }
 export default Query

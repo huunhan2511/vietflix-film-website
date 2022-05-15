@@ -20,7 +20,7 @@ export default function HomePage() {
       setlengthGenre(data.genres.length)
     }
   });
-  let quantity = 3
+  let quantity = 5
   const cardFilm = useQuery(Query.qGetFilmQuantity,{
     variables : {quantity}
   })
@@ -71,19 +71,19 @@ export default function HomePage() {
           {
             genre.data.genres.slice(0,lengthGenre/2).map((genre,key)=>{
               return(
-                <ListFilm key={key} title={genre.name} genreId={genre.id} openModal={openModal}/>            
+                <ListFilm key={key} title={genre.name} genreId={genre.id} films={genre.films} openModal={openModal}/>            
               )
             })
           }
-          <Banner/>
+          <Banner film={cardFilm.data.films[0]}/>
           {
-            genre.data.genres.slice(lengthGenre/2,lengthGenre).map((genre,key)=>{
+            genre.data.genres.slice(lengthGenre/2).map((genre,key)=>{ 
               return(
-                <ListFilm key={key} title={genre.name} genreId={genre.id} openModal={openModal}/>            
+                <ListFilm key={key} title={genre.name} genreId={genre.id} films={genre.films} openModal={openModal}/>            
               )
             })
           }
-          <ListCenter title="Nổi bật" />
+          <ListCenter title="Nổi bật"/>
         </div>
       </div>
       {filmId!==null && <DetailFilm isOpen={isOpen} closeModal={closeModal} filmId={filmId}/>}
