@@ -36,7 +36,6 @@ export default function SearchPage() {
   if (searchFilm.error){
     navigate('/NotFound')
   }
-  console.log(searchFilm.data.films)
   return ( 
     <Mylayout>
       <div className="px-20 py-32"> 

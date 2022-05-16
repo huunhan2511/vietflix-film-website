@@ -31,8 +31,10 @@ export default function CardFilm({openModal,film}) {
                   {film.name}
                 </p>  
                 </span> 
-                <span className='hidden md:block w-[80%] sm:text-sm lg:text-xl mb-5'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                <span className='hidden md:block w-[80%] sm:text-sm lg:text-xl mb-5 max-h-[10rem] max-w-full'>
+                  <p>
+                  {!film.description ? "Không có thông tin tóm tắt phim " : film.description}
+                  </p>
                 </span>
                 <span className='flex gap-8 justify-center'>
                     <span className='sm:test-sm lg:text-xl text-red-600'>

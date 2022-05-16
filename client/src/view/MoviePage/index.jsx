@@ -44,7 +44,7 @@ export default function MoviePage() {
         {
             genre.data.genres.map((genre,key)=>{
               return(
-                <ListFilm key={key} title={genre.name} genreId={genre.id} openModal={openModal} filmType="Movie"/>            
+                <ListFilm key={key} title={genre.name} genreId={genre.id} films={genre.films} openModal={openModal} filmType="Movie"/>            
               )
             })
           }

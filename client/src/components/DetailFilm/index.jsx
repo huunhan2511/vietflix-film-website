@@ -15,7 +15,7 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
     const handleWatching = () =>{
         navigate(`/watch/${filmId}`,{state:{filmId:filmId}})
     }
-    const {loading,error,data} = useQuery(Query.qGetFilm,{variables:{filmId}})
+    const {loading,error,data} = useQuery(Query.qGetDetailFilm,{variables:{filmId}})
     if (loading) return <Loading/>
     if (error) {
         navigate('/error')
@@ -28,7 +28,6 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
                 overlayClassName="Overlay"
                 isOpen={isOpen}
                 onRequestClose={closeModal}
-                
             >   
                 <div className="relative md:h-[55%] cursor-pointer" >
                     <img
@@ -64,19 +63,21 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
                 </div>
                 <div className='px-[2%] pt-[5%] flex flex-col'>
                     <span className='sm:text-lg text-white font-semibold'>Tóm tắt phim : </span>
-                    <span className='sm:text-lg text-zinc-400 mt-5'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</span>
+                    <span className='sm:text-lg text-zinc-400 mt-5'>
+                        {!data.film.description ? "Không có thông tin tóm tắt phim " : data.film.description}
+                    </span>
             
                 </div>
                 { 
-                data.film.filmType.name !== "Movie" 
+                data.film.filmDetail.seasons.length 
                 &&
                 <div className='px-[2%] pt-[5%]'>
-                    <Episode />
+                    <Episode seasons={data.film.filmDetail.seasons} img={data.film.img} filmId={data.film.id} />
                 </div>
                 }
                 
                 <div className='px-[2%] pt-[5%]'>
-                    <SimilarFilm/>
+                    <SimilarFilm genres={data.film.genres}/>
                 </div>
                 <div className='h-14'/>
                 

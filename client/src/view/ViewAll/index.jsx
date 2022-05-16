@@ -51,17 +51,24 @@ export default function TvShowPage() {
       <div className="min-h-screen px-20 py-20">
         <div className='py-5'>
             <span className='text-base sm:text-[200%] uppercase font-bold'>
-                Danh sách {location.state.filmType !== null && location.state.filmType === "TV Show" ? 'Phim bộ' : "Phim lẻ"} thể loại {location.state.title}
+                Danh sách phim {location.state.title}
             </span>
         </div> 
         <div className='grid grid-cols-1 gap-y-4 sm:grid sm:grid-cols-2 sm:gap-3 md:grid md:grid-cols-3 xl:grid xl:grid-cols-4'>
         {
-                  dataFilm.data.genre.films.filter(film=> film.filmType.name === location.state.filmType).map((film,key)=>{
-                    return(
-                        <Film openModal={openModal} film={film} key={key}/>
-                    )
-                  })
-                }
+          location.state.filmType === null?
+          dataFilm.data.genre.films.map((film,key)=>{
+            return(
+                <Film openModal={openModal} film={film} key={key}/>
+            )
+          })
+          :
+          dataFilm.data.genre.films.filter(film=> film.filmType.name === location.state.filmType).map((film,key)=>{
+            return(
+                <Film openModal={openModal} film={film} key={key}/>
+            )
+          })
+        }
         </div>
       </div>
       <div>
