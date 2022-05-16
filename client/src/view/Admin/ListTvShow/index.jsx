@@ -1,11 +1,11 @@
 import React from 'react'
 import {LayoutAdmin} from '../../../components/LayoutAdmin'
-import { TvShow } from './TvShow'
+import { ListTvShow } from './ListTvShow'
 
 export default function TvShowAdmin() {
     return (
         <>
-            <LayoutAdmin childComponent={<TvShow />}></LayoutAdmin>
+            <LayoutAdmin childComponent={<ListTvShow />}></LayoutAdmin>
         </>
     )
 }

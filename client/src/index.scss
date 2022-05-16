@@ -369,6 +369,16 @@ code {
   border-top: 2px solid #141414 !important;
 }
 
+.ant-table-cell, .ant-table-tbody > tr:hover > td {
+  background-color: #141414 !important;
+  color: #fff !important;
+  border-bottom: 5px solid #191919 !important;
+}
+
+.ant-table-pagination, .ant-pagination {
+  margin: 11px 0 !important;
+}
+
 //Loading item
 @keyframes rotate {
   from {

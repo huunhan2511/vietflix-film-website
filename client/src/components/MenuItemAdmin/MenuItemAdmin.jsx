@@ -23,8 +23,8 @@ export function MenuItemAdmin() {
             <Menu.Item key="/admin" icon={<HomeOutlined />}>
                 <Link to="/admin">Trang chủ</Link>
             </Menu.Item>
-            <Menu.Item key="/orders" icon={<DesktopOutlined />}>
-                <Link to="/orders">Tất cả phim</Link>
+            <Menu.Item key="/admin/tat-ca-phim" icon={<DesktopOutlined />}>
+                <Link to="/admin/tat-ca-phim">Tất cả phim</Link>
             </Menu.Item>
             <SubMenu key="sub1" icon={<BarsOutlined />} title="Phim lẻ">
                 <Menu.Item key="/admin/phim-le" icon={<EyeOutlined />}>
