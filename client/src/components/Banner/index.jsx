@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function Banner({film}) {
-    console.log(film)
     let img =  film.img
     const style = {
         backgroundImage : `url('${img}')`
@@ -24,7 +23,7 @@ export default function Banner({film}) {
                         </span>
                         <span className='hidden sm:flex text-white max-h-full text-[50%] xs:text-xs md:text-sm xl:text-[150%]'>
                             <p className='break-words description'>
-                            {film.description}
+                            {!film.description ? "Không có thông tin tóm tắt phim " : film.description}
                             </p>
                         </span>
                     </div>

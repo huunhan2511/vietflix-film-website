@@ -172,6 +172,22 @@ const Query={
         }
       }
     }
+    `,
+    qGetSeason :gql`
+    query qGetFilm($seasonId: ID) {
+      season(id: $seasonId) {
+        id
+        name
+        total_episodes
+        episodes {
+          id
+          name
+          time
+          link_embed
+          link_m3u8
+        }
+      }
+    }
     `
 }
 export default Query

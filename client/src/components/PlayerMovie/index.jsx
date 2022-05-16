@@ -15,7 +15,16 @@ export default function PlayerMoive({filmType,filmId,episode=null}) {
   return (
     <>
     {episode ? 
-        <div>abc</div>
+        <div>
+        <ReactPlayer
+            className="react-player"
+            playing={true}
+            url= {episode}
+            controls
+            width="100%"
+            height="90vh"
+          />
+        </div>
         :
         <div>
           <ReactPlayer

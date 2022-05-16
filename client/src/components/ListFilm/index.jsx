@@ -4,7 +4,6 @@ import Slide from '../Slide';
 import { useNavigate } from 'react-router-dom';
 
 export default function ListFilm({title,openModal,genreId,filmType=null,films=[]}) {
-  console.log(filmType);
   const navigate = useNavigate();
   const handleViewAll = () =>{
     navigate('/tat-ca',{state: {title:title,filmType:filmType,genreId:genreId}})

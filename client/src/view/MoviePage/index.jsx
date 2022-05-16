@@ -43,7 +43,6 @@ export default function MoviePage() {
         <div> 
         {
             genre.data.genres.map((genre,key)=>{
-              console.log(genre)
               return(
                 <ListFilm key={key} title={genre.name} genreId={genre.id} films={genre.films} openModal={openModal} filmType="Movie"/>            
               )
