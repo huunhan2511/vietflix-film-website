@@ -10,7 +10,6 @@ export function ListMoive() {
       key: 'name',
       align: 'center',
       width: '25%',
-      color: '#8c8c8c',
       render:(text, record) => {
         return (
           <div>
@@ -70,9 +69,9 @@ export function ListMoive() {
       width: '15%',
       render: (text, record) => (
         <Space size="middle">
-          <p>View</p>
-          <p>Edit</p>
-          <p>Delete</p>
+          <button className='btn-admin !bg-green-600 !mt-0'>Xem</button>
+          <button className='btn-admin !bg-yellow-600 !mt-0'>Sửa</button>
+          <button className='btn-admin !bg-red-600 !mt-0'>Xóa</button>
         </Space>
       ),
     },

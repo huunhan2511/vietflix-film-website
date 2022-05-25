@@ -7,7 +7,7 @@ export default function LoginPage() {
   const handleLogin = () => {
     localStorage.setItem('token',"abc");
     console.log("login")
-    navigate('/admin',{replace:true});
+    navigate('/tat-ca-phim',{replace:true});
 }
   return (
     <div className='flex justify-center'>

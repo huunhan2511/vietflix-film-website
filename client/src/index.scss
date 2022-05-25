@@ -419,3 +419,5 @@ border-bottom-color: transparent;
   animation-iteration-count:  infinite;
   animation-timing-function: linear; 
 }
+
+.element::-webkit-scrollbar { width: 0 !important }

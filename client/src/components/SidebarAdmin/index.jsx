@@ -7,11 +7,11 @@ import logo from '../../img/320x80.png'
 const { Sider } = Layout;
 export default function SidebarAdmin (){
         return (
-            <Layout>
+            <Layout >
                 <Sider theme='light'
                 style={{ overflow: 'auto',
                          height: '100vh',
-                         left: 0
+                         left: 0,
                         }}
                 >
                     <img src={logo} alt=''></img>

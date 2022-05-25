@@ -9,6 +9,8 @@ const AllFilmAdmin = lazy(()=>import("./view/Admin/AllFilmAdmin"));
 const ListMovieAdmin = lazy(()=>import("./view/Admin/ListMovie"));
 const ListTvShowAdmin = lazy(()=>import("./view/Admin/ListTvShow"));
 const AddTvShowAdmin = lazy(()=>import("./view/Admin/AddTvShow"));
+const AddCategoryAdmin = lazy(()=>import("./view/Admin/AddCategory"));
+const ListCategoryAdmin = lazy(()=>import("./view/Admin/ListCategory"));
 const AddMovieAdmin = lazy(()=>import("./view/Admin/AddMovie"));
 const LoginAdminPage = lazy(()=>import("./view/Admin/LoginPage"));
 const NotFound = lazy(()=>import("./view/NotFound"));
@@ -67,7 +69,9 @@ function App() {
                     <Route path="phim-le" element={<ListMovieAdmin/>}/>
                     <Route path="them-phim-le" element={< AddMovieAdmin/>} />
                     <Route path='phim-bo' element={<ListTvShowAdmin />}/>
-                    <Route path='them-phim-bo' element={<AddTvShowAdmin />}/>               
+                    <Route path='them-phim-bo' element={<AddTvShowAdmin />}/>  
+                    <Route path='them-the-loai' element={<AddCategoryAdmin />}/>
+                    <Route path='the-loai' element={<ListCategoryAdmin />}/>
                   </Route>
 
                   <Route

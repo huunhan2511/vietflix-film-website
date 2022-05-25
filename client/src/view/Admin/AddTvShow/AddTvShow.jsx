@@ -20,11 +20,11 @@ const handleCancel = () => {
   setIsModalVisible(false);
 };
   return (
-    <div style={{backgroundColor: '#141414'}} className='h-screen flex justify-center'>
+    <div style={{backgroundColor: '#141414'}} className='min-h-screen flex justify-center'>
       <div style={{backgroundColor: '#191919'}} className='w-[70%] my-8 ml-8 rounded-xl'>
         <AddInfomation title='Phim Bộ (TvShow)'/>
         <div className='flex justify-center'>
-          <button onClick={showModal} className='btn-admin w-[15%]' type='submit'>Thêm phim</button>
+          <button onClick={showModal} className='btn-admin w-fit' type='submit'>Thêm phim</button>
           <Modal 
             title="Xác nhận" 
             visible={isModalVisible} 
@@ -41,7 +41,7 @@ const handleCancel = () => {
           </Modal>
         </div>
       </div>
-      <div className='w-[30%] flex flex-col m-8 rounded-lg'>
+      <div className='w-[30%] flex flex-col m-8 rounded-lg !justify-between'>
         <AddEpisode/>
         <AddSeasion/>
       </div>
