@@ -20,9 +20,6 @@ export function MenuItemAdmin() {
     }
     return (
         <Menu theme="light" mode="inline" >
-            <Menu.Item key="/admin" icon={<HomeOutlined />}>
-                <Link to="/admin">Trang chủ</Link>
-            </Menu.Item>
             <Menu.Item key="/admin/tat-ca-phim" icon={<DesktopOutlined />}>
                 <Link to="/admin/tat-ca-phim">Tất cả phim</Link>
             </Menu.Item>

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
-import { AddEpisode } from '../AddEpisodePanel/AddEpisode';
-import { AddInfomation } from '../AddInfomationPanel/AddInfomation';
-import { AddSeasion } from '../AddSeasionPanel/AddSeasion';
+import { AddEpisode } from '../component/AddEpisodePanel/AddEpisode';
+import { AddInfomation } from '../component/AddInfomationPanel/AddInfomation';
+import { AddSeasion } from '../component/AddSeasionPanel/AddSeasion';
 import { Modal } from 'antd'
 
 export function AddTvShow() {

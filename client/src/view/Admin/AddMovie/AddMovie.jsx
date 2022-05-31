@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { Modal } from 'antd'
-import { AddInfomation } from '../AddInfomationPanel/AddInfomation'
+import { AddInfomation } from '../component/AddInfomationPanel/AddInfomation'
 export default function AddMovie() {
     const [isModalVisible, setIsModalVisible] = useState(false);
 

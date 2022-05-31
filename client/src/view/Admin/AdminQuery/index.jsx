@@ -17,5 +17,23 @@ const adminQuery = {
       }
     }
   `,
+  qGetFilmsByFilmType: gql`
+    query qGetFilmsByFilmType($filmTypeId: ID) {
+      filmType(id: $filmTypeId) {
+        films {
+          id
+          name
+          img
+          description
+          genres {
+            name
+          }
+          filmType {
+            name
+          }
+        }
+      }
+    }
+  `,
 };
 export default adminQuery;

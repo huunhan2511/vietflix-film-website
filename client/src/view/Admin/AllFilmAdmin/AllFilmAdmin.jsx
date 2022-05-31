@@ -6,13 +6,19 @@ import { Table, Tag, Space, Input, Button } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import  adminQuery from '../AdminQuery'
 import Loading from '../../../components/Loading'
+import { useNavigate } from 'react-router-dom';
 
-export function AllFilmAdmin() {
+export function AllFilmAdmin({filmId}) {
   const cardFilm = useQuery(adminQuery.qGetAllFilm);
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
+  const navigate = useNavigate();
 
+  const handleViewClick = ()=> {
+    navigate(`/admin/tat-ca/phim/${cardFilm.data.films.id}`, {state:{filmId:filmId}})
+  }
+  
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -166,14 +172,13 @@ export function AllFilmAdmin() {
       width: "15%",
       render: (text, record) => (
         <Space size="middle">
-          <button className="btn-admin !bg-green-600 !mt-0">Xem</button>
+          <button className="btn-admin !bg-green-600 !mt-0" onClick={handleViewClick}>Xem</button>
           <button className="btn-admin !bg-yellow-600 !mt-0">Sửa</button>
           <button className="btn-admin !bg-red-600 !mt-0">Xóa</button>
         </Space>
       ),
     },
   ];
-
   return (
     <>
       <div style={{backgroundColor: '#141414'}} className='min-h-screen flex justify-center'>
