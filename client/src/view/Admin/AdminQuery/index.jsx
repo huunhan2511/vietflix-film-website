@@ -17,6 +17,40 @@ const adminQuery = {
       }
     }
   `,
+  qGetDetailFilm: gql`
+    query qGetFilm($filmId: ID) {
+        film(id: $filmId) {
+          id
+          name
+          img
+          description
+          slug
+          filmType {
+            id
+            name
+          }
+          genres {
+            id
+            name
+          }
+          filmDetail {
+            id
+            seasons {
+              id
+              name
+              total_episodes
+              episodes {
+                id
+                name
+                time
+                link_embed
+                link_m3u8
+              }
+            }
+          }
+        }
+      }
+    `,
   qGetFilmsByFilmType: gql`
     query qGetFilmsByFilmType($filmTypeId: ID) {
       filmType(id: $filmTypeId) {
@@ -34,6 +68,28 @@ const adminQuery = {
         }
       }
     }
+  `,
+  qGetAllCategories: gql`
+  query qGetAllCategories {
+    genres {
+      id
+      name
+    }
+  }`,
+  mAddCategory: gql`
+  mutation mAddCategory($input: GenreInput) {
+    createGenre(input: $input) {
+      id
+      name
+    }
+  }
+  `,
+  mLogin: gql`
+  mutation mLogin($input: loginAdmin) {
+    loginAdmin(input: $input) {
+      token
+    }
+  }
   `,
 };
 export default adminQuery;

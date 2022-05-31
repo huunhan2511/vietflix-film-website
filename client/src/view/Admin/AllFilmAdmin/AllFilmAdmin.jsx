@@ -8,15 +8,15 @@ import  adminQuery from '../AdminQuery'
 import Loading from '../../../components/Loading'
 import { useNavigate } from 'react-router-dom';
 
-export function AllFilmAdmin({filmId}) {
+export function AllFilmAdmin() {
   const cardFilm = useQuery(adminQuery.qGetAllFilm);
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
   const navigate = useNavigate();
 
-  const handleViewClick = ()=> {
-    navigate(`/admin/tat-ca/phim/${cardFilm.data.films.id}`, {state:{filmId:filmId}})
+  const handleViewClick = (filmId)=> {
+    navigate(`/admin/tat-ca-phim/${filmId}`, {state:{filmId:filmId}})
   }
   
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -131,7 +131,7 @@ export function AllFilmAdmin({filmId}) {
       key: "name",
       align: "left",
       width: "15%",
-      ...getColumnSearchProps('name')
+      ...getColumnSearchProps("name"),
     },
     {
       title: "Thể loại",
@@ -167,12 +167,18 @@ export function AllFilmAdmin({filmId}) {
     },
     {
       title: "Chỉnh sửa",
-      key: "action",
+      dataIndex :"id",
+      key: "id",
       align: "center",
       width: "15%",
       render: (text, record) => (
         <Space size="middle">
-          <button className="btn-admin !bg-green-600 !mt-0" onClick={handleViewClick}>Xem</button>
+          <button
+            className="btn-admin !bg-green-600 !mt-0"
+            onClick={()=>handleViewClick(text)}
+          >
+            Xem
+          </button>
           <button className="btn-admin !bg-yellow-600 !mt-0">Sửa</button>
           <button className="btn-admin !bg-red-600 !mt-0">Xóa</button>
         </Space>

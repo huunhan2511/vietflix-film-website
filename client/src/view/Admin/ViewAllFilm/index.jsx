@@ -1,11 +1,14 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { LayoutAdmin } from '../../../components/LayoutAdmin'
+import ViewAllFilm from './ViewAllFilm'
+import { useParams } from 'react-router-dom';
 
-export default function ViewAllFilm() {
-    let id = useParams();
+export default function ViewAllFilmAdmin() {
+    const param = useParams();
+    console.log(param.id)
     return(
         <>
-            <h1>Id: {id}</h1>
+            <LayoutAdmin childComponent={<ViewAllFilm filmId={param.id}/>}/>
         </>
     )
 }
