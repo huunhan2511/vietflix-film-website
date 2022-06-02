@@ -100,12 +100,13 @@ export function ListMoive() {
       title: "Hình",
       dataIndex: "img",
       key: "img",
-      align: "left",
+      align: "center",
       width: "15%",
       render: (text, record) => {
         return (
           <div>
             <img
+              className='!m-auto'
               src={text}
               style={{ width: "50%", height: "50%", margin: "0" }}
               alt=""

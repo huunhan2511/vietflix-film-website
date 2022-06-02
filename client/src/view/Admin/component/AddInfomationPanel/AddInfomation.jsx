@@ -28,7 +28,7 @@ export function AddInfomation({title}) {
         <div className="header-content-admin">Thêm Thông Tin {title}</div>
         <div className="m-auto w-[96.5%]">
           <Input
-            className="input-infomation"
+            className="!mt-6"
             placeholder="Tên phim"
             size="large"
           ></Input>
@@ -39,10 +39,10 @@ export function AddInfomation({title}) {
           >
             <button className='btn-admin text-white m-1' style={{width: '100%'}}>Tải ảnh của phim</button>
           </Upload> */}
-          <Input placeholder="Đường dẫn ảnh phim" size="large"></Input>
-          <Input placeholder="Đường dẫn của phim" size="large"></Input>
-          <Input placeholder="Năm xuất bản" size="large"></Input>
-          <Input placeholder="Thời lượng phim" size="large"></Input>
+          <Input className="!mt-6" placeholder="Đường dẫn ảnh phim" size="large"></Input>
+          <Input className="!mt-6" placeholder="Đường dẫn của phim" size="large"></Input>
+          <Input className="!mt-6" placeholder="Năm xuất bản" size="large"></Input>
+          <Input className="!mt-6" placeholder="Thời lượng phim" size="large"></Input>
           <Cascader
             style={{
               width: "100%",
@@ -56,7 +56,7 @@ export function AddInfomation({title}) {
             maxTagCount="responsive"
             showCheckedStrategy={SHOW_CHILD}
           />
-          <TextArea placeholder="Mô tả" size="large" rows={9} />
+          <TextArea className="!mt-6" placeholder="Mô tả" size="large" rows={9} />
         </div>
       </>
     );

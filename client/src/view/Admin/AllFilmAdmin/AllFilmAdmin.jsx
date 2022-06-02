@@ -15,7 +15,8 @@ export function AllFilmAdmin() {
   const searchInput = useRef(null);
   const navigate = useNavigate();
 
-  const handleViewClick = (filmId)=> {
+  const handleViewClick = (filmId,record)=> {
+    localStorage.setItem("name",record.name); 
     navigate(`/admin/tat-ca-phim/${filmId}`, {state:{filmId:filmId}})
   }
   
@@ -104,19 +105,20 @@ export function AllFilmAdmin() {
     return <Loading/>
   }
   else {
-    console.log(cardFilm.data.films);
+    
   }
   const columns = [
     {
       title: "Hình",
       dataIndex: "img",
       key: "img",
-      align: "left",
+      align: "center",
       width: "15%",
       render: (text, record) => {
         return (
           <div>
             <img
+              className='!m-auto'
               src={text}
               style={{ width: "50%", height: "50%", margin: "0" }}
               alt=""
@@ -130,7 +132,7 @@ export function AllFilmAdmin() {
       dataIndex: "name",
       key: "name",
       align: "left",
-      width: "15%",
+      width: "24%",
       ...getColumnSearchProps("name"),
     },
     {
@@ -138,7 +140,7 @@ export function AllFilmAdmin() {
       key: "genres",
       dataIndex: "genres",
       align: "center",
-      width: "15%",
+      width: "13%",
       render: (genres) => (
         <>
           {genres.map((genre) => {
@@ -156,7 +158,7 @@ export function AllFilmAdmin() {
       dataIndex: "filmType",
       key: "filmType",
       align: "center",
-      width: "15%",
+      width: "8%",
       render: (text, record) => {
         return (
           <div>
@@ -175,7 +177,7 @@ export function AllFilmAdmin() {
         <Space size="middle">
           <button
             className="btn-admin !bg-green-600 !mt-0"
-            onClick={()=>handleViewClick(text)}
+            onClick={()=>handleViewClick(text,record)}
           >
             Xem
           </button>

@@ -4,6 +4,8 @@ import "antd/dist/antd.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./components/Loading";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
+const EditSeasonAdmin = lazy(()=> import("./view/Admin/EditSeasonAdmin"))
+const EditEpisodeAdmin = lazy(()=> import("./view/Admin/EditEpisodeAdmin"))
 const HomeAdmin = lazy(()=> import("./view/Admin/HomeAdmin"));
 const AllFilmAdmin = lazy(()=>import("./view/Admin/AllFilmAdmin"));
 const ViewAllFilmAdmin = lazy(()=>import("./view/Admin/ViewAllFilm"))
@@ -74,6 +76,9 @@ function App() {
                     <Route path='them-phim-bo' element={<AddTvShowAdmin />}/>  
                     <Route path='them-the-loai' element={<AddCategoryAdmin />}/>
                     <Route path='the-loai' element={<ListCategoryAdmin />}/>
+                    <Route path='season/:id' element={<EditSeasonAdmin />}/>
+                    <Route path='season/episode/:id' element={<EditEpisodeAdmin />}/>
+                    <Route path='episode/:id' element={<EditEpisodeAdmin />}/>
                   </Route>
 
                   <Route

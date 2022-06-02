@@ -336,7 +336,6 @@ code {
   border: none !important;
   color: #fff !important;
   resize: none;
-  margin-top: 1.5rem !important;
 }
 
 .ant-select:not(.ant-select-customize-input) .ant-select-selector, .ant-cascader-menu-item:hover, .ant-cascader-menu-item-active {
@@ -372,7 +371,15 @@ code {
 .ant-table-cell, .ant-table-tbody > tr:hover > td {
   background-color: #141414 !important;
   color: #fff !important;
-  border-bottom: 5px solid #191919 !important;
+  border: 3px solid #191919 !important;
+}
+
+.ant-table-container {
+  border: 3px solid #191919 !important;
+}
+
+.ant-table-content > table {
+  border-top-width: 0px !important;
 }
 
 .ant-table-pagination, .ant-pagination {

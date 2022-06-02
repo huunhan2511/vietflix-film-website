@@ -65,7 +65,7 @@ export default function AdminCategory() {
               <div className="flex justify-center">
                 <button
                   onClick={showModal}
-                  className="btn-admin w-[12%]"
+                  className="btn-admin w-fit"
                   type="submit"
                 >
                   Thêm thể loại

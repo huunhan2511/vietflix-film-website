@@ -25,8 +25,8 @@ export function AddSeasion() {
             <div style={{backgroundColor: '#191919'}} className='w-full h-fit mt-4 mr-4 rounded-xl'>
                 <div className='header-content-admin'>Thêm mùa TvShow</div>
                 <div className='flex flex-col items-center m-auto w-[90%]'>
-                    <Input placeholder='Tên mùa phim' size='large'></Input>
-                    <Input placeholder='time' size='large' type={'date'}></Input>
+                    <Input className="!mt-6" placeholder='Tên mùa phim' size='large'></Input>
+                    <Input className="!mt-6" placeholder='time' size='large' type={'date'}></Input>
                     <Cascader
                     style={{
                         width: '100%',

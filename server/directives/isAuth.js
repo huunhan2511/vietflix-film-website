@@ -17,7 +17,6 @@ function isAuth(schema, directiveName) {
         // Replace the original resolver with a function that *first* calls
         // the original resolver, then converts its result to upper case
         fieldConfig.resolve = async function (source, args, context, info) {
-          console.log(context.req.headers.authorization)
           let authorized = await token.verify(context.req);
           return authorized instanceof Error ? authorized : await resolve(source, args, context, info);
         } 

@@ -4,7 +4,7 @@ import { AddEpisode } from '../component/AddEpisodePanel/AddEpisode';
 import { AddInfomation } from '../component/AddInfomationPanel/AddInfomation';
 import { AddSeasion } from '../component/AddSeasionPanel/AddSeasion';
 import { Modal } from 'antd'
-import SeasonAndEpisodetable from '../component/SeasonAndEpisodeTable';
+
 
 export function AddTvShow() {
 const [isModalVisible, setIsModalVisible] = useState(false);
@@ -49,9 +49,7 @@ const handleCancel = () => {
         </div>
         
       </div>
-      <div style={{backgroundColor: '#191919'}} className='w-full p-8'>
-        <SeasonAndEpisodetable />
-      </div>
+      
     </div>
   )
 }

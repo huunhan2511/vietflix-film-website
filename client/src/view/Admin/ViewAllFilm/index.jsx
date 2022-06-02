@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 
 export default function ViewAllFilmAdmin() {
     const param = useParams();
-    console.log(param.id)
     return(
         <>
             <LayoutAdmin childComponent={<ViewAllFilm filmId={param.id}/>}/>

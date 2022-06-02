@@ -98,12 +98,13 @@ export function ListTvShow() {
       title: "Hình",
       dataIndex: "img",
       key: "img",
-      align: "left",
+      align: "center",
       width: "15%",
       render: (text, record) => {
         return (
           <div>
             <img
+              className='!m-auto'
               src={text}
               style={{ width: "50%", height: "50%", margin: "0" }}
               alt=""
@@ -169,7 +170,6 @@ export function ListTvShow() {
   if (data.loading || data.error) {
     return <Loading />;
   }
-  console.log(data.data.filmType.films)
   return (
     <>
       <div style={{backgroundColor: '#141414'}} className='h-screen flex justify-center'>
