@@ -94,7 +94,7 @@ const mongoDataMethods = {
 		}
 	},
 	
-  //Update
+  	//Update
     updateFilm: async args => {
 		return await Film.findOneAndUpdate({_id: args.input.id}, args.input, { returnDocument: 'after' })
 	},
@@ -120,6 +120,31 @@ const mongoDataMethods = {
 	},
     updateEpisodes: async args => {
 		return await Episode.insertMany(args.input)
+	},
+
+	//Delete
+    deleteFilm: async args => {
+		return await Film.findOneAndRemove({_id: args.id})
+	},
+
+    deleteGenre: async args => {
+		return await Genre.findOneAndRemove({_id: args.id})
+	},
+
+    deleteFilmType: async args => {
+		return await FilmType.findOneAndRemove({_id: args.id})
+	},
+
+    deleteFilmDetail: async args => {
+		return await FilmDetail.findOneAndRemove({_id: args.id})
+	},
+
+    deleteSeason: async args => {
+		return await Season.findOneAndRemove({_id: args.id})
+	},
+
+    deleteEpisode: async args => {
+		return await Episode.findOneAndRemove({_id: args.id})
 	},
 }
 

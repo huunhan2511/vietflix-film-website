@@ -62,7 +62,15 @@ const resolver = {
     updateFilmDetail: async (parent, args, context) => await context.mongoDataMethods.updateFilmDetail(args),
     updateSeason: async (parent, args, context) => await context.mongoDataMethods.updateSeason(args),
     updateEpisode: async (parent, args, context) => await context.mongoDataMethods.updateEpisode(args),
-    updateEpisodes: async (parent, args, context) => await context.mongoDataMethods.updateEpisodes(args)}
+    updateEpisodes: async (parent, args, context) => await context.mongoDataMethods.updateEpisodes(args),
+
+    deleteFilm: async (parent, args, context) => await context.mongoDataMethods.deleteFilm(args),
+    deleteGenre: async (parent, args, context) => await context.mongoDataMethods.deleteGenre(args),
+    deleteFilmType: async (parent, args, context) => await context.mongoDataMethods.deleteFilmType(args),
+    deleteFilmDetail: async (parent, args, context) => await context.mongoDataMethods.deleteFilmDetail(args),
+    deleteSeason: async (parent, args, context) => await context.mongoDataMethods.deleteSeason(args),
+    deleteEpisode: async (parent, args, context) => await context.mongoDataMethods.deleteEpisode(args),
     }
+}
 
 export default resolver;

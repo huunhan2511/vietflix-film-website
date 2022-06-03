@@ -154,6 +154,13 @@ const typeDefs = gql`
         updateSeason(input:SeasonInput): Season, @isAuth
         updateEpisode(input:EpisodeInput): Episode, @isAuth
         updateEpisodes(input:[EpisodeInput]): [Episode], @isAuth
+
+        deleteFilm(id:String): Film, @isAuth
+        deleteGenre(id:String): Genre, @isAuth
+        deleteFilmType(id:String): FilmType, @isAuth
+        deleteFilmDetail(id:String): FilmDetail, @isAuth
+        deleteSeason(id:String): Season, @isAuth
+        deleteEpisode(id:String): Episode, @isAuth
     }
 `;
 
