@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRef, useState } from 'react'
-import { useQuery } from "@apollo/client";
-import { Table, Tag, Space, Input, Button } from 'antd'
+import { useQuery,useMutation } from "@apollo/client";
+import { Table, Tag, Space, Input, Button,Modal } from 'antd'
 // import Highlighter from 'react-highlight-words'
 import { SearchOutlined } from '@ant-design/icons'
 import  adminQuery from '../AdminQuery'
@@ -9,12 +9,47 @@ import Loading from '../../../components/Loading'
 import { useNavigate } from 'react-router-dom';
 
 export function AllFilmAdmin() {
-  const cardFilm = useQuery(adminQuery.qGetAllFilm);
+  const [films,setFilms] = useState([])
+  const cardFilm = useQuery(adminQuery.qGetAllFilm,{fetchPolicy: 'network-only',onCompleted : data =>setFilms(data.films)},);
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
   const navigate = useNavigate();
+  const [mutationDeleteFilm, {error}] = useMutation(adminQuery.mDeleteFilm,{refetchQueries : ()=> [adminQuery.qGetAllFil,{fetchPolicy: 'network-only'}]});
 
+  
+  const handleDelete = (id)=>{
+    mutationDeleteFilm({
+      variables: {
+        deleteFilmId : id
+      },
+      context: {
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      },
+    });
+    if(error){
+      localStorage.removeItem("token")
+      navigate("/login-admin")
+    }else{
+      let newFilms = films.filter(film => film.id !== id)
+      setFilms(newFilms)
+    }
+  }
+  const confirm = (id) => {
+    Modal.confirm({
+      title: 'Xác nhận',
+      content: 'Chắc chắn muốn xóa phim',
+      okText: 'Xác nhận',
+      cancelText: 'Hủy',
+      onOk : ()=>{handleDelete(id)},
+      bodyStyle: {
+          backgroundColor: "#191919"
+      }
+    });
+  };
+  
   const handleViewClick = (filmId,record)=> {
     localStorage.setItem("name",record.name); 
     navigate(`/admin/tat-ca-phim/${filmId}`, {state:{filmId:filmId}})
@@ -104,9 +139,6 @@ export function AllFilmAdmin() {
   if (cardFilm.loading || cardFilm.error) {
     return <Loading/>
   }
-  else {
-    
-  }
   const columns = [
     {
       title: "Hình",
@@ -182,7 +214,9 @@ export function AllFilmAdmin() {
             Xem
           </button>
           <button className="btn-admin !bg-yellow-600 !mt-0">Sửa</button>
-          <button className="btn-admin !bg-red-600 !mt-0">Xóa</button>
+          <button className="btn-admin !bg-red-600 !mt-0"
+            onClick={()=>confirm(text)}
+          >Xóa</button>
         </Space>
       ),
     },
@@ -193,7 +227,7 @@ export function AllFilmAdmin() {
         <div style={{backgroundColor: '#191919'}} className='w-full m-8 rounded-xl'>
           <div className='header-content-admin'>Danh sách tất cả phim</div>
           <div className='m-4 h-auto'>
-            <Table columns={columns} dataSource={cardFilm.data.films} pagination={{ pageSize: 9}}/>
+            <Table columns={columns} dataSource={films} pagination={{ pageSize: 9}}/>
           </div>
         </div>
       </div>

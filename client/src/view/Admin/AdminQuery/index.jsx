@@ -149,6 +149,13 @@ const adminQuery = {
         link_m3u8
       }
     }
+  `,
+  mDeleteFilm : gql`
+    mutation mDeleteFilm($deleteFilmId: String) {
+      deleteFilm(id: $deleteFilmId) {
+        id
+      }
+    }
   `
 };
 export default adminQuery;

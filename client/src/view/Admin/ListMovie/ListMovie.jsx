@@ -176,7 +176,7 @@ export function ListMoive() {
     <>
       <div
         style={{ backgroundColor: "#141414" }}
-        className="h-screen flex justify-center"
+        className="min-h-screen flex justify-center"
       >
         <div
           style={{ backgroundColor: "#191919" }}
