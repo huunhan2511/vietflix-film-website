@@ -1,21 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useRef, useState } from 'react'
 import { useQuery,useMutation } from "@apollo/client";
-import { Table, Tag, Space, Input, Button,Modal } from 'antd'
+import { Table, Tag, Space, Input, Button} from 'antd'
 // import Highlighter from 'react-highlight-words'
 import { SearchOutlined } from '@ant-design/icons'
 import  adminQuery from '../AdminQuery'
 import Loading from '../../../components/Loading'
 import { useNavigate } from 'react-router-dom';
-
+import { openNotificationWithIcon } from '../../../components/Notification';
+import { ModalConfirmDelete } from '../../../components/Modal';
 export function AllFilmAdmin() {
   const [films,setFilms] = useState([])
-  const cardFilm = useQuery(adminQuery.qGetAllFilm,{fetchPolicy: 'network-only',onCompleted : data =>setFilms(data.films)},);
+  const cardFilm = useQuery(adminQuery.qGetAllFilm,{onCompleted : data =>setFilms(data.films),fetchPolicy : "cache-and-network"});
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
   const navigate = useNavigate();
-  const [mutationDeleteFilm, {error}] = useMutation(adminQuery.mDeleteFilm,{refetchQueries : ()=> [adminQuery.qGetAllFil,{fetchPolicy: 'network-only'}]});
+  const [mutationDeleteFilm, {error}] = useMutation(adminQuery.mDeleteFilm);
 
   
   const handleDelete = (id)=>{
@@ -31,25 +32,13 @@ export function AllFilmAdmin() {
     });
     if(error){
       localStorage.removeItem("token")
-      navigate("/login-admin")
+      navigate("/login-admin",{replace:true})
     }else{
       let newFilms = films.filter(film => film.id !== id)
       setFilms(newFilms)
+      openNotificationWithIcon("success","Xóa thành công","bottomRight");
     }
-  }
-  const confirm = (id) => {
-    Modal.confirm({
-      title: 'Xác nhận',
-      content: 'Chắc chắn muốn xóa phim',
-      okText: 'Xác nhận',
-      cancelText: 'Hủy',
-      onOk : ()=>{handleDelete(id)},
-      bodyStyle: {
-          backgroundColor: "#191919"
-      }
-    });
-  };
-  
+  } 
   const handleViewClick = (filmId,record)=> {
     localStorage.setItem("name",record.name); 
     navigate(`/admin/tat-ca-phim/${filmId}`, {state:{filmId:filmId}})
@@ -215,7 +204,7 @@ export function AllFilmAdmin() {
           </button>
           <button className="btn-admin !bg-yellow-600 !mt-0">Sửa</button>
           <button className="btn-admin !bg-red-600 !mt-0"
-            onClick={()=>confirm(text)}
+            onClick={()=>ModalConfirmDelete(text,handleDelete,"Xác nhận muốn xóa phim")}
           >Xóa</button>
         </Space>
       ),

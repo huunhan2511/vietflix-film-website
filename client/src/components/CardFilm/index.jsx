@@ -32,7 +32,7 @@ export default function CardFilm({openModal,film}) {
                 </p>  
                 </span> 
                 <span className='hidden md:block w-[80%] sm:text-sm lg:text-xl mb-5 max-h-[10rem] max-w-full'>
-                  <p>
+                  <p className='line-clamp-6'>
                   {!film.description ? "Không có thông tin tóm tắt phim " : film.description}
                   </p>
                 </span>

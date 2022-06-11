@@ -1,8 +1,8 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faArrowLeft} from "@fortawesome/free-solid-svg-icons"
-import { Input, Tag,Space  } from 'antd'
+import { Input, Tag } from 'antd'
 import  adminQuery from '../AdminQuery'
 import { useQuery } from "@apollo/client"
 import Loading from '../../../components/Loading';
@@ -14,8 +14,7 @@ export default function ViewAllFilm({filmId}){
     const previPage = () => {
       navigate(-1)
     }
-    const {data,loading} = useQuery(adminQuery.qGetDetailFilm,{variables:{filmId}});
-    data && console.log("data",data);
+    const {data,loading} = useQuery(adminQuery.qGetDetailFilm,{variables:{filmId},fetchPolicy : "cache-and-network"});
     if(loading) return <Loading/>
     return (
       <>
@@ -58,9 +57,9 @@ export default function ViewAllFilm({filmId}){
                 </div>
             </div>
             <div className='mx-6 mt-4'>
-              {data.film.filmType.name === "Movie" ? <EpisodeTable episodeId={data.film.filmDetail.episode.id}/>
+              {data.film.filmType.name === "Movie" ? <EpisodeTable episodeId={data.film.filmDetail.episode?.id}/>
               :
-              <SeasonTable filmDetailId={data.film.filmDetail.id}/>}
+              <SeasonTable filmDetailId={data.film.filmDetail?.id}/>}
             </div>
           </div>
         </div>

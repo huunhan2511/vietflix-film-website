@@ -156,6 +156,21 @@ const adminQuery = {
         id
       }
     }
+  `,
+  mDeleteSeason : gql`
+    mutation mDeleteSeason($deleteSeasonId: String) {
+      deleteSeason(id: $deleteSeasonId) {
+        id
+      }
+    }
+  `,
+  mDeleteEpisode : gql`
+    mutation mDeleteEpisode($deleteEpisodeId: String) {
+      deleteEpisode(id: $deleteEpisodeId) {
+        id
+      }
+    }
   `
+
 };
 export default adminQuery;

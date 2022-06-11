@@ -1,15 +1,39 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import { Table, Input, Button, Popconfirm, Form,Space } from 'antd';
-import { useQuery } from "@apollo/client"
+import React, { useState } from 'react';
+import { Table, Space } from 'antd';
+import { useMutation, useQuery } from "@apollo/client"
 import { useNavigate } from 'react-router-dom';
 import  adminQuery from '../../AdminQuery';
 import LoadingItem from "../../../../components/LoadingItem";
+import { openNotificationWithIcon } from '../../../../components/Notification';
+import { ModalConfirmDelete } from '../../../../components/Modal';
 
 export default function EpisodeTable ({filmDetailId}) {
   const navigate = useNavigate();
-  const {data, loading} = useQuery(adminQuery.qFilmDetail,{variables: {filmDetailId}});
+  const [seasons,setSeasons] = useState([])
+  const {loading} = useQuery(adminQuery.qFilmDetail,{variables: {filmDetailId},onCompleted : data => setSeasons(data.filmDetail.seasons),fetchPolicy : "cache-and-network"});
+  const [mutationDeleteSeason,{error}] = useMutation(adminQuery.mDeleteSeason) 
   const handleView = (seasonId) =>{
     navigate(`/admin/season/${seasonId}`)
+  }
+  const handleDelete = (id)=>{
+    mutationDeleteSeason({
+      variables: {
+        deleteSeasonId : id
+      },
+      context: {
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      },
+    });
+    if(error){
+      localStorage.removeItem("token")
+      navigate("/login-admin",{replace:true})
+    }else{
+      let newSeasons = seasons.filter(season => season.id !== id)
+      setSeasons(newSeasons)
+      openNotificationWithIcon("success","Xóa thành công","bottomRight");
+    }
   }
   let defaultColumns = [
     {
@@ -38,7 +62,9 @@ export default function EpisodeTable ({filmDetailId}) {
               Xem
             </button>
             <button className="btn-admin !bg-yellow-600 !mt-0">Sửa</button>
-            <button className="btn-admin !bg-red-600 !mt-0">Xóa</button>
+            <button className="btn-admin !bg-red-600 !mt-0"
+              onClick={()=>ModalConfirmDelete(text,handleDelete,"Xác nhận muốn xóa mùa phim")}
+            >Xóa</button>
           </Space>
         ),
       },
@@ -46,7 +72,7 @@ export default function EpisodeTable ({filmDetailId}) {
   if(loading) return <LoadingItem/>
   return (
     <>
-      <Table columns={defaultColumns} dataSource={data.filmDetail.seasons} pagination={{ pageSize: 9}}/>
+      <Table columns={defaultColumns} dataSource={seasons} pagination={{ pageSize: 9}}/>
     </>
   )
 }

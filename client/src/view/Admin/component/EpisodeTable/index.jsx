@@ -1,13 +1,43 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import { Table, Input, Button, Popconfirm, Form,Space } from 'antd';
-import { useQuery } from "@apollo/client"
+import React, { useState} from 'react';
+import { Table, Space } from 'antd';
+import { useMutation, useQuery } from "@apollo/client"
 import { useNavigate } from 'react-router-dom';
 import  adminQuery from '../../AdminQuery';
 import LoadingItem from "../../../../components/LoadingItem";
+import { openNotificationWithIcon } from '../../../../components/Notification';
+import { ModalConfirmDelete } from '../../../../components/Modal';
 
 export default function EpisodeTable ({seasonId,episodeId = null}) {
   const navigate = useNavigate();
-  const {data, loading} = useQuery(episodeId !== null ? adminQuery.qEpisode : adminQuery.qSeason, episodeId !== null ? {variables: {episodeId}} : {variables: {seasonId}});
+  const [episode, setEpisode] = useState([])
+  const {loading} = useQuery(episodeId !== null ? adminQuery.qEpisode : adminQuery.qSeason, 
+                            episodeId !== null 
+                            ? 
+                            {variables: {episodeId},onCompleted :data => setEpisode([data.episode]),fetchPolicy : "cache-and-network"} 
+                            : 
+                            {variables: {seasonId},onCompleted :data => setEpisode(data.season.episodes),fetchPolicy : "cache-and-network"}
+                            );
+  const [mutationDeleteEpisode,{error}] = useMutation(adminQuery.mDeleteEpisode)
+  const handleDelete = (id)=>{
+    mutationDeleteEpisode({
+      variables: {
+        deleteEpisodeId : id
+      },
+      context: {
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      },
+    });
+    if(error){
+      localStorage.removeItem("token")
+      navigate("/login-admin",{replace:true})
+    }else{
+      let newEpisode = episode.filter(episode => episode.id !== id)
+      setEpisode(newEpisode)
+      openNotificationWithIcon("success","Xóa thành công","bottomRight");
+    }
+  } 
   const handleView = (seasonId) =>{
     if(episodeId === null ){
     navigate(`/admin/season/episode/${seasonId}`)
@@ -54,7 +84,9 @@ export default function EpisodeTable ({seasonId,episodeId = null}) {
               Xem
             </button>
             <button className="btn-admin !bg-yellow-600 !mt-0">Sửa</button>
-            <button className="btn-admin !bg-red-600 !mt-0">Xóa</button>
+            <button className="btn-admin !bg-red-600 !mt-0"
+              onClick={()=>ModalConfirmDelete(text,handleDelete,"Xác nhận muốn xóa tập phim")}
+            >Xóa</button>
           </Space>
         ),
       },
@@ -62,7 +94,7 @@ export default function EpisodeTable ({seasonId,episodeId = null}) {
   if(loading) return <LoadingItem/>
   return (
     <>
-      <Table columns={defaultColumns} dataSource={episodeId!== null ? [data.episode] : data.season.episodes} pagination={{ pageSize: 9}} />
+      <Table columns={defaultColumns} dataSource={episode} pagination={{ pageSize: 9}} />
     </>
   )
 }

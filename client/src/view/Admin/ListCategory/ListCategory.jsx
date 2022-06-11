@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import  adminQuery from '../AdminQuery'
 import Loading from "../../../components/Loading";
 export default function ListCategory() {
-    const categories = useQuery(adminQuery.qGetAllCategories);
+    const categories = useQuery(adminQuery.qGetAllCategories,{fetchPolicy : "cache-and-network"});
     const columns = [
       {
         title: "Tên thể loại",

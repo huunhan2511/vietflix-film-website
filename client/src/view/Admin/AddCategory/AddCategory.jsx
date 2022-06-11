@@ -1,28 +1,23 @@
-import React from 'react'
-import { useState } from 'react'
+import React,{ useState } from 'react'
 import {Input} from 'antd'
-import { Modal } from 'antd'
 import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 import adminQuery from "../AdminQuery";
+import { ModalConfirmAdd } from '../../../components/Modal';
+import { openNotificationWithIcon } from '../../../components/Notification';
 export default function AdminCategory() {
-  const [mutateFunction, { data, loading, error }] = useMutation(adminQuery.mAddCategory,
-    {onCompleted : (data) => alert("Thêm thành công")}
-  );
+  const navigate = useNavigate();
+  const [mutateFunction, { error }] = useMutation(adminQuery.mAddCategory);
     const [newGenre, setNewGenre] = useState({
       name: "",
     });
     const { name } = newGenre;
-    const [isModalVisible, setIsModalVisible] = useState(false);
     const onInputChange = event => {
 		setNewGenre({
 			...newGenre,
 			[event.target.name]: event.target.value
 		})
 	}
-
-    const showModal = () => {
-      setIsModalVisible(true);
-    };
     
     const handleOk = () => {
         mutateFunction({
@@ -37,12 +32,14 @@ export default function AdminCategory() {
             },
           },
         });
-      setIsModalVisible(false);
+        if(error){
+          localStorage.removeItem('token')
+          navigate("/login-admin",{replace:true})
+        }else{
+          openNotificationWithIcon("success","Thêm thành công","bottomRight")
+
+        }
       setNewGenre({name: ""})
-    };
-    
-    const handleCancel = () => {
-      setIsModalVisible(false);
     };
     return (
       <>
@@ -57,33 +54,20 @@ export default function AdminCategory() {
             <div className="header-content-admin">Thêm thể loại</div>
             <div className="mx-8 mb-8">
               <Input
-                placeholder="Tên thể loại"
+                placeholder="Vui lòng nhập tên thể loại"
                 onChange={onInputChange}
                 name = 'name'
+                value={name}
                 size="large"
               ></Input>
               <div className="flex justify-center">
                 <button
-                  onClick={showModal}
+                  onClick={()=>ModalConfirmAdd(handleOk,"Xác nhận thêm thể loại")}
                   className="btn-admin w-fit"
                   type="submit"
                 >
                   Thêm thể loại
                 </button>
-                <Modal
-                  title="Xác nhận"
-                  visible={isModalVisible}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
-                  bodyStyle={{
-                    backgroundColor: "#191919",
-                    color: "#fff",
-                    paddingTop: "20px",
-                    paddingBottom: "20px",
-                  }}
-                >
-                  <p>Xác nhận thêm thể loại ?</p>
-                </Modal>
               </div>
             </div>
           </div>

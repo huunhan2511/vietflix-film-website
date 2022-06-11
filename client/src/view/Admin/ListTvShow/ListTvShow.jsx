@@ -5,8 +5,10 @@ import Loading from "../../../components/Loading";
 import {useQuery} from '@apollo/client'
 import adminQuery from "../AdminQuery";
 import { SearchOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom';
 
 export function ListTvShow() {
+  const navigate = useNavigate();
   const filmTypeId = "6270979651e4036f47581774";
   const data = useQuery(adminQuery.qGetFilmsByFilmType,
     {variables: {filmTypeId} }
@@ -20,7 +22,10 @@ export function ListTvShow() {
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
   };
-
+  const handleViewClick = (filmId,record)=> {
+    localStorage.setItem("name",record.name); 
+    navigate(`/admin/tat-ca-phim/${filmId}`, {state:{filmId:filmId}})
+  }
   const handleReset = (clearFilters, selectedKeys, confirm, dataIndex) => {
     clearFilters();
     setSearchText("");
@@ -155,12 +160,18 @@ export function ListTvShow() {
     },
     {
       title: "Chỉnh sửa",
-      key: "action",
+      dataIndex :"id",
+      key: "id",
       align: "center",
       width: "15%",
       render: (text, record) => (
         <Space size="middle">
-          <button className="btn-admin !bg-green-600 !mt-0">Xem</button>
+          <button
+            className="btn-admin !bg-green-600 !mt-0"
+            onClick={()=>handleViewClick(text,record)}
+          >
+            Xem
+          </button>
           <button className="btn-admin !bg-yellow-600 !mt-0">Sửa</button>
           <button className="btn-admin !bg-red-600 !mt-0">Xóa</button>
         </Space>

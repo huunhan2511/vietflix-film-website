@@ -21,7 +21,6 @@ export default function ListFilm({title,openModal,genreId,filmType=null,films=[]
           </div>
           <div className="list-film mt-7">
             {
-            // listFilm.data.genre.films.length < 4 ? 
             films.length < 4 ? 
             filmType === null
                 ? 
