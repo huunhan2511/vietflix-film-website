@@ -17,7 +17,18 @@ export default function EpisodeTable ({seasonId,episodeId = null}) {
                             : 
                             {variables: {seasonId},onCompleted :data => setEpisode(data.season.episodes),fetchPolicy : "cache-and-network"}
                             );
-  const [mutationDeleteEpisode,{error}] = useMutation(adminQuery.mDeleteEpisode)
+  const [mutationDeleteEpisode] = useMutation(adminQuery.mDeleteEpisode,
+    {onError : () => {
+      localStorage.removeItem("token")
+      navigate("/login-admin")
+      openNotificationWithIcon("error", "Từ chối truy cập","bottomRight");
+    },
+    onCompleted : data =>{
+      let newEpisode = episode.filter(episode => episode.id !== data.deleteEpisode.id)
+      setEpisode(newEpisode)
+      openNotificationWithIcon("success","Xóa thành công","bottomRight");
+    }
+    });
   const handleDelete = (id)=>{
     mutationDeleteEpisode({
       variables: {
@@ -29,14 +40,6 @@ export default function EpisodeTable ({seasonId,episodeId = null}) {
         },
       },
     });
-    if(error){
-      localStorage.removeItem("token")
-      navigate("/login-admin",{replace:true})
-    }else{
-      let newEpisode = episode.filter(episode => episode.id !== id)
-      setEpisode(newEpisode)
-      openNotificationWithIcon("success","Xóa thành công","bottomRight");
-    }
   } 
   const handleView = (seasonId) =>{
     if(episodeId === null ){

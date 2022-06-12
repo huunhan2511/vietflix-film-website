@@ -11,7 +11,18 @@ export default function EpisodeTable ({filmDetailId}) {
   const navigate = useNavigate();
   const [seasons,setSeasons] = useState([])
   const {loading} = useQuery(adminQuery.qFilmDetail,{variables: {filmDetailId},onCompleted : data => setSeasons(data.filmDetail.seasons),fetchPolicy : "cache-and-network"});
-  const [mutationDeleteSeason,{error}] = useMutation(adminQuery.mDeleteSeason) 
+  const [mutationDeleteSeason] = useMutation(adminQuery.mDeleteSeason,
+    {onError : () => {
+      localStorage.removeItem("token")
+      navigate("/login-admin")
+      openNotificationWithIcon("error", "Từ chối truy cập","bottomRight");
+    },
+    onCompleted : data =>{
+      let newSeasons = seasons.filter(season => season.id !== data.deleteSeason.id)
+      setSeasons(newSeasons)
+      openNotificationWithIcon("success","Xóa thành công","bottomRight");
+    }
+    }); 
   const handleView = (seasonId) =>{
     navigate(`/admin/season/${seasonId}`)
   }
@@ -26,14 +37,6 @@ export default function EpisodeTable ({filmDetailId}) {
         },
       },
     });
-    if(error){
-      localStorage.removeItem("token")
-      navigate("/login-admin",{replace:true})
-    }else{
-      let newSeasons = seasons.filter(season => season.id !== id)
-      setSeasons(newSeasons)
-      openNotificationWithIcon("success","Xóa thành công","bottomRight");
-    }
   }
   let defaultColumns = [
     {

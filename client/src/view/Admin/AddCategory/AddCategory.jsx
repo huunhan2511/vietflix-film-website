@@ -7,7 +7,16 @@ import { ModalConfirmAdd } from '../../../components/Modal';
 import { openNotificationWithIcon } from '../../../components/Notification';
 export default function AdminCategory() {
   const navigate = useNavigate();
-  const [mutateFunction, { error }] = useMutation(adminQuery.mAddCategory);
+  const [mutateFunction] = useMutation(adminQuery.mAddCategory,
+    {onError : () => {
+        localStorage.removeItem("token")
+        navigate("/login-admin")
+        openNotificationWithIcon("error", "Từ chối truy cập","bottomRight");
+    },
+    onCompleted : () =>{
+      openNotificationWithIcon("success","Thêm thành công","bottomRight")
+    }
+    });
     const [newGenre, setNewGenre] = useState({
       name: "",
     });
@@ -20,25 +29,18 @@ export default function AdminCategory() {
 	}
     
     const handleOk = () => {
-        mutateFunction({
-          variables: {
-            input: {
-              name: name,
-            },
+      mutateFunction({
+        variables: {
+          input: {
+            name: name,
           },
-          context: {
-            headers: {
-              authorization: localStorage.getItem("token"),
-            },
+        },
+        context: {
+          headers: {
+            authorization: localStorage.getItem("token"),
           },
-        });
-        if(error){
-          localStorage.removeItem('token')
-          navigate("/login-admin",{replace:true})
-        }else{
-          openNotificationWithIcon("success","Thêm thành công","bottomRight")
-
-        }
+        },
+      });
       setNewGenre({name: ""})
     };
     return (
