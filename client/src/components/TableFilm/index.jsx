@@ -206,7 +206,7 @@ export default function TableFilm({data,title}) {
       <>
         <div
           style={{ backgroundColor: "#141414" }}
-          className="min-h-screen flex justify-center"
+          className="h-screen flex justify-center"
         >
           <div
             style={{ backgroundColor: "#191919" }}

@@ -8,7 +8,8 @@ const EditSeasonAdmin = lazy(()=> import("./view/Admin/EditSeasonAdmin"))
 const EditEpisodeAdmin = lazy(()=> import("./view/Admin/EditEpisodeAdmin"))
 const HomeAdmin = lazy(()=> import("./view/Admin/HomeAdmin"));
 const AllFilmAdmin = lazy(()=>import("./view/Admin/AllFilmAdmin"));
-const ViewAllFilmAdmin = lazy(()=>import("./view/Admin/ViewAllFilm"))
+const ViewAllFilmAdmin = lazy(()=>import("./view/Admin/ViewAllFilm"));
+const ViewFilmByCategoryAdmin = lazy(()=>import("./view/Admin/ViewFilmByCategory"));
 const ListMovieAdmin = lazy(()=>import("./view/Admin/ListMovie"));
 const ListTvShowAdmin = lazy(()=>import("./view/Admin/ListTvShow"));
 const AddTvShowAdmin = lazy(()=>import("./view/Admin/AddTvShow"));
@@ -79,6 +80,7 @@ function App() {
                     <Route path='season/:id' element={<EditSeasonAdmin />}/>
                     <Route path='season/episode/:id' element={<EditEpisodeAdmin />}/>
                     <Route path='episode/:id' element={<EditEpisodeAdmin />}/>
+                    <Route path='the-loai/:id' element={<ViewFilmByCategoryAdmin />}/>
                   </Route>
 
                   <Route

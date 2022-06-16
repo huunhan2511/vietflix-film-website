@@ -83,6 +83,25 @@ const adminQuery = {
       name
     }
   }`,
+  qGetFilmByGenreId: gql `
+  query qGetFilmByGenreId($genreId: ID) {
+    genre(id: $genreId) {
+      name
+      films {
+        id
+        description
+        name
+        img
+        genres {
+          name
+        }
+        filmType {
+          name
+        }
+      }
+    }
+  }
+  `,
   mAddCategory: gql`
   mutation mAddCategory($input: GenreInput) {
     createGenre(input: $input) {
