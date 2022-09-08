@@ -4,6 +4,7 @@ import "antd/dist/antd.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./components/Loading";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
+const AddSeasonPage = lazy(() => import("./view/Admin/AddSeasonPage"))
 const EditSeasonAdmin = lazy(() => import("./view/Admin/EditSeasonAdmin"))
 const EditEpisodeAdmin = lazy(() => import("./view/Admin/EditEpisodeAdmin"))
 const HomeAdmin = lazy(() => import("./view/Admin/HomeAdmin"));
@@ -68,14 +69,15 @@ function App() {
             element={<NotFound />}
           />
 
-          <Route path="/admin" element={<ProtectedRoutes />}>
-            <Route path="/admin" element={<HomeAdmin />} />
+          <Route path="admin" element={<ProtectedRoutes />}>
+            <Route path="admin" element={<HomeAdmin />} />
             <Route path="tat-ca-phim" element={<AllFilmAdmin />} />
             <Route path="tat-ca-phim/:id" element={<ViewAllFilmAdmin />} />
             <Route path="phim-le" element={<ListMovieAdmin />} />
             <Route path="them-phim-le" element={< AddMovieAdmin />} />
             <Route path='phim-bo' element={<ListTvShowAdmin />} />
-            <Route path='them-phim-bo' element={<AddTvShowAdmin />} />
+            <Route path='them-phim-bo' element={<AddTvShowAdmin />}/>
+            <Route path='them-phim-bo/them-mua' element={<AddSeasonPage/>}/>
             <Route path='them-the-loai' element={<AddCategoryAdmin />} />
             <Route path='the-loai' element={<ListCategoryAdmin />} />
             <Route path='season/:id' element={<EditSeasonAdmin />} />
