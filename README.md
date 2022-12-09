@@ -2,7 +2,7 @@
 A free streaming website with Movie, TV Show and Series TV Show films
 
 >### **Live Demo**: [vietflix-film-website.vercel.app](https://vietflix-film-website.vercel.app)
->### **GraphQL Server**: [sagoflix.herokuapp.com/graphql](https://vietflix.onrender.com)
+>### **GraphQL Server**: [vietflix.onrender.com/graphql](https://vietflix.onrender.com/graphql)
 ### Table of Contents
 1. [Tech](#tech)
 2. [Member](#member)
