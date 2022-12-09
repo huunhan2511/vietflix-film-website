@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import Film from '../Film';
 import Slide from '../Slide';
 import { useNavigate } from 'react-router-dom';
@@ -22,24 +22,12 @@ export default function ListFilm({title,openModal,genreId,filmType=null,films=[]
           <div className="list-film mt-7">
             {
             films.length < 4 ? 
-            filmType === null
-                ? 
                 <div className='grid grid-cols-1 gap-y-4 sm:grid sm:grid-cols-2 sm:gap-3 md:grid md:grid-cols-3 xl:grid xl:grid-cols-4'>
                 {
                   films.map((film,key)=>{
                     return(
                         <Film openModal={openModal} film={film} key={key}/>
                     );
-                  })
-                }
-                </div>
-                :
-                <div className='grid grid-cols-1 gap-y-4 sm:grid sm:grid-cols-2 sm:gap-3 md:grid md:grid-cols-3 xl:grid xl:grid-cols-4'>
-                {
-                  films.filter(film=> film.filmType.name === filmType).map((film,key)=>{
-                    return(
-                        <Film openModal={openModal} film={film} key={key}/>
-                    )
                   })
                 }
                 </div>

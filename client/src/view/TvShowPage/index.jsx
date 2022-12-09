@@ -44,7 +44,7 @@ export default function TvShowPage() {
           {
             genre.data.genres.map((genre,key)=>{
               return(
-                <ListFilm key={key} title={genre.name} genreId={genre.id} films={genre.films} openModal={openModal} filmType="TV Show"/>            
+                <ListFilm key={key} title={genre.name} genreId={genre.id} films={genre.films.filter(film=> film.filmType.name === "TV Show")} openModal={openModal}/>            
               )
             })
           }
