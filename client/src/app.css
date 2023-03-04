@@ -448,3 +448,10 @@ code {
 .ant-notification-notice-icon-success {
   color: #16a34a !important;
 }
+.description{
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
