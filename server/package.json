@@ -6,12 +6,13 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node app.js",
+    "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/server-plugin-landing-page-graphql-playground": "^4.0.0",
     "apollo-server-express": "^3.6.7",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",

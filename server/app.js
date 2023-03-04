@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config();
 connect.connectDB();
 import express from 'express'
+import { ApolloServerPluginLandingPageGraphQLPlayground } from '@apollo/server-plugin-landing-page-graphql-playground';
 
 import { ApolloServer } from 'apollo-server-express'
 import typeDefs from './schema/schema.js'
@@ -19,7 +20,8 @@ const app = express();
 const server = new ApolloServer({
     schema,
     // UNDER CONSTRUCED FOR AUTHORIZATION
-    context: ({req},res) => ({req, mongoDataMethods})
+    context: ({req},res) => ({req, mongoDataMethods}),
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 })
 await server.start();
 server.applyMiddleware({app});
