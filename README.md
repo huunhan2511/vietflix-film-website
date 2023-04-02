@@ -35,8 +35,8 @@ A free streaming website with Movie, TV Show and Series TV Show films
 ## Some Screenshots
 | **Home** | **Deatil Film** |
 | :-: | :-: |
-| ![Home](https://imgur.com/XjMOY96) | ![Detail Film](https://imgur.com/RK2Uuty) |
+| ![Home](https://imgur.com/XjMOY96.jpeg) | ![Detail Film](https://imgur.com/RK2Uuty.jpeg) |
 
 | **Movie** | **TV Show** |
 | :-: | :-: |
-| ![Movie](https://imgur.com/1d7kMCf) | ![TV SHow](https://imgur.com/2ZOmr6E) |
+| ![Movie](https://imgur.com/1d7kMCf.jpeg) | ![TV SHow](https://imgur.com/2ZOmr6E.jpeg) |
