@@ -15,7 +15,6 @@ export default function LoginPage() {
     username: "",
     password: ""
   });
-  const { username, password } = newLogin;
 
   const onInputChange = event => {
   setNewLogin({
@@ -29,8 +28,8 @@ export default function LoginPage() {
     mutateFunction({
       variables: {
         input: {
-          username: username,
-          password: password
+          username: newLogin.username,
+          password: newLogin.password
         },
       }
     });
