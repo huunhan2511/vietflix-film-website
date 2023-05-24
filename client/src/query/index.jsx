@@ -188,6 +188,13 @@ const Query={
         }
       }
     }
-    `
+    `,
+    mLogin: gql`
+    mutation mLogin($input: loginAdmin) {
+      loginAdmin(input: $input) {
+        token
+      }
+    }
+    `,
 }
 export default Query

@@ -1,5 +1,4 @@
 import React from 'react'
-import {SearchField} from "@adobe/react-spectrum";
 import { Link,useNavigate } from 'react-router-dom';
 import logo from "../../img/320x80.png";
 export default function Header() {
@@ -11,6 +10,9 @@ export default function Header() {
       {path:'/phim-bo',name:'Phim bộ'}
     ];
   let [currentSearch, setCurrentSearch] = React.useState();
+  const onInputChange = event => {
+    setCurrentSearch(event.target.value)
+  }
   const submitSearch = ()=>{
     navigate("/tim-kiem",{state:{inputSearch : currentSearch}})
   }
@@ -34,9 +36,9 @@ export default function Header() {
                 )
             })}
         </div>
-        <div className="Seach p-4 w-64 ">
-            <SearchField isQuiet onChange={setCurrentSearch} onSubmit={submitSearch}/>
-        </div>
+        <form className="form p-4 w-64" onSubmit={submitSearch}>
+          <input className="input" placeholder="Tìm kiếm..." required="" type="text" onChange={onInputChange} />
+        </form>
     </div>
     
   )

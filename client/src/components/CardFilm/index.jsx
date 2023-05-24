@@ -10,6 +10,13 @@ export default function CardFilm({openModal,film}) {
   const handleWatching = () =>{
     navigate(`/watch/${film.id}`,{state:{filmId:film.id}})
   }
+  const getGenres = () =>{
+    let genres = ""
+    film.genres.map((item) => {
+      genres += item.name+", "
+    })
+    return genres.slice(0,-2)+'.'
+  }
   
   return (
     <div className="relative h-96 md:h-screen cursor-pointer">
@@ -41,10 +48,9 @@ export default function CardFilm({openModal,film}) {
                         Thể loại : 
                     </span>
                     <span className='text-sm sm:test-sm lg:text-xl text-white'>
-                       {film.genres.map((item,key)=>{
-                         return item.name+", "
-                       })}
-
+                       {
+                        getGenres()
+                       }
                     </span>
                 </span>
                 <span className='mt-5 flex justify-center'>

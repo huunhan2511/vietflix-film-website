@@ -19,12 +19,12 @@ const client = new ApolloClient({
 });
 ReactDOM.render(
   <React.StrictMode>
-    <Provider theme={defaultTheme} colorScheme="dark">
+    {/* <Provider theme={defaultTheme} colorScheme="dark"> */}
       
     <ApolloProvider client={client}>
       <App />
     </ApolloProvider>
-    </Provider>
+    {/* </Provider> */}
   </React.StrictMode>,
   
   document.getElementById('root')
