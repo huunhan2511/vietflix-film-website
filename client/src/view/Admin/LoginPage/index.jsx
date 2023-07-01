@@ -7,7 +7,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [mutateFunction] = useMutation(Query.mLogin,{onCompleted : (data)=> {
     localStorage.setItem("token",data.loginAdmin.token);
-    navigate("/admin/tat-ca-phim");
+    navigate("/admin");
   },
   onError: (error) => alert(error.message)
   });

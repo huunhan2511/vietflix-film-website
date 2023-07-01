@@ -3,6 +3,10 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./components/Loading";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
+const AddMoviePage = lazy(()=> import("./view/Admin/AddMoviePage"));
+const TvShowAdmin = lazy(()=> import("./view/Admin/TvShowAdmin"));
+const MovieAdmin = lazy(()=> import("./view/Admin/MovieAdmin"));
+const HomeAdmin = lazy(()=>import('./view/Admin/HomeAdmin'))
 const LoginAdminPage = lazy(() => import("./view/Admin/LoginPage"));
 const NotFound = lazy(() => import("./view/NotFound"));
 const MoviePage = lazy(() => import("./view/MoviePage"));
@@ -56,6 +60,23 @@ function App() {
           />
 
           <Route path="admin" element={<ProtectedRoutes />}>
+            <Route
+              path="/admin"
+              exact
+              element={<HomeAdmin />}
+            />  
+            <Route
+              path="/admin/phim-le"
+              element={<MovieAdmin/>}
+            />
+            <Route
+              path="/admin/phim-bo"
+              element={<TvShowAdmin/>}
+            />
+            <Route
+              path="/admin/them-phim-le"
+              element={<AddMoviePage/>}
+            />
           </Route>
 
           <Route
