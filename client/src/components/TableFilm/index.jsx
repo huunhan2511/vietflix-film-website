@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Query from '../../query'
 
 export default function TableFilm({data,title,functionButton}) { 
-    const [films,setFilms] = useState(data)
+    const [films,] = useState(data)
     console.log(films)
     const navigate = useNavigate()
     const searchInput = useRef(null);

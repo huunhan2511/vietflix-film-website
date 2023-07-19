@@ -668,3 +668,7 @@ button:hover::before {
 .notification.active{
   right:0;
 }
+.dropdown-container, .dropdown-heading, .dropdown-heading-value{
+  background-color: #191919;
+  border: 0 !important;
+}

@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './app.css';
 import App from './App';
-import {defaultTheme, Provider} from '@adobe/react-spectrum';
 import {
   ApolloClient,
   InMemoryCache,

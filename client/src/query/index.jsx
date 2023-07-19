@@ -196,5 +196,13 @@ const Query={
       }
     }
     `,
+    qGenre: gql`
+    query qGenre {
+      genres {
+        id
+        name
+      }
+    }
+    `
 }
 export default Query

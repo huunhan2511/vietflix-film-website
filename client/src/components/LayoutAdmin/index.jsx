@@ -1,6 +1,7 @@
 import React from 'react'
 import MenuItemAdmin from '../MenuItemAdmin'
 import Loadingitem from '../LoadingItem'
+import { ToastContainer } from "react-toastify";
 const LayoutAdmin = ({children}) => {
     return (
         <div className='flex justify-between !overflow-hidden'>
@@ -13,6 +14,18 @@ const LayoutAdmin = ({children}) => {
             <div className='loader-container' id='loader'>
                 <Loadingitem/>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+                />
         </div>
     )
 }

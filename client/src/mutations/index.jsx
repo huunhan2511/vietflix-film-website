@@ -3,12 +3,17 @@ const mutations = {
     createEpíode: gql`
         mutation CreateEpisode($input: EpisodeInput) {
             createEpisode(input: $input) {
-            link_embed
-            link_m3u8
-            name
-            time
+                id
             }
         }
     `,
+    createFilmDetail: gql`
+    ,
+        mutation CreateFilmDetail($input: FilmDetailInput){
+            createFilmDetail(input: $input){
+                id
+            }
+        }
+    `
 }
 export default mutations;
