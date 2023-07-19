@@ -611,3 +611,60 @@ label:first-child span {
 label:last-child span {
   border-radius: 0 .375em .375em 0;
 }
+
+
+button {
+  position: relative;
+  background-color: rgb(185, 28, 28);
+  border-radius: 5px;
+  padding: 15px;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  color: #fff;
+  border: none;
+  transition: all .3s ease-in-out;
+  z-index: 1;
+  overflow: hidden;
+}
+
+button::before {
+  content: "";
+  background-color: rgb(180, 10, 10);
+  width: 0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: width 700ms ease-in-out;
+  display: inline-block;
+}
+
+button:hover::before {
+  width: 100%;
+}
+
+.loader-container {
+  display: none;
+}
+
+.loader-container.active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.notification{
+  position: fixed;
+  right: -100px;
+}
+.notification.active{
+  right:0;
+}

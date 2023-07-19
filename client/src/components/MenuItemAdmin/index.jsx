@@ -9,7 +9,7 @@ const MenuItemAdmin = () => {
     return (
         <div className='min-h-screen bg-[#191919] w-full text-white flex flex-col justify-between py-5'>
         <div className='text-[200%] h-[10%]'>
-            <span className="pl-[10%] float-left font-extrabold after:content-['.'] after:text-4xl after:text-[#c09244]">HuuNhan</span>
+            <span className="pl-[10%] float-left font-extrabold after:content-['.'] after:text-4xl after:text-[#c09244]">Vietflix</span>
         </div>
         <div className='h-full w-full'>
             <div className='font-bold h-12 pl-[10%] '>

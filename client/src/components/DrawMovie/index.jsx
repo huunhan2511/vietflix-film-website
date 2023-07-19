@@ -10,17 +10,44 @@ const DrawMovie = () => {
         {onError : () => {
             localStorage.removeItem("token")
             navigate("/login-admin")
+            console.log("error")
         },
-        onCompleted : () =>{
+        onCompleted : (response) =>{
+            console.log(response)
         }
     });
-        
+    
     const [dataMovie,setDataMovie] = useState({});
     const [urlMovie, setUrlMovie] = useState('');
-    const handleGetInfoMovie = () =>{
-        axios.get(urlMovie).then(res=>{
-            setDataMovie(res.data);
+    const [dataEpisode, setDataEpisode] = useState({});
+    
+    const handleAddEpisode = (episode) =>{
+        mutationAddEpisode({
+            variables: {input : dataEpisode},
+            context: {
+                headers: {
+                    authorization: localStorage.getItem("token"),
+                },
+            }
         })
+    }
+    const handleGetInfoMovie = async () =>{
+        document.getElementById('loader').classList.add('active');
+        await axios.get(urlMovie).then(res=>{
+            setDataMovie(res.data);
+            if(Object.keys(res.data).length > 0){
+                var temp = {
+                    link_embed : res.data.episodes[res.data.episodes.length-1].server_data[res.data.episodes[res.data.episodes.length-1].server_data.length-1]['link_embed'],
+                    link_m3u8 : res.data.episodes[res.data.episodes.length-1].server_data[res.data.episodes[res.data.episodes.length-1].server_data.length-1]['link_m3u8'],
+                    name : res.data.movie.name,
+                    time : res.data.movie.time.toLowerCase().replace('giờ','h').replace('phút','m')
+                }
+                setDataEpisode(temp);
+            }
+        })
+        document.getElementById('loader').classList.remove('active');
+
+
     }
     const onChangeInput = (e)=>{
         setUrlMovie(e.target.value);
@@ -75,7 +102,11 @@ const DrawMovie = () => {
                 </form>
             </div>
             <div className='text-white flex justify-end mt-5'>
-                <button className='px-10 py-4 bg-red-700 rounded-md'>Thêm phim</button>
+                <button className='px-10 py-4 bg-red-700 rounded-md' 
+                disabled={Object.keys(dataMovie).length === 0 ? true : false} 
+                onClick={()=>handleAddEpisode(dataEpisode)}>
+                    Thêm phim
+                </button>
             </div>
         </div>
     );
