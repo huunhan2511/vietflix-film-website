@@ -4,7 +4,7 @@ import { useQuery} from "@apollo/client";
 import Loading from '../../../components/Loading'
 import TableFilm from '../../../components/TableFilm';
 import Query from '../../../query'
-import {typeFilm} from '../../../constant';
+import {TYPE_FILM} from '../../../constant';
 import { useNavigate } from 'react-router-dom';
 export default function MovieAdmin() {
   const navigate = useNavigate();
@@ -15,10 +15,11 @@ export default function MovieAdmin() {
   const addMovie = () =>{
     navigate('/admin/them-phim-le')
   }
+  
   return (
     <LayoutAdmin>
       <TableFilm 
-        data={data.films.filter(film=>film.filmType.name === typeFilm.Movie)} 
+        data={data.films.filter(film=>film.filmType.name === TYPE_FILM.Movie)} 
         title="Danh sách phim lẻ"
         functionButton={addMovie}
       />

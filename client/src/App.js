@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./components/Loading";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
 const AddMoviePage = lazy(()=> import("./view/Admin/AddMoviePage"));
+const EditMoviePage = lazy(()=> import("./view/Admin/EditMoviePage"));
 const TvShowAdmin = lazy(()=> import("./view/Admin/TvShowAdmin"));
 const MovieAdmin = lazy(()=> import("./view/Admin/MovieAdmin"));
 const HomeAdmin = lazy(()=>import('./view/Admin/HomeAdmin'))
@@ -18,7 +19,6 @@ const SearchPage = lazy(() => import("./view/SearchPage"));
 const ViewAll = lazy(() => import("./view/ViewAll"));
 function App() {
   React.useEffect(() => {
-    console.log('5')
     localStorage.removeItem('filmId')
   }, [])
 
@@ -77,6 +77,10 @@ function App() {
             <Route
               path="/admin/them-phim-le"
               element={<AddMoviePage/>}
+            />
+            <Route
+              path="/admin/sua-phim-le/:id"
+              element={<EditMoviePage/>}
             />
           </Route>
 

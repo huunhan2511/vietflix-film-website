@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { episodes } from '../../constant';
+import { EPISODES,MULTI_SELECT_GENRE,ACCESS_DENIED,TYPE_MOVIE } from '../../constant';
 import { useMutation, useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import mutations from '../../mutations';
@@ -8,58 +8,93 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Loadingitem from '../LoadingItem';
 import { MultiSelect } from "react-multi-select-component";
-const listOptions = JSON.parse(localStorage.getItem("options"));   
+const listOptions = JSON.parse(localStorage.getItem("options")) || [];   
 const DrawMovie = () => {
     const navigate = useNavigate();
     const options= [];
     const [selectedOptions, setSelectedOptions] = useState([]);
-    const [mutationAddEpisode] = useMutation(mutations.createEpíode,
-        {onError : () => {
-            localStorage.removeItem("token")
-            navigate("/login-admin")
+    const [dataFilm, setDataFilm] = useState({
+        name : "",
+        img : "",
+        link_embed : "",
+        link_m3u8 : "",
+        description : "",
+    })
+    const [urlMovie, setUrlMovie] = useState('');
+    const [dataEpisode, setDataEpisode] = useState({});
+    const [time,setTime] = useState({ hour: 0, minute: 0 });
+    const [btnAddFilm, setBtnAddFilm] = useState(true);
+    const [mutationAddEpisode] = useMutation(mutations.createEpisode,
+        {onError : (error) => {
+            if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+                localStorage.removeItem("token")
+                navigate("/login-admin")
+            }
+            toast.error(error.graphQLErrors[0].message);
         },
         onCompleted : (response) =>{
-            handleAddFilmDetail(
-                {
-                    "episode" : response.createEpisode.id,
-                    "seasons" : [],
-                    "total_seasons": 0
-                }
-            )
+            handleAddFilmDetail({
+                episode: response.createEpisode.id,
+                seasons: [],
+                total_seasons: 0
+            })
         }
     });
     const [mutationAddFilmDetail] = useMutation(mutations.createFilmDetail,
-        {onError : () => {
-            localStorage.removeItem("token")
-            navigate("/login-admin")
+        {onError : (error) => {
+            if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+                localStorage.removeItem("token")
+                navigate("/login-admin")
+            }
+            toast.error(error.graphQLErrors[0].message);
         },
         onCompleted : (response) =>{
-            console.log(response)
+
+            var genre = []
+            selectedOptions.forEach(option =>{
+                genre.push(option.value);
+            })
+            handleAddFilm({
+                description: dataFilm.description,
+                filmType : TYPE_MOVIE,
+                filmDetail: response.createFilmDetail.id,
+                genres : genre,
+                img : dataFilm.img,
+                name: dataFilm.name
+            })
         }
     });
-    const {data,loading,error} = useQuery(Query.qGenre,{onCompleted: (data)=>{
+    const [mutationAddFilm] = useMutation(mutations.createFilm,
+        {onError : (error) => {
+            if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+                localStorage.removeItem("token")
+                navigate("/login-admin")
+            }
+            toast.error(error.graphQLErrors[0].message);
+        },
+        onCompleted : (response) =>{
+            toast.success("Thêm phim thành công");
+        }
+    });
+    const {loading} = useQuery(Query.qGenre,{onCompleted: (data)=>{
         data.genres.forEach(item => {
             options.push({
                 value: item.id,
                 label: item.name
             })
-            localStorage.setItem("options", JSON.stringify(options));
         });
+        localStorage.setItem("options", JSON.stringify(options));
     }});
-    const [dataMovie,setDataMovie] = useState({});
-    const [urlMovie, setUrlMovie] = useState('');
-    const [dataEpisode, setDataEpisode] = useState({});
     
     const handleAddEpisode = (episode) =>{
-        // mutationAddEpisode({
-        //     variables: {input : episode},
-        //     context: {
-        //         headers: {
-        //             authorization: localStorage.getItem("token"),
-        //         },
-        //     }
-        // })
-        console.log(selectedOptions)
+        mutationAddEpisode({
+            variables: {input : episode},
+            context: {
+                headers: {
+                    authorization: localStorage.getItem("token"),
+                },
+            }
+        })
     }
     const handleAddFilmDetail = (filmDetail)=>{
         mutationAddFilmDetail({
@@ -71,20 +106,36 @@ const DrawMovie = () => {
             }
         })
     }
+    const handleAddFilm = (film) =>{
+        mutationAddFilm({
+            variables: {input : film},
+            context: {
+                headers: {
+                    authorization: localStorage.getItem("token"),
+                },
+            }
+        })
+    }
     const handleGetInfoMovie = async () =>{
         document.getElementById('loader').classList.add('active');
         await axios.get(urlMovie).then(res=>{
             toast.success('Tìm thông tin phim thành công');
-            setDataMovie(res.data);
             if(Object.keys(res.data).length > 0){
-                var temp = {
+                convertMinutesToHoursAndMinutes(res.data.movie.time === "" ? 0 : parseInt(res.data.movie.time.toLowerCase().replace('phút','')))
+                setDataEpisode({
                     link_embed : res.data.episodes[res.data.episodes.length-1].server_data[res.data.episodes[res.data.episodes.length-1].server_data.length-1]['link_embed'],
                     link_m3u8 : res.data.episodes[res.data.episodes.length-1].server_data[res.data.episodes[res.data.episodes.length-1].server_data.length-1]['link_m3u8'],
                     name : res.data.movie.name,
-                    time : res.data.movie.time.toLowerCase().replace('giờ','h').replace('phút','m')
-                }
-                console.log(temp)
-                setDataEpisode(temp);
+                    time : Object.keys(time).length === 0 ? '0' : time.hour+"h"+time.minute+"m"
+                });
+                setDataFilm({
+                    name : res.data.movie.name,
+                    img : res.data.movie.poster_url,
+                    link_embed : res.data.episodes[res.data.episodes.length-1].server_data[res.data.episodes[res.data.episodes.length-1].server_data.length-1]['link_embed'],
+                    link_m3u8 : res.data.episodes[res.data.episodes.length-1].server_data[res.data.episodes[res.data.episodes.length-1].server_data.length-1]['link_m3u8'],
+                    description : res.data.movie.content.replace(/[<p></p>]/g, '')
+                })
+
             }
         }).catch(error =>{
             toast.error("Không tìm thấy thông tin phim")
@@ -96,67 +147,124 @@ const DrawMovie = () => {
     const onChangeInput = (e)=>{
         setUrlMovie(e.target.value);
     }
+    const convertMinutesToHoursAndMinutes = (minutes) =>{
+        if(minutes !== ""){
+            setTime({
+                hour: Math.floor(minutes / 60),
+                minute: minutes % 60
+            })
+        }
+    }
+    const handleChangeInput = (event) => {
+        setDataFilm({
+            ...dataFilm,
+            [event.target.name]: event.target.value
+        })
+        if(dataFilm.name === "" || dataFilm.img === "" || dataFilm.link_embed === "" || dataFilm.link_m3u8 === "" || dataFilm.description === ""){
+            setBtnAddFilm(true);
+        }else{
+            setBtnAddFilm(false)
+        }
+    }
+    const handleChangeTime = (event) => {
+        setTime({
+            ...time,
+            [event.target.name]: event.target.value
+        })
+        if(event.target.name === "minute" && event.target.value > 59){
+            setTime({
+                ...time,
+                minute: 59
+            })
+        }
+    }
     if(loading) return <Loadingitem/>
     return (
-        <div className='p-5'>
+        <div className='movie p-5'>
             <div>
-                <div className='text-white text-xl mb-10'>Nhập đường dẫn phim</div>
+                <div className='text-white text-xl mb-5'>Nhập đường dẫn phim</div>
                 <div className='flex justify-between'>
                     <input onChange={onChangeInput} type='text' className='w-[88%] mr-2 border border-red-700 bg-[#191919] !focus:outline-none focus:border-red-700 focus:ring-1 focus:ring-red-500 p-5 text-white'></input>
                     <button onClick={()=>handleGetInfoMovie()} className='text-white bg-red-700 rounded-md px-5 py-2 disabled:opacity-50' disabled={urlMovie === "" ? true : false }>Tìm thông tin phim</button>
                 </div>
             </div>
-            <div className='mt-10'>
+            <div className='mt-5'>
+                <div className='text-white text-xl mb-5'>Thông tin phim</div>
                 <form>
                     <div className='w-full flex'>
                         <label className='w-44 p-5 bg-red-700'>Tên phim</label>
-                        <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' value={
-                                Object.keys(dataMovie).length === 0 ? '' : dataMovie.movie.name
-                        }/>
+                        <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="name" defaultValue={
+                                Object.keys(dataFilm).length === 0 ? '' : dataFilm.name
+                        }
+                        onChange={handleChangeInput}
+                        />
+                    </div>
+                    <div className='w-full flex'>
+                        <label className='w-44 p-5 bg-red-700'>Thể loại</label>
+                        <MultiSelect className='p-3 !bg-[#191919] border border-zinc-700 w-full'
+                            options={listOptions}
+                            value={selectedOptions}
+                            onChange={setSelectedOptions}
+                            overrideStrings = {MULTI_SELECT_GENRE}
+                            />
                     </div>
                     <div className='w-full flex'>
                         <label className='w-44 p-5 bg-red-700'>Link hình</label>
-                        <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' value={
-                                Object.keys(dataMovie).length === 0 ? '' : dataMovie.movie.thumb_url
-                        }/>
+                        <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="img" defaultValue={
+                                Object.keys(dataFilm).length === 0 ? '' : dataFilm.img
+                        }
+                        onChange={handleChangeInput}
+                        />
                     </div>
                     <div className='w-full flex'>
-                        <label className='w-44 p-5 bg-red-700'>Thời lượng</label>
-                        <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' value={
-                            Object.keys(dataMovie).length === 0 ? '' : dataMovie.movie.time.toLowerCase().replace('giờ','h').replace('phút','m')
-                        }/>
+                        <label className='w-44 p-[1.20rem] bg-red-700'>Thời lượng</label>
+                        <div className='flex w-[50%]'>
+                            <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="hour" value={
+                                Object.keys(time).length === 0 ? 0 : time.hour
+                            }
+                            type="number"
+                            min="0"
+                            onChange={handleChangeTime}/>
+                            <label className='w-28 p-5 bg-red-700'>giờ</label>
+                        </div>
+                        <div className='flex w-[50%]'>
+                            <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="minute" value={
+                                Object.keys(time).length === 0 ? 0 : time.minute
+                            }
+                            type="number"
+                            min="0"
+                            max="60"
+                            onChange={handleChangeTime}/>
+                            <label className='w-28 p-5 bg-red-700'>phút</label>
+                        </div>
                     </div>
                     {
-                        Object.keys(episodes).map((item,key)=>{
+                        Object.keys(EPISODES).map((item,key)=>{
                             return(
                             <div className='w-full flex' key={key}>
                                 <label className='w-44 p-5 bg-red-700'>{item}</label>
-                                <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' value={
-                                    Object.keys(dataMovie).length === 0 ? '' : dataMovie.episodes[dataMovie.episodes.length-1].server_data[dataMovie.episodes[dataMovie.episodes.length-1].server_data.length-1][item]
-                                }/>
+                                <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name={item} defaultValue={
+                                    Object.keys(dataFilm).length === 0 ? '' : dataFilm[item]
+                                }
+                                onChange={handleChangeInput}
+                                />
                             </div>
                             )
                         })
                     }
                     <div className='w-full flex'>
-                        <label className='w-44 p-5 bg-red-700'>Thể loại</label>
-                        <MultiSelect className='p-5 !bg-[#191919] border border-zinc-700 w-full'
-                            options={listOptions}
-                            value={selectedOptions}
-                            onChange={setSelectedOptions}
-                            />
-                    </div>
-                    <div className='w-full flex'>
                         <label className='w-44 p-5 bg-red-700'>Nội dung phim</label>
-                        <textarea className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' value={
-                                Object.keys(dataMovie).length === 0 ? '' : dataMovie.movie.content.replace(/[<p></p>]/g, '')
-                        }/>
+                        <textarea className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="description" defaultValue={
+                                Object.keys(dataFilm).length === 0 ? '' : dataFilm.description
+                        }
+                        onChange={handleChangeInput}
+                        />
                     </div>
                 </form>
             </div>
             <div className='text-white flex justify-end mt-5'>
                 <button className='px-10 py-4 bg-red-700 rounded-md disabled:opacity-50' 
-                disabled={Object.keys(dataMovie).length === 0 ? true : false} 
+                disabled={btnAddFilm} 
                 onClick={()=>handleAddEpisode(dataEpisode)}>
                     Thêm phim
                 </button>

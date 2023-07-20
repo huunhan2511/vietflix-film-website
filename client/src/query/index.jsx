@@ -203,6 +203,26 @@ const Query={
         name
       }
     }
-    `
+    `,
+    qGetDetailFilmEdit: gql`
+    query qGetFilm($filmId: ID) {
+      film(id: $filmId) {
+        description
+        filmDetail {
+          episode {
+            link_embed
+            link_m3u8
+            time
+          }
+        }
+        genres {
+          id
+          name
+        }
+        img
+        name
+      }
+      }
+    `,
 }
 export default Query

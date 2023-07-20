@@ -1,15 +1,17 @@
 import React, {useState, useRef} from 'react'
 import { useNavigate } from 'react-router-dom';
 import Query from '../../query'
+import { TYPE_FILM } from '../../constant';
 
 export default function TableFilm({data,title,functionButton}) { 
     const [films,] = useState(data)
-    console.log(films)
     const navigate = useNavigate()
     const searchInput = useRef(null);
-    const handleViewClick = (filmId,record)=> {
-      localStorage.setItem("name",record.name); 
-      navigate(`/admin/tat-ca-phim/${filmId}`, {state:{filmId:filmId}})
+    const editMovie = (id) =>{
+      navigate(`/admin/sua-phim-le/${id}`,{state:{idFilm:id}})
+    }
+    const editTvShow = (id) =>{
+      console.log("edit tv show")
     }
     const getGenres = (film) =>{
       let genres = ""
@@ -63,7 +65,13 @@ export default function TableFilm({data,title,functionButton}) {
                         {getGenres(film)}
                       </td>
                       <td className='grid grid-cols-2 gap-4 place-items-center h-56 p-4 border-slate-700 border justify-center'>
-                        <button className='bg-green-500 px-8 py-2 rounded-full'>Sửa</button>
+                        {
+                          film.filmType.name === TYPE_FILM.Movie
+                          ? 
+                          <button className='bg-green-500 px-8 py-2 rounded-full' onClick={()=>editMovie(film.id)}>Sửa</button>
+                          :
+                          <button className='bg-green-500 px-8 py-2 rounded-full' onClick={()=>editTvShow(film.id)}>Sửa</button>
+                        }
                         <button className='bg-red-700 px-8 py-2 rounded-full'>Xóa</button>
                       </td>
                     </tr>

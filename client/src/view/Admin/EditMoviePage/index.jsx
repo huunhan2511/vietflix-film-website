@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LayoutAdmin from '../../../components/LayoutAdmin';
-import DrawMovie from '../../../components/DrawMovie';
+import EditMovie from '../../../components/EditMovie';
+import {useLocation} from "react-router-dom";
 
-const AddMoviePage = () => {
+const EditMoviePage = () => {
+    const location = useLocation();
+    const [filmId] = useState(location.state.idFilm);
+    
     return (
         <LayoutAdmin>
             <div className="flex justify-center min-h-screen bg-[#141414]">
                 <div className="w-full m-8 rounded-xl bg-[#191919]">
                     <div className="header-content-admin text-white flex justify-between">
-                        <div>Thêm phim lẻ</div>
+                        <div>Cập nhật thông tin phim</div>
                     </div>
-                    <DrawMovie/>
+                    <EditMovie filmId={filmId}/>
                 </div>
             </div>
         </LayoutAdmin>
     );
 }
 
-export default AddMoviePage;
+export default EditMoviePage;

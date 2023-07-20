@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 const mutations = {
-    createEpíode: gql`
+    createEpisode: gql`
         mutation CreateEpisode($input: EpisodeInput) {
             createEpisode(input: $input) {
                 id
@@ -11,6 +11,14 @@ const mutations = {
     ,
         mutation CreateFilmDetail($input: FilmDetailInput){
             createFilmDetail(input: $input){
+                id
+            }
+        }
+    `,
+    createFilm: gql`
+    ,
+        mutation CreateFilm($input: FilmInput){
+            createFilm(input: $input){
                 id
             }
         }

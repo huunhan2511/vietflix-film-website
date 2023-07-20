@@ -14,7 +14,6 @@ export default function WatchPage() {
     localStorage.setItem('isOpen',true);
     localStorage.setItem('filmId',location.state.filmId);
   }
-  console.log(location.state.episode)
   let filmId = location.state.filmId;
   const {loading,error,data} = useQuery(Query.qGetFilm,{variables:{filmId}})
     if (loading) return <Loading/>

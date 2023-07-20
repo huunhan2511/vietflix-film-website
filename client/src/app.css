@@ -195,6 +195,7 @@ body > #root > div {
   border-radius: 1.5%;
   outline: none;
   border: none;
+  z-index: 1000;
 }
 @media screen and (min-width: 1280px) {
   .Modal {
@@ -612,8 +613,7 @@ label:last-child span {
   border-radius: 0 .375em .375em 0;
 }
 
-
-button {
+.movie button {
   position: relative;
   background-color: rgb(185, 28, 28);
   border-radius: 5px;
@@ -627,7 +627,7 @@ button {
   overflow: hidden;
 }
 
-button::before {
+.movie button::before {
   content: "";
   background-color: rgb(180, 10, 10);
   width: 0;
@@ -640,7 +640,7 @@ button::before {
   display: inline-block;
 }
 
-button:hover::before {
+.movie button:hover::before {
   width: 100%;
 }
 
@@ -661,13 +661,6 @@ button:hover::before {
   z-index: 9999;
 }
 
-.notification{
-  position: fixed;
-  right: -100px;
-}
-.notification.active{
-  right:0;
-}
 .dropdown-container, .dropdown-heading, .dropdown-heading-value{
   background-color: #191919;
   border: 0 !important;

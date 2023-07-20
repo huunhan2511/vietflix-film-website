@@ -10,7 +10,6 @@ export default function LoginPage() {
     onCompleted: (data) => {
       localStorage.setItem('token', data.loginAdmin.token);
       navigate('/admin');
-      toast.success('Đăng nhập thành công');
     },
     onError: (error) => {
       toast.error(error.message);
