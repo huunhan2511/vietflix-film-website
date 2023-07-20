@@ -22,6 +22,13 @@ const mutations = {
                 id
             }
         }
+    `,
+    updateEpisode: gql`
+        mutation updateEpisode($input: EpisodeInput) {
+            updateEpisode(input: $input) {
+                id
+            }
+        }
     `
 }
 export default mutations;

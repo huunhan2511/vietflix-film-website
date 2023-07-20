@@ -22,7 +22,7 @@ const DrawMovie = () => {
     })
     const [urlMovie, setUrlMovie] = useState('');
     const [dataEpisode, setDataEpisode] = useState({});
-    const [time,setTime] = useState({ hour: 0, minute: 0 });
+    const [time,setTime] = useState({});
     const [btnAddFilm, setBtnAddFilm] = useState(true);
     const [mutationAddEpisode] = useMutation(mutations.createEpisode,
         {onError : (error) => {
@@ -48,8 +48,7 @@ const DrawMovie = () => {
             }
             toast.error(error.graphQLErrors[0].message);
         },
-        onCompleted : (response) =>{
-
+        onCompleted : (response) =>{ 
             var genre = []
             selectedOptions.forEach(option =>{
                 genre.push(option.value);
@@ -73,6 +72,10 @@ const DrawMovie = () => {
             toast.error(error.graphQLErrors[0].message);
         },
         onCompleted : (response) =>{
+            setDataFilm({});
+            setUrlMovie('');
+            setTime({hour: 0, minute: 0})
+            setSelectedOptions([])
             toast.success("Thêm phim thành công");
         }
     });
@@ -135,6 +138,7 @@ const DrawMovie = () => {
                     link_m3u8 : res.data.episodes[res.data.episodes.length-1].server_data[res.data.episodes[res.data.episodes.length-1].server_data.length-1]['link_m3u8'],
                     description : res.data.movie.content.replace(/[<p></p>]/g, '')
                 })
+                setBtnAddFilm(false);
 
             }
         }).catch(error =>{
@@ -160,11 +164,6 @@ const DrawMovie = () => {
             ...dataFilm,
             [event.target.name]: event.target.value
         })
-        if(dataFilm.name === "" || dataFilm.img === "" || dataFilm.link_embed === "" || dataFilm.link_m3u8 === "" || dataFilm.description === ""){
-            setBtnAddFilm(true);
-        }else{
-            setBtnAddFilm(false)
-        }
     }
     const handleChangeTime = (event) => {
         setTime({

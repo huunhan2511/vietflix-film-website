@@ -10,7 +10,8 @@ const EditMovie = ({filmId}) => {
     const options= [];
     const [selectedOptions, setSelectedOptions] = useState([]);
     const optionQuery = useQuery(Query.qGenre,{onCompleted: (data)=>{
-        data.forEach(item => {
+        console.log(data)
+        data.genres.forEach(item => {
             options.push({
                 value: item.id,
                 label: item.name
@@ -19,8 +20,15 @@ const EditMovie = ({filmId}) => {
         localStorage.setItem("options", JSON.stringify(options));
     }});
     const [film,setFilm] = useState({});
+    const [time,setTime] = useState({ hour: 0, minute: 0 });
     const {data, loading} = useQuery(Query.qGetDetailFilmEdit,{variables:{filmId},onCompleted: (data)=>{
         setFilm(data.film)
+        setTime(
+            {
+                hour: film.filmDetail.episode.time.split("h")[0],
+                minute : film.filmDetail.episode.time.split("h")[1].replace("m", "")
+            }
+        )
         let temp = [];
         data.film.genres.forEach(item => {
             temp.push({
@@ -30,6 +38,27 @@ const EditMovie = ({filmId}) => {
         })
         setSelectedOptions(temp)
     }});
+    const handleChangeInput = (event) => {
+        setFilm({
+            ...film,
+            [event.target.name]: event.target.value
+        })
+    }
+    const handleChangeTime = (event) => {
+        setTime({
+            ...time,
+            [event.target.name]: event.target.value
+        })
+        if(event.target.name === "minute" && event.target.value > 59){
+            setTime({
+                ...time,
+                minute: 59
+            })
+        }
+    }
+    const handleUpdateMovie = () =>{
+        
+    }
     if (loading) return <Loadingitem/>
 
     return (
@@ -43,6 +72,8 @@ const EditMovie = ({filmId}) => {
                         <label className='w-44 p-5 bg-red-700'>Tên phim</label>
                         <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' 
                         value={Object.keys(film).length === 0 ? "" : film.name}
+                        name = "name"
+                        onChange={handleChangeInput}
                         />
                     </div>
                     <div className='w-full flex'>
@@ -58,44 +89,29 @@ const EditMovie = ({filmId}) => {
                         <label className='w-44 p-5 bg-red-700'>Link hình</label>
                         <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' 
                         value={ Object.keys(film).length === 0 ? "" : film.img}
+                        name = "img"
+                        onChange={handleChangeInput}
                         />
                     </div>
                     <div className='w-full flex'>
                         <label className='w-44 p-[1.20rem] bg-red-700'>Thời lượng</label>
                         <div className='flex w-[50%]'>
-                            {
-                                Object.keys(film).length === 0
-                                ?
-                                <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="hour"
-                                type="number"
-                                min="0"
-                                />
-                                :
-                                <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="hour"
-                                type="number"
-                                min="0"
-                                value = {film.filmDetail.episode.time === "" ? 0 : film.filmDetail.episode.time.split("h")[0]}
-                                />
-                            }
+                            <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="hour"
+                            type="number"
+                            min="0"
+                            value = {time.hour === 0 ? 0 : time.hour}
+                            onChange={handleChangeTime}
+                            />
                             <label className='w-28 p-5 bg-red-700'>giờ</label>
                         </div>
                         <div className='flex w-[50%]'>
-                            {
-                            Object.keys(film).length === 0
-                            ?
                             <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="minute" 
                             type="number"
                             min="0"
                             max="60"
+                            value ={time.minute === 0 ? 0 : time.minute}
+                            onChange={handleChangeTime}
                             />
-                            :
-                            <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="minute" 
-                            type="number"
-                            min="0"
-                            max="60"
-                            value ={film.filmDetail.episode.time === "" ? 0 : film.filmDetail.episode.time.split("h")[1].replace("m", "")}
-                            />
-                            }
                             <label className='w-28 p-5 bg-red-700'>phút</label>
                         </div>
                     </div>
@@ -105,7 +121,9 @@ const EditMovie = ({filmId}) => {
                             <div className='w-full flex' key={key}>
                                 <label className='w-44 p-5 bg-red-700'>{item}</label>
                                 <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' 
-                                value={ Object.keys(film).length === 0 ? "" : film.filmDetail.episode[item]}/>
+                                value={ Object.keys(film).length === 0 ? "" : film.filmDetail.episode[item]}
+                                onChange={handleChangeInput}
+                                />
                             </div>
                             )
                         })
@@ -113,7 +131,10 @@ const EditMovie = ({filmId}) => {
                     <div className='w-full flex'>
                         <label className='w-44 p-5 bg-red-700'>Nội dung phim</label>
                         <textarea className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' 
-                        value={ Object.keys(film).length === 0 ? "" : film.description}/>
+                        value={ Object.keys(film).length === 0 ? "" : film.description}
+                        name = "description"
+                        onChange={handleChangeInput}
+                        />
                     </div>
                 </form>
             </div>
