@@ -1,16 +1,57 @@
 import React, { useState } from 'react';
 import Query from '../../query'
 import Loadingitem from '../LoadingItem';
-import { EPISODES,MULTI_SELECT_GENRE } from '../../constant';
-import { useQuery } from '@apollo/client';
+import { EPISODES,MULTI_SELECT_GENRE,ACCESS_DENIED,TYPE_MOVIE } from '../../constant';
+import { useMutation, useQuery } from '@apollo/client';
 import { MultiSelect } from "react-multi-select-component";
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import mutations from '../../mutations';
 const listOptions = JSON.parse(localStorage.getItem("options")) || [];   
 
 const EditMovie = ({filmId}) => {
+    const navigate = useNavigate();
     const options= [];
+    const [film,setFilm] = useState({});
+    const [time,setTime] = useState({ hour: 0, minute: 0 });
     const [selectedOptions, setSelectedOptions] = useState([]);
+    const [mutationUpdateEpisode] = useMutation(mutations.updateEpisode,
+        {onError : (error) => {
+            if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+                localStorage.removeItem("token")
+                navigate("/login-admin")
+            }
+            toast.error(error.graphQLErrors[0].message);
+        },
+        onCompleted : (response) =>{
+            handleUpdateFilmDetail(response.updateEpisode.id)
+        }
+    })
+    const [mutationUpdateFilmDetail] = useMutation(mutations.updateFilmDetail,
+        {onError : (error) => {
+            if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+                localStorage.removeItem("token")
+                navigate("/login-admin")
+            }
+            toast.error(error.graphQLErrors[0].message);
+        },
+        onCompleted : (response) =>{
+            handleUpdateFilm(response.updateFilmDetail.id)
+        }
+    })
+    const [mutationUpdateFilm] = useMutation(mutations.updateFilm,
+        {onError : (error) => {
+            if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+                localStorage.removeItem("token")
+                navigate("/login-admin")
+            }
+            toast.error(error.graphQLErrors[0].message);
+        },
+        onCompleted : (response) =>{
+            toast.success("Cập nhật phim thành công");
+        }
+    })
     const optionQuery = useQuery(Query.qGenre,{onCompleted: (data)=>{
-        console.log(data)
         data.genres.forEach(item => {
             options.push({
                 value: item.id,
@@ -19,14 +60,13 @@ const EditMovie = ({filmId}) => {
         });
         localStorage.setItem("options", JSON.stringify(options));
     }});
-    const [film,setFilm] = useState({});
-    const [time,setTime] = useState({ hour: 0, minute: 0 });
-    const {data, loading} = useQuery(Query.qGetDetailFilmEdit,{variables:{filmId},onCompleted: (data)=>{
+    const {loading} = useQuery(Query.qGetDetailFilmEdit,{variables:{filmId},onCompleted: (data)=>{
+        console.log(data)
         setFilm(data.film)
         setTime(
             {
-                hour: film.filmDetail.episode.time.split("h")[0],
-                minute : film.filmDetail.episode.time.split("h")[1].replace("m", "")
+                hour: data.film.filmDetail.episode.time.split("h")[0],
+                minute : data.film.filmDetail.episode.time.split("h")[1].replace("m", "")
             }
         )
         let temp = [];
@@ -56,8 +96,62 @@ const EditMovie = ({filmId}) => {
             })
         }
     }
-    const handleUpdateMovie = () =>{
-        
+    const handleUpdateEpisode = () => {
+        const episode = {
+            id: film.filmDetail.episode.id,
+            name: film.name,
+            time: time.hour+"h"+time.minute+"m",
+            link_embed: film.filmDetail.episode.link_embed,
+            link_m3u8: film.filmDetail.episode.link_m3u8
+        }
+        mutationUpdateEpisode({
+            variables: {input : episode},
+            context: {
+                headers: {
+                    authorization: localStorage.getItem("token"),
+                },
+            }
+        })
+    }
+    const handleUpdateFilmDetail = (episodeId) => {
+        const filmDetail = {
+            episode : episodeId,
+            id: film.filmDetail.id,
+            seasons: [],
+            total_seasons : 0
+        }
+        mutationUpdateFilmDetail({
+            variables: {input : filmDetail},
+            context: {
+                headers: {
+                    authorization: localStorage.getItem("token"),
+                },
+            }
+        })
+    }
+    const handleUpdateFilm = (filmDetailId) =>{
+        const genres = []
+        selectedOptions.forEach(option =>{
+            genres.push(option.value)
+        })
+        const filmUpdate = {
+            desciption: filmId.desciption,
+            filmDetail: filmDetailId,
+            filmType: TYPE_MOVIE,
+            genres: genres,
+            id: film.id,
+            img: film.img,
+            name: film.name,
+        }
+        mutationUpdateFilm({
+            variables: {input : filmUpdate},
+            context: {
+                headers: {
+                    authorization: localStorage.getItem("token"),
+                },
+            }
+        })
+
     }
     if (loading) return <Loadingitem/>
 
@@ -139,7 +233,7 @@ const EditMovie = ({filmId}) => {
                 </form>
             </div>
             <div className='text-white flex justify-end mt-5'>
-                <button className='px-10 py-4 bg-red-700 rounded-md'>Cập nhật</button>
+                <button className='px-10 py-4 bg-red-700 rounded-md' onClick={()=>handleUpdateEpisode()}>Cập nhật</button>
             </div>
         </div>
     );

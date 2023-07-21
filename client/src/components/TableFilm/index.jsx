@@ -72,7 +72,13 @@ export default function TableFilm({data,title,functionButton}) {
                           :
                           <button className='bg-green-500 px-8 py-2 rounded-full' onClick={()=>editTvShow(film.id)}>Sửa</button>
                         }
-                        <button className='bg-red-700 px-8 py-2 rounded-full'>Xóa</button>
+                        {
+                          film.filmType.name === TYPE_FILM.Movie
+                          ?
+                          <button className='bg-red-700 px-8 py-2 rounded-full'>Xóa</button>
+                          :
+                          <button className='bg-red-700 px-8 py-2 rounded-full'>Xóa</button>
+                        }
                       </td>
                     </tr>
                     )

@@ -207,9 +207,12 @@ const Query={
     qGetDetailFilmEdit: gql`
     query qGetFilm($filmId: ID) {
       film(id: $filmId) {
+        id
         description
         filmDetail {
+          id
           episode {
+            id
             link_embed
             link_m3u8
             time

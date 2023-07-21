@@ -90,6 +90,10 @@ const DrawMovie = () => {
     }});
     
     const handleAddEpisode = (episode) =>{
+        episode = {
+            ...episode,
+            time: time.hour+"h"+time.minute+"m"
+        }
         mutationAddEpisode({
             variables: {input : episode},
             context: {
