@@ -43,14 +43,6 @@ const mutations = {
                 id
             }
         }
-    `,
-    deleteFilm: gql`
-        mutation DeleteFilm $deleteFilmId: String) {
-        deleteFilm(id: $deleteFilmId) {
-            filmDetail {
-                id
-            }
-        }
-`
+    `
 }
 export default mutations;
