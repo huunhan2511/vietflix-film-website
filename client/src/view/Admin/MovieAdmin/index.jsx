@@ -8,7 +8,7 @@ import {TYPE_FILM} from '../../../constant';
 import { useNavigate } from 'react-router-dom';
 export default function MovieAdmin() {
   const navigate = useNavigate();
-  const {data,loading,error} = useQuery(Query.qGetAllFilm,{etchPolicy : "cache-and-network"});
+  const {data,loading,error} = useQuery(Query.qGetAllFilm,{fetchPolicy : "no-cache"});
   if (loading || error) {
     return <Loading />;
   }

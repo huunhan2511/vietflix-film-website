@@ -1,6 +1,6 @@
 import React from 'react';
 import LayoutAdmin from '../../../components/LayoutAdmin';
-import DrawMovie from '../../../components/DrawMovie';
+import AddMovie from '../../../components/AddMovie';
 
 const AddMoviePage = () => {
     return (
@@ -10,7 +10,7 @@ const AddMoviePage = () => {
                     <div className="header-content-admin text-white flex justify-between">
                         <div>Thêm phim lẻ</div>
                     </div>
-                    <DrawMovie/>
+                    <AddMovie/>
                 </div>
             </div>
         </LayoutAdmin>

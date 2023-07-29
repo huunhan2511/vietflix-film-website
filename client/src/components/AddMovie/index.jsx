@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EPISODES,MULTI_SELECT_GENRE,ACCESS_DENIED,TYPE_MOVIE } from '../../constant';
+import { EPISODES,MULTI_SELECT_GENRE,ACCESS_DENIED,TYPE_MOVIE, ADD_MOVIE_SUCCESS } from '../../constant';
 import { useMutation, useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import mutations from '../../mutations';
@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import Loadingitem from '../LoadingItem';
 import { MultiSelect } from "react-multi-select-component";
 const listOptions = JSON.parse(localStorage.getItem("options")) || [];   
-const DrawMovie = () => {
+const AddMovie = () => {
     const navigate = useNavigate();
     const options= [];
     const [selectedOptions, setSelectedOptions] = useState([]);
@@ -76,7 +76,7 @@ const DrawMovie = () => {
             setUrlMovie('');
             setTime({hour: 0, minute: 0})
             setSelectedOptions([])
-            toast.success("Thêm phim thành công");
+            toast.success(ADD_MOVIE_SUCCESS);
         }
     });
     const {loading} = useQuery(Query.qGenre,{onCompleted: (data)=>{
@@ -276,4 +276,4 @@ const DrawMovie = () => {
     );
 }
 
-export default DrawMovie;
+export default AddMovie;

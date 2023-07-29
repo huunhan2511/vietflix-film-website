@@ -17,6 +17,11 @@ export const MULTI_SELECT_GENRE = {
     "selectAllFiltered": "Chọn tất cả các tìm kiếm",
     "selectSomeItems": "Chọn thể loại",
     "create": "Tạo",
-  }
+}
 export const ACCESS_DENIED = "ACCESS DENIED";
 export const TYPE_MOVIE = "626fe94b6bd3447a657b4a62";
+
+
+// handle film
+export const DELETE_MOVIE_SUCCESS = "Xóa phim thành công";
+export const ADD_MOVIE_SUCCESS = "Thêm phim thành công";

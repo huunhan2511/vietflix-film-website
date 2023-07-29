@@ -1,12 +1,44 @@
-import React, {useState, useRef} from 'react'
+import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
-import Query from '../../query'
-import { TYPE_FILM } from '../../constant';
+import { TYPE_FILM,ACCESS_DENIED, DELETE_MOVIE_SUCCESS } from '../../constant';
+import { useMutation } from '@apollo/client';
+import mutations from '../../mutations';
+import { toast } from 'react-toastify';
 
 export default function TableFilm({data,title,functionButton}) { 
-    const [films,] = useState(data)
+    const [films,setFilms] = useState(data)
     const navigate = useNavigate()
-    const searchInput = useRef(null);
+    const [mutationDeleteFilm] = useMutation(mutations.deleteFilm,
+      {onError : (error) => {
+          if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+              localStorage.removeItem("token")
+              navigate("/login-admin")
+          }
+          toast.error(error.graphQLErrors[0].message);
+      }
+    });
+    const [mutationDeleteFilmDetail] = useMutation(mutations.deleteFilmDetail,
+      {onError : (error) => {
+          if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+              localStorage.removeItem("token")
+              navigate("/login-admin")
+          }
+          toast.error(error.graphQLErrors[0].message);
+      }
+    });
+    const [mutationDeleteEpisode] = useMutation(mutations.deleteEpisode,
+      {onError : (error) => {
+          if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+              localStorage.removeItem("token")
+              navigate("/login-admin")
+          }
+          toast.error(error.graphQLErrors[0].message);
+      },
+      onCompleted : (response) =>{
+        handleUpdateTableMovie(response.deleteEpisode.id)
+        toast.success(DELETE_MOVIE_SUCCESS);
+      }
+    });
     const editMovie = (id) =>{
       navigate(`/admin/sua-phim-le/${id}`,{state:{idFilm:id}})
     }
@@ -20,6 +52,42 @@ export default function TableFilm({data,title,functionButton}) {
         return genres
       })
       return genres.slice(0,-2)+'.'
+    }
+    const handleDeleteMovie = (filmid, filmDetailId, episodeId) => {
+          mutationDeleteFilm({
+            variables: {input : filmid},
+            context: {
+                headers: {
+                    authorization: localStorage.getItem("token"),
+                },
+            }
+          })
+          
+          //Delete Film Detail
+          mutationDeleteFilmDetail({
+            variables: {input : filmDetailId},
+            context: {
+                headers: {
+                    authorization: localStorage.getItem("token"),
+                },
+            }
+          })
+    
+          // Delete Episode
+          mutationDeleteEpisode({
+            variables: {input : episodeId},
+            context: {
+                headers: {
+                    authorization: localStorage.getItem("token"),
+                },
+            }
+          })
+      
+    }
+    const handleUpdateTableMovie = (episodeId) =>{
+      setFilms(films.filter((film) => {
+        return film.filmDetail.episode.id !== episodeId
+      }))
     }
     return (
       <>
@@ -47,7 +115,7 @@ export default function TableFilm({data,title,functionButton}) {
             </div>
             <div className="m-4 h-auto">
               <table className='text-white min-w-full border-collapse border-slate-700 border'>
-                <thead className='bg-red-700 text-black w-100'>
+                <thead className='bg-red-700 text-white w-100'>
                   <tr className='w-100'>
                     <th className='p-4'>Hình ảnh</th>
                     <th>Tên phim</th>
@@ -75,7 +143,7 @@ export default function TableFilm({data,title,functionButton}) {
                         {
                           film.filmType.name === TYPE_FILM.Movie
                           ?
-                          <button className='bg-red-700 px-8 py-2 rounded-full'>Xóa</button>
+                          <button className='bg-red-700 px-8 py-2 rounded-full' onClick={()=>handleDeleteMovie(film.id,film.filmDetail.id,film.filmDetail.episode.id)}>Xóa</button>
                           :
                           <button className='bg-red-700 px-8 py-2 rounded-full'>Xóa</button>
                         }

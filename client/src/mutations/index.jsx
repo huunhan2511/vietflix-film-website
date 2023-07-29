@@ -43,6 +43,31 @@ const mutations = {
                 id
             }
         }
+    `,
+    deleteFilm: gql`
+        mutation DeleteFilm ($input: String) {
+            deleteFilm(id: $input) {
+                filmDetail {
+                    id
+                }
+            }
+        }
+    `,
+    deleteFilmDetail: gql`
+        mutation DeleteFilmDetail($input: String) {
+            deleteFilmDetail(id: $input) {
+                episode {
+                    id
+                }
+            }
+        }
+    `,
+    deleteEpisode: gql`
+        mutation DeleteEpisode($input: String) {
+            deleteEpisode(id: $input) {
+                id
+            }
+        }
     `
 }
 export default mutations;

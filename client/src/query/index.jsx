@@ -17,6 +17,12 @@ const Query={
             id
             name
           }
+          filmDetail{
+            id
+            episode {
+              id
+            }
+          }
         }
       }
     `,
