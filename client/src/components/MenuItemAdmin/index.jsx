@@ -11,7 +11,8 @@ const MenuItemAdmin = () => {
     return (
         <div className='min-h-screen bg-[#191919] w-full text-white flex flex-col justify-between py-5'>
         <div className='text-[200%] h-[10%]'>
-            <span className="pl-[10%] float-left font-extrabold after:content-['.'] after:text-4xl after:text-[#c09244]">Vietflix</span>
+            <span className="pl-[10%] float-left font-extrabold text-yellow-300">Viet</span>
+            <span className="float-left font-extrabold text-red-500 after:content-['.'] after:text-4xl after:text-yellow-300">flix</span>
         </div>
         <div className='h-full w-full'>
             <Link to="/admin" className='gap-5  cursor-pointer'>
