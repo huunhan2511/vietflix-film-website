@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link,useNavigate } from 'react-router-dom';
 import logo from "../../img/320x80.png";
+import { useLocation } from 'react-router-dom';
+
 export default function Header() {
-  const navigate = useNavigate();
-  let Setting = "Navigation font-semibold text-base hover:text-red-500 cursor-pointer text-white"
+    const location = useLocation();
+    const navigate = useNavigate();
+  let Setting =  " font-semibold hover:text-yellow-300 cursor-pointer"
   let menuItems = [
       {path: '/',name: 'Trang chủ'},
       {path:'/phim-le',name: 'Phim lẻ'},
@@ -30,7 +33,7 @@ export default function Header() {
                 return(
                     <div className="text-center" key={key}>
                       <Link to={item.path}>
-                        <span className={Setting}>{item.name}</span>
+                        <span className={(location.pathname === item.path ? 'text-yellow-300' : '') + Setting}>{item.name}</span>
                       </Link>  
                     </div>
                 )

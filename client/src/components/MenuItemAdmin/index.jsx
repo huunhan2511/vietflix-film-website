@@ -4,15 +4,9 @@ import { useLocation } from 'react-router-dom';
 const MenuItemAdmin = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const [isActive, setIsActive] = useState(false)
     const handleLogout = () =>{
         localStorage.removeItem('token');
         navigate('/login-admin',{replace: true})  
-    }
-    const handleMenu = (e) => {
-        document.getElementsByClassName("").forEach((element)=>{
-            element.removeClass(' active')
-        })
     }
     return (
         <div className='min-h-screen bg-[#191919] w-full text-white flex flex-col justify-between py-5'>
