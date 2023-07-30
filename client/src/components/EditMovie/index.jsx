@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Query from '../../query'
 import Loadingitem from '../LoadingItem';
-import { EPISODES,MULTI_SELECT_GENRE,ACCESS_DENIED,TYPE_MOVIE } from '../../constant';
+import { EPISODES,MULTI_SELECT_GENRE,ACCESS_DENIED,TYPE_MOVIE,UPDATE_MOVIE_SUCCESS } from '../../constant';
 import { useMutation, useQuery } from '@apollo/client';
 import { MultiSelect } from "react-multi-select-component";
 import { useNavigate } from 'react-router-dom';
@@ -48,7 +48,7 @@ const EditMovie = ({filmId}) => {
             toast.error(error.graphQLErrors[0].message);
         },
         onCompleted : (response) =>{
-            toast.success("Cập nhật phim thành công");
+            toast.success(UPDATE_MOVIE_SUCCESS);
         }
     })
     const optionQuery = useQuery(Query.qGenre,{onCompleted: (data)=>{
@@ -60,8 +60,7 @@ const EditMovie = ({filmId}) => {
         });
         localStorage.setItem("options", JSON.stringify(options));
     }});
-    const {loading} = useQuery(Query.qGetDetailFilmEdit,{variables:{filmId},onCompleted: (data)=>{
-        console.log(data)
+    const {loading} = useQuery(Query.qGetDetailFilmEdit,{fetchPolicy: "no-cache", variables:{filmId},onCompleted: (data)=>{
         setFilm(data.film)
         setTime(
             {

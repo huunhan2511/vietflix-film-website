@@ -68,6 +68,20 @@ const mutations = {
                 id
             }
         }
+    `,
+    createGenre: gql`
+        mutation CreateGenre($input: GenreInput) {
+            createGenre(input: $input) {
+                id
+            }
+        }
+    `,
+    updateGenre: gql`
+        mutation Mutation($input: GenreInput) {
+            updateGenre(input: $input) {
+                id
+            }
+        }
     `
 }
 export default mutations;

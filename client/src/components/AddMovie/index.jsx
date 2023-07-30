@@ -140,10 +140,8 @@ const AddMovie = () => {
                     img : res.data.movie.poster_url,
                     link_embed : res.data.episodes[res.data.episodes.length-1].server_data[res.data.episodes[res.data.episodes.length-1].server_data.length-1]['link_embed'],
                     link_m3u8 : res.data.episodes[res.data.episodes.length-1].server_data[res.data.episodes[res.data.episodes.length-1].server_data.length-1]['link_m3u8'],
-                    description : res.data.movie.content.replace(/[<p></p>]/g, '')
+                    description : res.data.movie.content.replace(/<p>(.*?)<\/p>/g, '$1')
                 })
-                setBtnAddFilm(false);
-
             }
         }).catch(error =>{
             toast.error("Không tìm thấy thông tin phim")
@@ -181,13 +179,22 @@ const AddMovie = () => {
             })
         }
     }
+    const handleChangeGenre = (selected) =>{
+        setSelectedOptions(selected)
+        if(selectedOptions.length !== 0){
+            setBtnAddFilm(false);
+        }
+    }
     if(loading) return <Loadingitem/>
     return (
         <div className='movie p-5'>
             <div>
                 <div className='text-white text-xl mb-5'>Nhập đường dẫn phim</div>
                 <div className='flex justify-between'>
-                    <input onChange={onChangeInput} type='text' className='w-[88%] mr-2 border border-red-700 bg-[#191919] !focus:outline-none focus:border-red-700 focus:ring-1 focus:ring-red-500 p-5 text-white'></input>
+                    <input 
+                        onChange={onChangeInput} type='text' className='w-[88%] mr-2 border border-red-700 bg-[#191919] !focus:outline-none focus:border-red-700 focus:ring-1 focus:ring-red-500 p-5 text-white'
+                        value = {urlMovie}
+                    ></input>
                     <button onClick={()=>handleGetInfoMovie()} className='text-white bg-red-700 rounded-md px-5 py-2 disabled:opacity-50' disabled={urlMovie === "" ? true : false }>Tìm thông tin phim</button>
                 </div>
             </div>
@@ -196,7 +203,7 @@ const AddMovie = () => {
                 <form>
                     <div className='w-full flex'>
                         <label className='w-44 p-5 bg-red-700'>Tên phim</label>
-                        <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="name" defaultValue={
+                        <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="name" value={
                                 Object.keys(dataFilm).length === 0 ? '' : dataFilm.name
                         }
                         onChange={handleChangeInput}
@@ -207,13 +214,13 @@ const AddMovie = () => {
                         <MultiSelect className='p-3 !bg-[#191919] border border-zinc-700 w-full'
                             options={listOptions}
                             value={selectedOptions}
-                            onChange={setSelectedOptions}
+                            onChange={handleChangeGenre}
                             overrideStrings = {MULTI_SELECT_GENRE}
                             />
                     </div>
                     <div className='w-full flex'>
                         <label className='w-44 p-5 bg-red-700'>Link hình</label>
-                        <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="img" defaultValue={
+                        <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="img" value={
                                 Object.keys(dataFilm).length === 0 ? '' : dataFilm.img
                         }
                         onChange={handleChangeInput}
@@ -246,7 +253,7 @@ const AddMovie = () => {
                             return(
                             <div className='w-full flex' key={key}>
                                 <label className='w-44 p-5 bg-red-700'>{item}</label>
-                                <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name={item} defaultValue={
+                                <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name={item} value={
                                     Object.keys(dataFilm).length === 0 ? '' : dataFilm[item]
                                 }
                                 onChange={handleChangeInput}
@@ -257,7 +264,7 @@ const AddMovie = () => {
                     }
                     <div className='w-full flex'>
                         <label className='w-44 p-5 bg-red-700'>Nội dung phim</label>
-                        <textarea className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="description" defaultValue={
+                        <textarea className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="description" value={
                                 Object.keys(dataFilm).length === 0 ? '' : dataFilm.description
                         }
                         onChange={handleChangeInput}

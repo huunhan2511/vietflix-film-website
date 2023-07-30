@@ -105,12 +105,12 @@ export default function TableFilm({data,title,functionButton}) {
                 functionButton 
                 && 
                 <div>
-                <button 
-                className='bg-red-700 px-5 py-2 rounded-xl text-xl' 
-                onClick={()=>functionButton()}>
-                  Thêm phim
-                </button>
-              </div>
+                  <button 
+                  className='bg-red-700 px-5 py-2 rounded-xl text-xl' 
+                  onClick={()=>functionButton()}>
+                    Thêm phim
+                  </button>
+                </div>
               }
             </div>
             <div className="m-4 h-auto">

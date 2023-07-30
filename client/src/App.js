@@ -4,6 +4,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./components/Loading";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
+const GenrePage = lazy(()=> import("./view/Admin/GenreAdmin"));
+const AddGenrePage = lazy(()=> import("./view/Admin/AddGenrePage"));
+const EditGenrePage = lazy(()=> import("./view/Admin/EditGenrePage"));
 const AddMoviePage = lazy(()=> import("./view/Admin/AddMoviePage"));
 const EditMoviePage = lazy(()=> import("./view/Admin/EditMoviePage"));
 const TvShowAdmin = lazy(()=> import("./view/Admin/TvShowAdmin"));
@@ -81,6 +84,18 @@ function App() {
             <Route
               path="/admin/sua-phim-le/:id"
               element={<EditMoviePage/>}
+            />
+            <Route 
+              path="/admin/the-loai"
+              element= {<GenrePage/>}
+            />
+            <Route 
+              path="/admin/them-the-loai"
+              element= {<AddGenrePage/>}
+            />
+            <Route 
+              path="/admin/sua-the-loai/:id"
+              element= {<EditGenrePage/>}
             />
           </Route>
 

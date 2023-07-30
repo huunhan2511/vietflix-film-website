@@ -25,3 +25,8 @@ export const TYPE_MOVIE = "626fe94b6bd3447a657b4a62";
 // handle film
 export const DELETE_MOVIE_SUCCESS = "Xóa phim thành công";
 export const ADD_MOVIE_SUCCESS = "Thêm phim thành công";
+export const UPDATE_MOVIE_SUCCESS = "Cập nhật phim thành công";
+
+//handle genre 
+export const ADD_GENRE_SUCCESS = "Thêm thể loại thành công";
+export const UPDATE_GENRE_SUCCESS = "Cập nhật thể loại thành công";
