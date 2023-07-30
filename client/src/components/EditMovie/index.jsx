@@ -51,7 +51,7 @@ const EditMovie = ({filmId}) => {
             toast.success(UPDATE_MOVIE_SUCCESS);
         }
     })
-    const optionQuery = useQuery(Query.qGenre,{onCompleted: (data)=>{
+    const optionQuery = useQuery(Query.qGenre,{fetchPolicy: 'no-cache', onCompleted: (data)=>{
         data.genres.forEach(item => {
             options.push({
                 value: item.id,
@@ -232,7 +232,7 @@ const EditMovie = ({filmId}) => {
                 </form>
             </div>
             <div className='text-white flex justify-end mt-5'>
-                <button className='px-10 py-4 bg-red-700 rounded-md' onClick={()=>handleUpdateEpisode()}>Cập nhật</button>
+                <button className='px-10 py-4 bg-red-700 rounded-md button-update' onClick={()=>handleUpdateEpisode()}>Cập nhật</button>
             </div>
         </div>
     );

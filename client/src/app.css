@@ -15,6 +15,18 @@ body > #root > div {
   padding: 0;
   min-height: 100vh;
 }
+div::-webkit-scrollbar,body::-webkit-scrollbar {
+  width: 10px;
+}
+
+div::-webkit-scrollbar-track,body::-webkit-scrollbar-track {
+  background-color: #191919;
+}
+
+div::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
+  background-color: #302f2f;
+  border-radius: 5px;
+}
 
 .background-image .slick-next {
   @apply right-5 h-24 w-8;
@@ -613,11 +625,11 @@ label:last-child span {
   border-radius: 0 .375em .375em 0;
 }
 
-.movie button {
+.button-add,.button-delete , .button-update{
   position: relative;
-  background-color: rgb(185, 28, 28);
+  background-color: #B91C1C;
   border-radius: 5px;
-  padding: 15px;
+  padding: 10px 15px;
   background-repeat: no-repeat;
   box-sizing: border-box;
   color: #fff;
@@ -627,9 +639,9 @@ label:last-child span {
   overflow: hidden;
 }
 
-.movie button::before {
+.button-delete::before, .button-add::before, .button-update::before {
   content: "";
-  background-color: rgb(180, 10, 10);
+  background-color: rgb(252, 55, 55);
   width: 0;
   height: 100%;
   position: absolute;
@@ -640,10 +652,40 @@ label:last-child span {
   display: inline-block;
 }
 
-.movie button:hover::before {
+.button-delete:hover::before, .button-add:hover::before ,.button-update:hover::before {
   width: 100%;
 }
 
+.button-edit{
+  position: relative;
+  background-color: #22C55E;
+  border-radius: 5px;
+  padding: 10px 15px;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  color: #fff;
+  border: none;
+  transition: all .3s ease-in-out;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.button-edit::before {
+  content: "";
+  background-color: #04df54;
+  width: 0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: width 700ms ease-in-out;
+  display: inline-block;
+}
+
+.button-edit:hover::before {
+  width: 100%;
+}
 .loader-container {
   display: none;
 }

@@ -53,7 +53,7 @@ const AddGenrePage = () => {
                             </div>
                         </form>
                         <div className='text-white flex justify-end mt-5'>
-                                <button className='px-10 py-4 bg-red-700 rounded-md disabled:opacity-50' 
+                                <button className='button-add px-10 py-4 bg-red-700 rounded-md disabled:opacity-50' 
                                 disabled={genre === '' ? true : false}
                                 onClick={()=>handleAddGenre()}
                                 >

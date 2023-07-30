@@ -4,6 +4,8 @@ import { TYPE_FILM,ACCESS_DENIED, DELETE_MOVIE_SUCCESS } from '../../constant';
 import { useMutation } from '@apollo/client';
 import mutations from '../../mutations';
 import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faPenToSquare,faTrashCan} from "@fortawesome/free-solid-svg-icons"
 
 export default function TableFilm({data,title,functionButton}) { 
     const [films,setFilms] = useState(data)
@@ -113,9 +115,9 @@ export default function TableFilm({data,title,functionButton}) {
                 </div>
               }
             </div>
-            <div className="m-4 h-auto">
+            <div className="m-4 max-h-[80vh] overflow-auto">
               <table className='text-white min-w-full border-collapse border-slate-700 border'>
-                <thead className='bg-red-700 text-white w-100'>
+                <thead className='bg-red-700 text-white w-100 sticky top-[-1px] z-50'>
                   <tr className='w-100'>
                     <th className='p-4'>Hình ảnh</th>
                     <th>Tên phim</th>
@@ -136,16 +138,28 @@ export default function TableFilm({data,title,functionButton}) {
                         {
                           film.filmType.name === TYPE_FILM.Movie
                           ? 
-                          <button className='bg-green-500 px-8 py-2 rounded-full' onClick={()=>editMovie(film.id)}>Sửa</button>
+                          <button className='button-edit' onClick={()=>editMovie(film.id)}>
+                            Sửa
+                            <FontAwesomeIcon icon={faPenToSquare} className='px-1'/>
+                          </button>
                           :
-                          <button className='bg-green-500 px-8 py-2 rounded-full' onClick={()=>editTvShow(film.id)}>Sửa</button>
+                          <button className='button-edit' onClick={()=>editTvShow(film.id)}>
+                            Sửa
+                            <FontAwesomeIcon icon={faPenToSquare} className='px-1'/>
+                          </button>
                         }
                         {
                           film.filmType.name === TYPE_FILM.Movie
                           ?
-                          <button className='bg-red-700 px-8 py-2 rounded-full' onClick={()=>handleDeleteMovie(film.id,film.filmDetail.id,film.filmDetail.episode.id)}>Xóa</button>
+                          <button className='button-delete' onClick={()=>handleDeleteMovie(film.id,film.filmDetail.id,film.filmDetail.episode.id)}>
+                            Xóa
+                            <FontAwesomeIcon icon={faTrashCan} className='px-1'/>
+                          </button>
                           :
-                          <button className='bg-red-700 px-8 py-2 rounded-full'>Xóa</button>
+                          <button className='button-delete'>
+                            Xóa
+                            <FontAwesomeIcon icon={faTrashCan} className='px-1'/>
+                          </button>
                         }
                       </td>
                     </tr>

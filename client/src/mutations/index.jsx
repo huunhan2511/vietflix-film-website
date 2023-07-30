@@ -82,6 +82,13 @@ const mutations = {
                 id
             }
         }
+    `,
+    deleteGenre: gql`
+        mutation Mutation($input: String) {
+            deleteGenre(id: $input) {
+                id
+            }
+        }
     `
 }
 export default mutations;

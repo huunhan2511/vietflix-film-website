@@ -205,6 +205,9 @@ const Query={
     qGenre: gql`
     query qGenre {
       genres {
+        films {
+          id
+        }
         id
         name
       }

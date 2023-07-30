@@ -29,4 +29,6 @@ export const UPDATE_MOVIE_SUCCESS = "Cập nhật phim thành công";
 
 //handle genre 
 export const ADD_GENRE_SUCCESS = "Thêm thể loại thành công";
+export const DELETE_GENRE_SUCCESS = "Xoá thể loại thành công";
 export const UPDATE_GENRE_SUCCESS = "Cập nhật thể loại thành công";
+export const WARNING_GENRE_NOT_CAN_DELETE = "Không thể xóa thể loại đã tồn tại phim";

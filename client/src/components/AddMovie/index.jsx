@@ -23,7 +23,6 @@ const AddMovie = () => {
     const [urlMovie, setUrlMovie] = useState('');
     const [dataEpisode, setDataEpisode] = useState({});
     const [time,setTime] = useState({});
-    const [btnAddFilm, setBtnAddFilm] = useState(true);
     const [mutationAddEpisode] = useMutation(mutations.createEpisode,
         {onError : (error) => {
             if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
@@ -74,12 +73,12 @@ const AddMovie = () => {
         onCompleted : (response) =>{
             setDataFilm({});
             setUrlMovie('');
-            setTime({hour: 0, minute: 0})
+            setTime({hour: '', minute: ''})
             setSelectedOptions([])
             toast.success(ADD_MOVIE_SUCCESS);
         }
     });
-    const {loading} = useQuery(Query.qGenre,{onCompleted: (data)=>{
+    const {loading} = useQuery(Query.qGenre,{fetchPolicy: "no-cache", onCompleted: (data)=>{
         data.genres.forEach(item => {
             options.push({
                 value: item.id,
@@ -156,8 +155,8 @@ const AddMovie = () => {
     const convertMinutesToHoursAndMinutes = (minutes) =>{
         if(minutes !== ""){
             setTime({
-                hour: Math.floor(minutes / 60),
-                minute: minutes % 60
+                hour: Math.floor(minutes / 60) === 0 ? '' : Math.floor(minutes / 60) , 
+                minute: minutes % 60 === 0 ? '' : minutes % 60
             })
         }
     }
@@ -178,11 +177,17 @@ const AddMovie = () => {
                 minute: 59
             })
         }
-    }
-    const handleChangeGenre = (selected) =>{
-        setSelectedOptions(selected)
-        if(selectedOptions.length !== 0){
-            setBtnAddFilm(false);
+        if(event.target.name === "minute" && event.target.value < 0){
+            setTime({
+                ...time,
+                minute: 0
+            })
+        }
+        if(event.target.name === "hour" && event.target.value < 0){
+            setTime({
+                ...time,
+                hour: 0
+            })
         }
     }
     if(loading) return <Loadingitem/>
@@ -192,7 +197,7 @@ const AddMovie = () => {
                 <div className='text-white text-xl mb-5'>Nhập đường dẫn phim</div>
                 <div className='flex justify-between'>
                     <input 
-                        onChange={onChangeInput} type='text' className='w-[88%] mr-2 border border-red-700 bg-[#191919] !focus:outline-none focus:border-red-700 focus:ring-1 focus:ring-red-500 p-5 text-white'
+                        onChange={onChangeInput} type='text' className='w-[87%] mr-2 border border-red-700 bg-[#191919] !focus:outline-none focus:border-red-700 focus:ring-1 focus:ring-red-500 p-5 text-white'
                         value = {urlMovie}
                     ></input>
                     <button onClick={()=>handleGetInfoMovie()} className='text-white bg-red-700 rounded-md px-5 py-2 disabled:opacity-50' disabled={urlMovie === "" ? true : false }>Tìm thông tin phim</button>
@@ -214,7 +219,7 @@ const AddMovie = () => {
                         <MultiSelect className='p-3 !bg-[#191919] border border-zinc-700 w-full'
                             options={listOptions}
                             value={selectedOptions}
-                            onChange={handleChangeGenre}
+                            onChange={setSelectedOptions}
                             overrideStrings = {MULTI_SELECT_GENRE}
                             />
                     </div>
@@ -230,7 +235,7 @@ const AddMovie = () => {
                         <label className='w-44 p-[1.20rem] bg-red-700'>Thời lượng</label>
                         <div className='flex w-[50%]'>
                             <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="hour" value={
-                                Object.keys(time).length === 0 ? 0 : time.hour
+                                Object.keys(time).length === 0 ? '' : time.hour
                             }
                             type="number"
                             min="0"
@@ -239,7 +244,7 @@ const AddMovie = () => {
                         </div>
                         <div className='flex w-[50%]'>
                             <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' name="minute" value={
-                                Object.keys(time).length === 0 ? 0 : time.minute
+                                Object.keys(time).length === 0 ? '' : time.minute
                             }
                             type="number"
                             min="0"
@@ -273,8 +278,8 @@ const AddMovie = () => {
                 </form>
             </div>
             <div className='text-white flex justify-end mt-5'>
-                <button className='px-10 py-4 bg-red-700 rounded-md disabled:opacity-50' 
-                disabled={btnAddFilm} 
+                <button className='button-add px-10 py-4 bg-red-700 rounded-md disabled:opacity-50' 
+                disabled={selectedOptions.length > 0 && time.hour !== '' && time.minute !== '' ? false : true} 
                 onClick={()=>handleAddEpisode(dataEpisode)}>
                     Thêm phim
                 </button>
