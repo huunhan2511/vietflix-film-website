@@ -35,9 +35,9 @@ const MenuItemAdmin = () => {
                 </div>
             </Link>
         </div>
-        <div className='p-2 h-[10%]'>
-            <span>
-                <button onClick={handleLogout}>Đăng xuất</button>
+        <div className='px-2 h-[10%]'>
+            <span className='bg-[#B91c1c] py-3 rounded-md w-full'>
+                <button className="w-full" onClick={handleLogout}>Đăng xuất</button>
             </span>
         </div>
     </div>
