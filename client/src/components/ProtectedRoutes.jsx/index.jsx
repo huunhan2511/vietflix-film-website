@@ -5,6 +5,6 @@ const useAuth = () =>{
 }
 const ProtectedRoutes = () =>{
     const isAuth = useAuth();
-    return isAuth !== null  ? <Outlet/> : <Navigate replace to="/login-admin"/>  
+    return isAuth !== null  ? <Outlet/> : <Navigate replace to="/"/>  
 } 
 export default ProtectedRoutes;

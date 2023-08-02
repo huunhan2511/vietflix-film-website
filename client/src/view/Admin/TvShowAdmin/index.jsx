@@ -5,8 +5,8 @@ import Loading from '../../../components/Loading'
 import TableFilm from '../../../components/TableFilm';
 import Query from '../../../query'
 import { useNavigate } from 'react-router-dom';
-import { ACCESS_DENIED } from '../../../constant';
-export default function HomeAdmin() {
+import {TYPE_FILM,ACCESS_DENIED } from '../../../constant';
+export default function TvShowAdmin() {
   const navigate = useNavigate();
   const queryCheckToken = useQuery(Query.qCheckToken,{
     context: {
@@ -25,9 +25,16 @@ export default function HomeAdmin() {
   if (loading || error) {
     return <Loading />;
   }
+  const addTvShow = () =>{
+    navigate('/admin/them-phim-le')
+  }
   return (
     <LayoutAdmin>
-      <TableFilm data={data.films} title="Danh sách tất cả phim"/>
+      <TableFilm 
+        data={data.films.filter(film=>film.filmType.name === TYPE_FILM.TVShow)} 
+        title="Danh sách phim bộ"
+        functionButton={addTvShow}
+      />
     </LayoutAdmin>
   )
 }

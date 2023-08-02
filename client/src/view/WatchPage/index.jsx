@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {useLocation, useNavigate} from "react-router-dom";
@@ -12,10 +12,16 @@ export default function WatchPage() {
   const previPage = () => {
     navigate(-1)
     localStorage.setItem('isOpen',true);
-    localStorage.setItem('filmId',location.state.filmId);
+    localStorage.setItem('filmId',filmId);
   }
-  console.log(location.state.episode)
-  let filmId = location.state.filmId;
+  const [filmId,setFIlmId] = useState('');
+  useEffect(()=>{
+    if(location.state && location.state.filmId){
+      setFIlmId(location.state.filmId)
+    }else{
+      navigate('/')
+    }
+  },[])
   const {loading,error,data} = useQuery(Query.qGetFilm,{variables:{filmId}})
     if (loading) return <Loading/>
     if (error) {

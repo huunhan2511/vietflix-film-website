@@ -17,6 +17,12 @@ const Query={
             id
             name
           }
+          filmDetail{
+            id
+            episode {
+              id
+            }
+          }
         }
       }
     `,
@@ -188,6 +194,52 @@ const Query={
         }
       }
     }
+    `,
+    mLogin: gql`
+    mutation mLogin($input: loginAdmin) {
+      loginAdmin(input: $input) {
+        token
+      }
+    }
+    `,
+    qGenre: gql`
+    query qGenre {
+      genres {
+        films {
+          id
+        }
+        id
+        name
+      }
+    }
+    `,
+    qGetDetailFilmEdit: gql`
+    query qGetFilm($filmId: ID) {
+      film(id: $filmId) {
+        id
+        description
+        filmDetail {
+          id
+          episode {
+            id
+            link_embed
+            link_m3u8
+            time
+          }
+        }
+        genres {
+          id
+          name
+        }
+        img
+        name
+      }
+      }
+    `,
+    qCheckToken: gql`
+      query qCheckToken{
+        hello
+      }
     `
 }
 export default Query

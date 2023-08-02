@@ -21,7 +21,7 @@ const server = new ApolloServer({
     schema,
     // UNDER CONSTRUCED FOR AUTHORIZATION
     context: ({req},res) => ({req, mongoDataMethods}),
-    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+    // plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 })
 await server.start();
 server.applyMiddleware({app});

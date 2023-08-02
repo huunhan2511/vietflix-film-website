@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './app.css';
 import App from './App';
-import {defaultTheme, Provider} from '@adobe/react-spectrum';
 import {
   ApolloClient,
   InMemoryCache,
@@ -35,12 +34,12 @@ if(currentDate.getDate() > 19){
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider theme={defaultTheme} colorScheme="dark">
+    {/* <Provider theme={defaultTheme} colorScheme="dark"> */}
       
     <ApolloProvider client={client}>
       <App />
     </ApolloProvider>
-    </Provider>
+    {/* </Provider> */}
   </React.StrictMode>,
   
   document.getElementById('root')

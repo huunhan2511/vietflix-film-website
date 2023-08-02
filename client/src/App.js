@@ -1,21 +1,17 @@
 
 import React, { Suspense, lazy } from "react";
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./components/Loading";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
-const AddSeasonPage = lazy(() => import("./view/Admin/AddSeasonPage"))
-const EditSeasonAdmin = lazy(() => import("./view/Admin/EditSeasonAdmin"))
-const EditEpisodeAdmin = lazy(() => import("./view/Admin/EditEpisodeAdmin"))
-const HomeAdmin = lazy(() => import("./view/Admin/HomeAdmin"));
-const AllFilmAdmin = lazy(() => import("./view/Admin/AllFilmAdmin"));
-const ViewAllFilmAdmin = lazy(() => import("./view/Admin/ViewAllFilm"));
-const ViewFilmByCategoryAdmin = lazy(() => import("./view/Admin/ViewFilmByCategory"));
-const ListMovieAdmin = lazy(() => import("./view/Admin/ListMovie"));
-const ListTvShowAdmin = lazy(() => import("./view/Admin/ListTvShow"));
-const AddTvShowAdmin = lazy(() => import("./view/Admin/AddTvShow"));
-const AddCategoryAdmin = lazy(() => import("./view/Admin/AddCategory"));
-const ListCategoryAdmin = lazy(() => import("./view/Admin/ListCategory"));
-const AddMovieAdmin = lazy(() => import("./view/Admin/AddMovie"));
+const GenrePage = lazy(()=> import("./view/Admin/GenreAdmin"));
+const AddGenrePage = lazy(()=> import("./view/Admin/AddGenrePage"));
+const EditGenrePage = lazy(()=> import("./view/Admin/EditGenrePage"));
+const AddMoviePage = lazy(()=> import("./view/Admin/AddMoviePage"));
+const EditMoviePage = lazy(()=> import("./view/Admin/EditMoviePage"));
+const TvShowAdmin = lazy(()=> import("./view/Admin/TvShowAdmin"));
+const MovieAdmin = lazy(()=> import("./view/Admin/MovieAdmin"));
+const HomeAdmin = lazy(()=>import('./view/Admin/HomeAdmin'))
 const LoginAdminPage = lazy(() => import("./view/Admin/LoginPage"));
 const NotFound = lazy(() => import("./view/NotFound"));
 const MoviePage = lazy(() => import("./view/MoviePage"));
@@ -26,7 +22,6 @@ const SearchPage = lazy(() => import("./view/SearchPage"));
 const ViewAll = lazy(() => import("./view/ViewAll"));
 function App() {
   React.useEffect(() => {
-    console.log('5')
     localStorage.removeItem('filmId')
   }, [])
 
@@ -69,20 +64,39 @@ function App() {
           />
 
           <Route path="admin" element={<ProtectedRoutes />}>
-            <Route path="admin" element={<HomeAdmin />} />
-            <Route path="tat-ca-phim" element={<AllFilmAdmin />} />
-            <Route path="tat-ca-phim/:id" element={<ViewAllFilmAdmin />} />
-            <Route path="phim-le" element={<ListMovieAdmin />} />
-            <Route path="them-phim-le" element={< AddMovieAdmin />} />
-            <Route path='phim-bo' element={<ListTvShowAdmin />} />
-            <Route path='them-phim-bo' element={<AddTvShowAdmin />}/>
-            <Route path='them-phim-bo/them-mua' element={<AddSeasonPage/>}/>
-            <Route path='them-the-loai' element={<AddCategoryAdmin />} />
-            <Route path='the-loai' element={<ListCategoryAdmin />} />
-            <Route path='season/:id' element={<EditSeasonAdmin />} />
-            <Route path='season/episode/:id' element={<EditEpisodeAdmin />} />
-            <Route path='episode/:id' element={<EditEpisodeAdmin />} />
-            <Route path='the-loai/:id' element={<ViewFilmByCategoryAdmin />} />
+            <Route
+              path="/admin"
+              exact
+              element={<HomeAdmin />}
+            />  
+            <Route
+              path="/admin/phim-le"
+              element={<MovieAdmin/>}
+            />
+            <Route
+              path="/admin/phim-bo"
+              element={<TvShowAdmin/>}
+            />
+            <Route
+              path="/admin/them-phim-le"
+              element={<AddMoviePage/>}
+            />
+            <Route
+              path="/admin/sua-phim-le"
+              element={<EditMoviePage/>}
+            />
+            <Route 
+              path="/admin/the-loai"
+              element= {<GenrePage/>}
+            />
+            <Route 
+              path="/admin/them-the-loai"
+              element= {<AddGenrePage/>}
+            />
+            <Route 
+              path="/admin/sua-the-loai"
+              element= {<EditGenrePage/>}
+            />
           </Route>
 
           <Route

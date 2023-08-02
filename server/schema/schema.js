@@ -61,7 +61,7 @@ const typeDefs = gql`
         authorization: String
     }
     type Query {
-        hello: String 
+        hello: String @isAuth
         headers: Headers
 
         films(quantity: Int, search: String): [Film]

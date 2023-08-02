@@ -1,23 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import '~antd/dist/antd.min.css';
 html, body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Saira', sans-serif;
   min-height: 100vh;
+  background-color: #191919;
 }
-
+p,h1,h2,h3,h4,h5,h6,span,path,label{
+  color: white;
+}
 body > #root > div {
   margin: 0px;
   padding: 0;
   min-height: 100vh;
 }
+div::-webkit-scrollbar,body::-webkit-scrollbar {
+  width: 10px;
+}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+div::-webkit-scrollbar-track {
+  background-color: #191919;
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: #302f2f;
+  border-radius: 5px;
+}
+body::-webkit-scrollbar-track {
+  background-color: #191919;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #DB2017;
+  border-radius: 5px;
 }
 
 .background-image .slick-next {
@@ -190,7 +205,7 @@ code {
 
 .Modal {
   position: fixed;
-  top: 5%;
+  top: 10%;
   left: 10%;
   right: 10%;
   background-color: #171717;
@@ -199,6 +214,7 @@ code {
   border-radius: 1.5%;
   outline: none;
   border: none;
+  z-index: 1000;
 }
 @media screen and (min-width: 1280px) {
   .Modal {
@@ -454,4 +470,248 @@ code {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* admin login */
+.form__group {
+  position: relative;
+  padding: 20px 0 0;
+}
+
+.form__field {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 17px;
+  color: #fff;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 17px;
+  cursor: text;
+  top: 20px;
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 17px;
+  pointer-events: none;
+  font-weight: 500;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #DC2626, #f36f6f);
+  border-image-slice: 1;
+}
+
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 17px;
+  color: #DC2626;
+  font-weight: 700;
+}
+
+/* reset input */
+.form__field:required, .form__field:invalid {
+  box-shadow: none;
+}
+
+/* search */
+.form {
+ --width-of-input: 200px;
+ --border-height: 1px;
+ --border-before-color: rgba(221, 221, 221, 0.39);
+ position: relative;
+ width: var(--width-of-input);
+}
+/* styling of Input */
+.input {
+ color: #fff;
+ font-size: 0.9rem;
+ background-color: transparent;
+ width: 100%;
+ box-sizing: border-box;
+ padding-inline: 0.5em;
+ padding-block: 0.7em;
+ border: none;
+ border-bottom: var(--border-height) solid var(--border-before-color);
+}
+/* styling of animated border */
+.input-border {
+ position: absolute;
+ width: 0%;
+ height: 2px;
+ bottom: 0;
+ left: 0;
+ transition: 0.3s;
+}
+/* Hover on Input */
+input:hover {
+ background: var(--input-hovered-color);
+}
+
+input:focus {
+ outline: none;
+}
+/* here is code of animated border */
+input:focus ~ .input-border {
+ width: 100%;
+}
+/* === if you want to do animated border on typing === */
+/* remove input:focus code and uncomment below code */
+/* input:valid ~ .input-border{
+  width: 100%;
+} */
+
+/* radio button */
+input[type="radio"]:focus {
+  outline: 0;
+  border-color: #DC2626;
+}
+
+.mydict div {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+  justify-content: center;
+}
+
+.mydict input[type="radio"] {
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.mydict input[type="radio"]:checked + span {
+  box-shadow: 0 0 0 0.0625em #DC2626;
+  background-color: #191919;
+  z-index: 1;
+  color: #fff;
+}
+
+label span {
+  display: block;
+  cursor: pointer;
+  background-color: #191919;
+  padding: 0.375em .75em;
+  position: relative;
+  margin-left: .0625em;
+  box-shadow: 0 0 0 0.0625em #474747;
+  letter-spacing: .05em;
+  color: #fff;
+  text-align: center;
+  transition: background-color .5s ease;
+}
+
+label:first-child span {
+  border-radius: .375em 0 0 .375em;
+}
+
+label:last-child span {
+  border-radius: 0 .375em .375em 0;
+}
+
+.button-add,.button-delete , .button-update{
+  position: relative;
+  background-color: #B91C1C;
+  border-radius: 5px;
+  padding: 10px 15px;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  color: #fff;
+  border: none;
+  transition: all .3s ease-in-out;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.button-delete::before, .button-add::before, .button-update::before {
+  content: "";
+  background-color: rgb(252, 55, 55);
+  width: 0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: width 700ms ease-in-out;
+  display: inline-block;
+}
+
+.button-delete:hover::before, .button-add:hover::before ,.button-update:hover::before {
+  width: 100%;
+}
+
+.button-edit{
+  position: relative;
+  background-color: #22C55E;
+  border-radius: 5px;
+  padding: 10px 15px;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  color: #fff;
+  border: none;
+  transition: all .3s ease-in-out;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.button-edit::before {
+  content: "";
+  background-color: #04df54;
+  width: 0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: width 700ms ease-in-out;
+  display: inline-block;
+}
+
+.button-edit:hover::before {
+  width: 100%;
+}
+.loader-container {
+  display: none;
+}
+
+.loader-container.active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.dropdown-container, .dropdown-heading, .dropdown-heading-value{
+  background-color: #191919;
+  border: 0 !important;
+  z-index: 100;
 }
