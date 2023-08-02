@@ -1,13 +1,27 @@
 import React,{useState} from 'react';
 import LayoutAdmin from '../../../components/LayoutAdmin';
 import { ACCESS_DENIED,ADD_GENRE_SUCCESS } from '../../../constant';
-import { useMutation } from '@apollo/client';
+import { useMutation,useQuery } from '@apollo/client';
 import mutations from '../../../mutations';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import Query from '../../../query'
 
 const AddGenrePage = () => {
     const navigate = useNavigate();
+    const queryCheckToken = useQuery(Query.qCheckToken,{
+        context: {
+            headers: {
+                authorization: localStorage.getItem("token"),
+            },
+        },
+        onError : (error) => {
+            if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+                localStorage.removeItem("token")
+                navigate("/")
+            }
+        }
+    })
     const [genre,setGenre] = useState('');
     const [mutationCreateGenre] = useMutation(mutations.createGenre,
         {onError : (error) => {

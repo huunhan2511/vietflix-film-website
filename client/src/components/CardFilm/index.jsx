@@ -34,7 +34,7 @@ export default function CardFilm({openModal,film}) {
                   </span>
                 </div>
                 <span className=" items-center w-full xs:text-[1.5rem] sm:text-[2rem] md:text-[2rem] lg:text-[3rem] xl:text-[3rem] font-bold opacity-100 text-white">
-                <p className='md:truncate text-center md:text-left'>
+                <p className='text-center md:text-left line-clamp-2'>
                   {film.name}
                 </p>  
                 </span> 

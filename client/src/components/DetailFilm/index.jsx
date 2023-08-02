@@ -33,7 +33,7 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
                     <img
                         src={data.film.img}
                         alt="background"
-                        className="h-full w-full"
+                        className="h-full w-full brightness-[.45]"
                     />
                     <div className="absolute top-2 flex flex-col justify-between w-[100%] px-[2%] h-full">
                         <div className='grid justify-items-end' onClick={closeModal}>
@@ -42,13 +42,13 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
                             </div>
                         </div>
                         <div className='mb-[10%] ml-[3%] flex flex-col'>
-                            <div className="hidden lg:flex bg-gradient-to-r w-1/5 h-12 from-[#cbcaca7f]">
-                                <span>
+                            <div className="hidden lg:flex bg-gradient-to-r w-1/5 h-10 from-[#cbcaca7f]">
+                                <span className='self-center'>
                                     <img src={logo} alt="logo" />
                                 </span>
                             </div>
-                            <span className='text-white text-[150%] xs:text-[150%] sm:text-left sm:text-[200%] md:text-[350%] lg:text[400%] font-semibold'>
-                                <p className='truncate'>
+                            <span className='text-white text-[150%] xs:text-[150%] sm:text-left sm:text-[200%] md:text-[250%] lg:text[300%] font-semibold'>
+                                <p className='line-clamp-2'>
                                     {data.film.name}
                                 </p>
                             </span>

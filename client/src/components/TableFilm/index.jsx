@@ -42,7 +42,7 @@ export default function TableFilm({data,title,functionButton}) {
       }
     });
     const editMovie = (id) =>{
-      navigate(`/admin/sua-phim-le/${id}`,{state:{idFilm:id}})
+      navigate(`/admin/sua-phim-le`,{state:{idFilm:id}})
     }
     const editTvShow = (id) =>{
       console.log("edit tv show")

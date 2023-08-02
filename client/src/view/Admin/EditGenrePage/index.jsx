@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import LayoutAdmin from '../../../components/LayoutAdmin';
 import { ACCESS_DENIED,UPDATE_GENRE_SUCCESS } from '../../../constant';
 import { useMutation,useQuery } from '@apollo/client';
@@ -12,8 +12,28 @@ import Loadingitem from '../../../components/LoadingItem';
 const EditGenrePage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [genreId] = useState(location.state.idGenre);
+    const [genreId,setGenreId] = useState('');
     const [genre,setGenre] = useState({});
+    useEffect(()=>{
+        if(location.state && location.state.idGenre){
+            setGenreId(location.state.idFilm)
+        }else{
+            navigate('/')
+        }
+    },[])
+    const queryCheckToken = useQuery(Query.qCheckToken,{
+        context: {
+            headers: {
+                authorization: localStorage.getItem("token"),
+            },
+        },
+        onError : (error) => {
+            if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+                localStorage.removeItem("token")
+                navigate("/")
+            }
+        }
+    })
     const {loading} = useQuery(Query.qGetGenreId,{fetchPolicy: "no-cache", variables:{genreId},onCompleted: (data)=>{
         setGenre({
             id: data.genre.id,

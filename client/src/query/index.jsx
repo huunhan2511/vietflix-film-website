@@ -236,5 +236,10 @@ const Query={
       }
       }
     `,
+    qCheckToken: gql`
+      query qCheckToken{
+        hello
+      }
+    `
 }
 export default Query

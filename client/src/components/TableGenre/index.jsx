@@ -13,7 +13,7 @@ const TableGerne = ({data,title,functionButton}) => {
     const [genres,setGenres] = useState(data)
     const navigate = useNavigate();
     const handleEditGenre = (genreId) => {
-        navigate(`/admin/sua-the-loai/${genreId}`,{state:{idGenre:genreId}})
+        navigate(`/admin/sua-the-loai`,{state:{idGenre:genreId}})
     }
     const [mutationDeleteGenre] = useMutation(mutations.deleteGenre,{
         onError : (error) => {

@@ -82,7 +82,7 @@ function App() {
               element={<AddMoviePage/>}
             />
             <Route
-              path="/admin/sua-phim-le/:id"
+              path="/admin/sua-phim-le"
               element={<EditMoviePage/>}
             />
             <Route 
@@ -94,7 +94,7 @@ function App() {
               element= {<AddGenrePage/>}
             />
             <Route 
-              path="/admin/sua-the-loai/:id"
+              path="/admin/sua-the-loai"
               element= {<EditGenrePage/>}
             />
           </Route>
