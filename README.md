@@ -40,3 +40,7 @@ A free streaming website with Movie, TV Show and Series TV Show films
 | **Movie** | **TV Show** |
 | :-: | :-: |
 | ![Movie](https://imgur.com/1d7kMCf.jpeg) | ![TV SHow](https://imgur.com/2ZOmr6E.jpeg) |
+
+
+## Deploy
+- [02/08/2023]
