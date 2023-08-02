@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EPISODES,MULTI_SELECT_GENRE,ACCESS_DENIED,TYPE_MOVIE, ADD_MOVIE_SUCCESS } from '../../constant';
+import { EPISODES,MULTI_SELECT_GENRE,ACCESS_DENIED,TYPE_MOVIE, ADD_MOVIE_SUCCESS,URL_OPHIM } from '../../constant';
 import { useMutation, useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import mutations from '../../mutations';
@@ -124,7 +124,12 @@ const AddMovie = () => {
     }
     const handleGetInfoMovie = async () =>{
         document.getElementById('loader').classList.add('active');
-        await axios.get(urlMovie).then(res=>{
+        let url = urlMovie;
+        if(!url.includes(URL_OPHIM)){
+            url = url.replace(/\/\/.*\..{1,4}\//,'//'+URL_OPHIM+'/')
+            setUrlMovie(url);
+        }
+        await axios.get(url).then(res=>{
             toast.success('Tìm thông tin phim thành công');
             if(Object.keys(res.data).length > 0){
                 convertMinutesToHoursAndMinutes(res.data.movie.time === "" ? 0 : parseInt(res.data.movie.time.toLowerCase().replace('phút','')))

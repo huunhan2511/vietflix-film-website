@@ -20,7 +20,7 @@ export const MULTI_SELECT_GENRE = {
 }
 export const ACCESS_DENIED = "ACCESS DENIED";
 export const TYPE_MOVIE = "626fe94b6bd3447a657b4a62";
-
+export const URL_OPHIM = "ophim1.com";
 
 // handle film
 export const DELETE_MOVIE_SUCCESS = "Xóa phim thành công";
