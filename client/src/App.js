@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./components/Loading";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
+const LoadingPage = lazy(()=> import("./view/LoadingPage"));
 const GenrePage = lazy(()=> import("./view/Admin/GenreAdmin"));
 const AddGenrePage = lazy(()=> import("./view/Admin/AddGenrePage"));
 const EditGenrePage = lazy(()=> import("./view/Admin/EditGenrePage"));
@@ -59,9 +60,14 @@ function App() {
             element={<ViewAll />}
           />
           <Route
+            path="/loading"
+            element={<LoadingPage />}
+          />
+          <Route
             path="*"
             element={<NotFound />}
           />
+
 
           <Route path="admin" element={<ProtectedRoutes />}>
             <Route
