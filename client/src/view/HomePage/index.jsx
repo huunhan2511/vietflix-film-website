@@ -6,7 +6,7 @@ import ListFilm from '../../components/ListFilm';
 import ListCenter from '../../components/ListFilm/ListCenter';
 import Slide from '../../components/Slide';
 import Query from '../../query';
-import Loading from '../../components/Loading';
+import LoadingPage from '../LoadingPage';
 import Mylayout from '../../components/Mylayout';
 import Banner from '../../components/Banner';
 import { useNavigate } from 'react-router-dom';
@@ -45,7 +45,7 @@ export default function HomePage() {
     document.body.style.overflow = 'unset';
   }
 
-  if (genre.loading || cardFilm.loading) return <Loading/>
+  if (genre.loading || cardFilm.loading) return <LoadingPage/>
   if (genre.error || cardFilm.error){
     navigate('/error')
   }

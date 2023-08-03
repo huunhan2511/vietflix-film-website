@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./components/Loading";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
-const LoadingPage = lazy(()=> import("./view/LoadingPage"));
 const GenrePage = lazy(()=> import("./view/Admin/GenreAdmin"));
 const AddGenrePage = lazy(()=> import("./view/Admin/AddGenrePage"));
 const EditGenrePage = lazy(()=> import("./view/Admin/EditGenrePage"));
@@ -30,7 +29,7 @@ function App() {
     <Router>
       <Suspense
         fallback={
-          <Loading />
+          <Loading/>
         }
       >
         <Routes>
@@ -58,10 +57,6 @@ function App() {
           <Route
             path="/tat-ca"
             element={<ViewAll />}
-          />
-          <Route
-            path="/loading"
-            element={<LoadingPage />}
           />
           <Route
             path="*"
