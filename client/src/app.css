@@ -5,6 +5,7 @@ html, body {
   margin: 0;
   font-family: 'Saira', sans-serif;
   min-height: 100vh;
+  max-width: 100vw;
   background-color: #191919;
 }
 p,h1,h2,h3,h4,h5,h6,span,path,label{
@@ -715,3 +716,4 @@ label:last-child span {
   border: 0 !important;
   z-index: 100;
 }
+

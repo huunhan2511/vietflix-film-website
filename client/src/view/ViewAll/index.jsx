@@ -5,7 +5,7 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import HeaderSm from '../../components/HeaderSm';
 import Query from '../../query';
-import Loading from '../../components/Loading';
+import LoadingPage from '../LoadingPage';
 import Film from '../../components/Film';
 import { useLocation, useNavigate } from 'react-router-dom';
 export default function TvShowPage() {
@@ -35,7 +35,7 @@ export default function TvShowPage() {
       document.body.style.overflow = 'unset';
   }
   
-  if (dataFilm.loading) return <Loading/>
+  if (dataFilm.loading) return <LoadingPage page="tat-ca"/>
   if (dataFilm.loading) {
     navigate('/error')
   }

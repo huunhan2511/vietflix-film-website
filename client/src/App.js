@@ -29,7 +29,7 @@ function App() {
     <Router>
       <Suspense
         fallback={
-          <Loading />
+          <Loading/>
         }
       >
         <Routes>
@@ -62,6 +62,7 @@ function App() {
             path="*"
             element={<NotFound />}
           />
+
 
           <Route path="admin" element={<ProtectedRoutes />}>
             <Route
