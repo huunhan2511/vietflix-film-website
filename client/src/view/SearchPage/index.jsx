@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import React from 'react';
 import DetailFilm from '../../components/DetailFilm';
 import Query from '../../query';
-import Loading from '../../components/Loading';
+import LoadingPage from '../LoadingPage';
 import Film from '../../components/Film';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Mylayout from '../../components/Mylayout';
@@ -32,7 +32,7 @@ export default function SearchPage() {
       document.body.style.overflow = 'unset';
   }
   
-  if (searchFilm.loading) return <Loading/>
+  if (searchFilm.loading) return <LoadingPage page="tim-kiem"/>
   if (searchFilm.error){
     navigate('/NotFound')
   }

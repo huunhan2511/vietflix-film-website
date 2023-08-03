@@ -3,7 +3,7 @@ import React from 'react';
 import DetailFilm from '../../components/DetailFilm';
 import ListFilm from '../../components/ListFilm';
 import Query from '../../query';
-import Loading from '../../components/Loading';
+import LoadingPage from '../LoadingPage';
 import Mylayout from '../../components/Mylayout';
 import { useNavigate } from 'react-router-dom';
 export default function TvShowPage() {
@@ -30,7 +30,7 @@ export default function TvShowPage() {
       document.body.style.overflow = 'unset';
   }
   
-  if (genre.loading) return <Loading/>
+  if (genre.loading) return <LoadingPage page="phim-bo"/>
   if (genre.error) {
     navigate("/error")
   }
