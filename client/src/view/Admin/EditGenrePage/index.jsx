@@ -16,7 +16,7 @@ const EditGenrePage = () => {
     const [genre,setGenre] = useState({});
     useEffect(()=>{
         if(location.state && location.state.idGenre){
-            setGenreId(location.state.idFilm)
+            setGenreId(location.state.idGenre)
         }else{
             navigate('/')
         }
