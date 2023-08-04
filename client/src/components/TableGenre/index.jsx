@@ -11,6 +11,7 @@ import {faPenToSquare,faTrashCan} from "@fortawesome/free-solid-svg-icons"
 
 const TableGerne = ({data,title,functionButton}) => {
     const [genres,setGenres] = useState(data)
+    const [genresFilter, setGenresFiler] = useState(data);
     const navigate = useNavigate();
     const handleEditGenre = (genreId) => {
         navigate(`/admin/sua-the-loai`,{state:{idGenre:genreId}})
@@ -46,6 +47,13 @@ const TableGerne = ({data,title,functionButton}) => {
         }
         
     }
+    const handleSearchChange = (e) =>{
+        const listGenre = genres;
+        if(e.target.value === '') setGenresFiler(genres);
+        setGenresFiler(listGenre.filter((genre)=>{
+            return genre.name.toLowerCase().includes(e.target.value.toLowerCase())
+        }))
+    }
     return (
         <>
             <div
@@ -70,7 +78,14 @@ const TableGerne = ({data,title,functionButton}) => {
                         </div>
                     }
                     </div>
-                    <div className="m-4 max-h-[47.5rem] overflow-auto">
+                    <div className='w-full flex px-5'>
+                        <label className='w-32 p-5 bg-red-700'>Tìm kiếm</label>
+                        <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' 
+                        name = "search"
+                        onChange={handleSearchChange}
+                        />
+                    </div>
+                    <div className="m-4 max-h-[70vh] overflow-auto">
                     <table className='text-white min-w-full border-collapse border-slate-700 border'>
                         <thead className='bg-red-700 text-white w-100 sticky top-[-1px] z-50'>
                             <tr className='w-100'>
@@ -81,7 +96,7 @@ const TableGerne = ({data,title,functionButton}) => {
                         </thead>
                         <tbody >
                             {
-                                genres.map((genre,key)=>{
+                                genresFilter.map((genre,key)=>{
                                     return (
                                         <tr key={key} className='text-white'>
                                             <td className='border-slate-700 border p-4'>{genre.id}</td>
