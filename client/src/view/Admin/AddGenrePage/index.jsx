@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import LayoutAdmin from '../../../components/LayoutAdmin';
-import { ACCESS_DENIED,ADD_GENRE_SUCCESS } from '../../../constant';
+import { ACCESS_DENIED,ADD_GENRE_SUCCESS,CLEAR_INPUT_SUCCESS } from '../../../constant';
 import { useMutation,useQuery } from '@apollo/client';
 import mutations from '../../../mutations';
 import { toast } from 'react-toastify';
@@ -67,6 +67,14 @@ const AddGenrePage = () => {
                             </div>
                         </form>
                         <div className='text-white flex justify-end mt-5'>
+                                <button className='button-edit px-10 py-4 bg-red-700 rounded-md disabled:opacity-50 mx-5' 
+                                onClick={()=>{
+                                    setGenre('')
+                                    toast.success(CLEAR_INPUT_SUCCESS)
+                                }}
+                                >
+                                    Xóa toàn bộ
+                                </button>
                                 <button className='button-add px-10 py-4 bg-red-700 rounded-md disabled:opacity-50' 
                                 disabled={genre === '' ? true : false}
                                 onClick={()=>handleAddGenre()}

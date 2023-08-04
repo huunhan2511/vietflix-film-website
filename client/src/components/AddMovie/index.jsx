@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EPISODES,MULTI_SELECT_GENRE,ACCESS_DENIED,TYPE_MOVIE, ADD_MOVIE_SUCCESS,URL_OPHIM } from '../../constant';
+import { EPISODES,MULTI_SELECT_GENRE,ACCESS_DENIED,TYPE_MOVIE, ADD_MOVIE_SUCCESS,URL_OPHIM,CLEAR_INPUT_SUCCESS } from '../../constant';
 import { useMutation, useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import mutations from '../../mutations';
@@ -195,6 +195,20 @@ const AddMovie = () => {
             })
         }
     }
+    const handleClearInput = () => {
+        setDataFilm({
+            name : "",
+            img : "",
+            link_embed : "",
+            link_m3u8 : "",
+            description : "",
+        })
+        setTime({
+            hour: '',
+            minute: ''
+        })
+        toast.success(CLEAR_INPUT_SUCCESS)
+    }
     if(loading) return <Loadingitem/>
     return (
         <div className='movie p-5'>
@@ -283,11 +297,16 @@ const AddMovie = () => {
                 </form>
             </div>
             <div className='text-white flex justify-end mt-5'>
+                <button className='button-edit px-10 py-4 bg-red-700 rounded-md disabled:opacity-50 mx-5' 
+                onClick={()=>handleClearInput()}>
+                    Xóa toàn bộ
+                </button>
                 <button className='button-add px-10 py-4 bg-red-700 rounded-md disabled:opacity-50' 
                 disabled={selectedOptions.length > 0 && time.hour !== '' && time.minute !== '' ? false : true} 
-                onClick={()=>handleAddEpisode(dataEpisode)}>
+                onClick={()=>handleAddEpisode()}>
                     Thêm phim
                 </button>
+                
             </div>
         </div>
     );
