@@ -93,6 +93,28 @@ const mongoDataMethods = {
 			throw new ApolloError('Username và password không trùng khớp', 'USERNAME AND PASSWORD INCORRECT')
 		}
 	},
+
+	changeAdminPassword: async args => {
+		const id = args.input.id
+		let newPassword = args.input.newPassword
+		let account = await Admin.findById(id)
+
+		const oldPassword = args.input.oldPassword
+		let isOldPassword = bcrypt.compareSync(oldPassword, account.password);
+		if(!isOldPassword){
+			throw new ApolloError('Password không trùng khớp','PASSWORD INCORRECT')
+		}
+		let compare = bcrypt.compareSync(newPassword, account.password);
+		if(compare){
+			throw new ApolloError('Password mới không được trùng với password cũ', 'PASSWORD IS SAME WITH OLD PASSWORD')
+		}
+
+		let err = account.validateSync()
+		if (err) throw new ApolloError(errorMessage(err), 'ERROR')
+		const BCRYPT_SALT = process.env.BCRYPT_SALT || 10
+		newPassword = bcrypt.hashSync(newPassword, Number(BCRYPT_SALT))
+		return await Admin.findOneAndUpdate({ _id: id }, { password: newPassword }, { returnDocument: 'after' })
+	},
 	
   	//Update
     updateFilm: async args => {

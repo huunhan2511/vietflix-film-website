@@ -55,6 +55,7 @@ const resolver = {
 
     createAdmin: async (parent, args, context) => await context.mongoDataMethods.createAdmin(args),
     loginAdmin: async (parent, args, context) => await context.mongoDataMethods.loginAdmin(args),
+    changeAdminPassword: async (parent, args, context) => await context.mongoDataMethods.changeAdminPassword(args),
 
     updateFilm: async (parent, args, context) => await context.mongoDataMethods.updateFilm(args),
     updateGenre: async (parent, args, context) => await context.mongoDataMethods.updateGenre(args),

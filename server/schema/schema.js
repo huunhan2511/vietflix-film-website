@@ -136,6 +136,12 @@ const typeDefs = gql`
         password: String
     }
 
+    input changeAdminPassword{
+        id: String,
+        oldPassword: String,
+        newPassword: String,
+    },
+
     type Mutation{
         createFilm(input:FilmInput): Film, @isAuth
         createGenre(input:GenreInput): Genre, @isAuth
@@ -144,8 +150,9 @@ const typeDefs = gql`
         createSeason(input:SeasonInput): Season, @isAuth
         createEpisode(input:EpisodeInput): Episode, @isAuth
 
-        createAdmin(input: createAdmin): Admin, @isAuth
+        createAdmin(input: createAdmin): Admin,
         loginAdmin(input: loginAdmin): Token,
+        changeAdminPassword(input: changeAdminPassword): Admin, @isAuth
 
         updateFilm(input:FilmInput): Film, @isAuth
         updateGenre(input:GenreInput): Genre, @isAuth
