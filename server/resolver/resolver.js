@@ -20,6 +20,8 @@ const resolver = {
 
     episodes: async (parent,args, context) => await context.mongoDataMethods.getAllEpisodes(),
     episode: async (parent, args, context) => await context.mongoDataMethods.getEpisodeById(args.id),
+
+    getAllAdmins: async (parent, args, context) => await context.mongoDataMethods.getAllAdmins()
     },
 
     Film: {
@@ -44,6 +46,7 @@ const resolver = {
     Season: {
         episodes: async (parent, args, context) =>await context.mongoDataMethods.getAllEpisodes({_id: {$in: parent.episodes}}),
     },
+
 
   Mutation: {
     createFilm: async (parent, args, context) => await context.mongoDataMethods.createFilm(args),
