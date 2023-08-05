@@ -23,7 +23,7 @@ const mongoDataMethods = {
 	},
     getFilmById: async (id) => await Film.findById(id),
 
-    getAllGenres: async (conditions = null) => conditions === null ? await Genre.find() : await Genre.find(conditions),
+    getAllGenres: async (conditions = null) => conditions === null ? await Genre.find() : await Genre.find().limit(conditions.quantityGenres),
     getGenreById: async id => Genre.findById(id),
 
     getAllFilmTypes: async () => await FilmType.find(),

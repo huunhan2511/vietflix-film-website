@@ -6,7 +6,7 @@ const resolver = {
     films: async (parent, args, context) => !args.quantity  && !args.search ? await context.mongoDataMethods.getAllFilms.films() : await context.mongoDataMethods.getAllFilms.films(args),
     film: async (parent, args, context) => await context.mongoDataMethods.getFilmById(args.id),
 
-    genres:async (parent, args, context) => await context.mongoDataMethods.getAllGenres(),
+    genres: async (parent, args, context) => !args.quantityGenres ? await context.mongoDataMethods.getAllGenres() : await context.mongoDataMethods.getAllGenres(args),
     genre: async (parent, args, context) => await context.mongoDataMethods.getGenreById(args.id),
 
     filmTypes: async (parent, args, context) => await context.mongoDataMethods.getAllFilmTypes(),
@@ -25,14 +25,14 @@ const resolver = {
     },
 
     Film: {
-        genres: async (parent, args, context) => await context.mongoDataMethods.getAllGenres({_id: {$in: parent.genres}}),
+        genres: async (parent, args, context) => await context.mongoDataMethods.getAllGenres({ _id: { $in: parent.genres } }),
         filmType: async (parent, args, context) => await context.mongoDataMethods.getFilmTypeById(parent.filmType),
         filmDetail: async (parent, args, context) => await context.mongoDataMethods.getFilmDetailById(parent.filmDetail),
     },
 
     Genre: {
-        films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms.where({genres: {$in: parent.id}})
-    },
+        films: async (parent, args, context) => !args.quantityFilms ? await context.mongoDataMethods.getAllFilms.where({ genres: { $in: parent.id } }) : await context.mongoDataMethods.getAllFilms.films({ _id: { $in: parent.genres }, quantity: args.quantityFilms })
+    }, 
 
     FilmType: {
         films: async (parent, args, context) => await context.mongoDataMethods.getAllFilms.where({filmType: parent.id})
