@@ -81,8 +81,6 @@ const typeDefs = gql`
 
         episodes: [Episode]
         episode(id: ID): Episode
-
-        getAllAdmins: [Admin] @isAuth
     }
 
     input FilmInput{
