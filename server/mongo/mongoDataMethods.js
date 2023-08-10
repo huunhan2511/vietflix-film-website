@@ -41,6 +41,7 @@ const mongoDataMethods = {
     getEpisodeById: async id => await Episode.findById(id),
 
 	getAllAdmins: async () => await Admin.find(),
+	getAdminById: async id => await Admin.findById(id),
 
     //Create
     createFilm: async args => {

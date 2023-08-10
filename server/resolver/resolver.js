@@ -21,7 +21,8 @@ const resolver = {
     episodes: async (parent,args, context) => await context.mongoDataMethods.getAllEpisodes(),
     episode: async (parent, args, context) => await context.mongoDataMethods.getEpisodeById(args.id),
 
-    getAllAdmins: async (parent, args, context) => await context.mongoDataMethods.getAllAdmins()
+    getAllAdmins: async (parent, args, context) => await context.mongoDataMethods.getAllAdmins(),
+    getAdmin: async (parent, args, context) => await context.mongoDataMethods.getAdminById(args.id),
     },
 
     Film: {
