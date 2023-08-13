@@ -8,7 +8,6 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Loadingitem from '../LoadingItem';
 import { MultiSelect } from "react-multi-select-component";
-const listOptions = JSON.parse(localStorage.getItem("options")) || [];   
 const AddMovie = () => {
     const navigate = useNavigate();
     const options= [];
@@ -85,7 +84,6 @@ const AddMovie = () => {
                 label: item.name
             })
         });
-        localStorage.setItem("options", JSON.stringify(options));
     }});
     
     const handleAddEpisode = (episode) =>{
@@ -236,7 +234,7 @@ const AddMovie = () => {
                     <div className='w-full flex'>
                         <label className='w-44 p-5 bg-red-700'>Thể loại</label>
                         <MultiSelect className='p-3 !bg-[#191919] border border-zinc-700 w-full'
-                            options={listOptions}
+                            options={options}
                             value={selectedOptions}
                             onChange={setSelectedOptions}
                             overrideStrings = {MULTI_SELECT_GENRE}
