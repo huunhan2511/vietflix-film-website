@@ -7,7 +7,6 @@ import { MultiSelect } from "react-multi-select-component";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import mutations from '../../mutations';
-const listOptions = JSON.parse(localStorage.getItem("options")) || [];   
 
 const EditMovie = ({filmId}) => {
     const navigate = useNavigate();
@@ -58,7 +57,6 @@ const EditMovie = ({filmId}) => {
                 label: item.name
             })
         });
-        localStorage.setItem("options", JSON.stringify(options));
     }});
     const {loading} = useQuery(Query.qGetDetailFilmEdit,{fetchPolicy: "no-cache", variables:{filmId},onCompleted: (data)=>{
         setFilm(data.film)
@@ -172,7 +170,7 @@ const EditMovie = ({filmId}) => {
                     <div className='w-full flex'>
                         <label className='w-44 p-5 bg-red-700'>Thể loại</label>
                         <MultiSelect className='p-3 !bg-[#191919] border border-zinc-700 w-full'
-                            options={listOptions}
+                            options={options}
                             value={selectedOptions}
                             onChange={setSelectedOptions}
                             overrideStrings = {MULTI_SELECT_GENRE}
