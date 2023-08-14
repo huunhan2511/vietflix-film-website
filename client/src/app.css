@@ -717,3 +717,6 @@ label:last-child span {
   z-index: 100;
 }
 
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
