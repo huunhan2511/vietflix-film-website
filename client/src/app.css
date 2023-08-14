@@ -720,3 +720,9 @@ label:last-child span {
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+.dropdown:hover span{
+  color: #FDE047;
+}
+.dropdown:hover svg > path{
+  color: #FDE047;
+}

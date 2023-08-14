@@ -29,7 +29,7 @@ export default function Header() {
           </span>
           </Link>
         </div>
-        <div className="Nav grid gap-5 grid-cols-4 p-4 ">
+        <div className="Nav grid gap-5 grid-cols-4 p-4">
             {menuItems.map((item,key)=>{
                 return(
                     <div className="inline-flex items-center text-white py-2 px-4 " key={key}>
