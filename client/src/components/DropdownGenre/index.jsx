@@ -14,7 +14,7 @@ const DropdownGenre = () => {
         <span className="mr-1">Thể loại</span>
         <FontAwesomeIcon icon={faChevronDown}/>
       </div>
-      <ul className="dropdown-menu absolute hidden text-white bg-zinc-800 pt-1">
+      <ul className="dropdown-menu absolute hidden text-white bg-zinc-800 px-3 py-4 max-h-[50vh] max-w-xs overflow-auto rounded-lg">
         {
           genres.data.genres.map((genre,key) => {
             return (
