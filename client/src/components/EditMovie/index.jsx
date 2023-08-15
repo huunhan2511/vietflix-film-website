@@ -10,7 +10,7 @@ import mutations from '../../mutations';
 
 const EditMovie = ({filmId}) => {
     const navigate = useNavigate();
-    const options= [];
+    const [options,setOptions] = useState([]);
     const [film,setFilm] = useState({});
     const [time,setTime] = useState({ hour: 0, minute: 0 });
     const [selectedOptions, setSelectedOptions] = useState([]);
@@ -51,12 +51,14 @@ const EditMovie = ({filmId}) => {
         }
     })
     const optionQuery = useQuery(Query.qGenre,{fetchPolicy: 'no-cache', onCompleted: (data)=>{
+        let temp = []
         data.genres.forEach(item => {
-            options.push({
+            temp.push({
                 value: item.id,
                 label: item.name
             })
         });
+        setOptions(temp)
     }});
     const {loading} = useQuery(Query.qGetDetailFilmEdit,{fetchPolicy: "no-cache", variables:{filmId},onCompleted: (data)=>{
         setFilm(data.film)
@@ -150,7 +152,7 @@ const EditMovie = ({filmId}) => {
         })
 
     }
-    if (loading) return <Loadingitem/>
+    if (loading || optionQuery.loading) return <Loadingitem/>
 
     return (
         <div className='movie p-5'>

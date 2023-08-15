@@ -10,7 +10,7 @@ import Loadingitem from '../LoadingItem';
 import { MultiSelect } from "react-multi-select-component";
 const AddMovie = () => {
     const navigate = useNavigate();
-    const options= [];
+    const [options,setOptions] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [dataFilm, setDataFilm] = useState({
         name : "",
@@ -78,12 +78,14 @@ const AddMovie = () => {
         }
     });
     const {loading} = useQuery(Query.qGenre,{fetchPolicy: "no-cache", onCompleted: (data)=>{
+        let temp = []
         data.genres.forEach(item => {
-            options.push({
+            temp.push({
                 value: item.id,
                 label: item.name
             })
         });
+        setOptions(temp)
     }});
     
     const handleAddEpisode = (episode) =>{

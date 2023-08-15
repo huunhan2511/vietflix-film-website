@@ -27,6 +27,7 @@ const TableGerne = ({data,title,functionButton}) => {
         onCompleted : (response) =>{
             toast.success(DELETE_GENRE_SUCCESS)
             setGenres(genres.filter((genre) =>{ return genre.id !== response.deleteGenre.id }))
+            setGenresFiler(genres.filter((genre) =>{ return genre.id !== response.deleteGenre.id }))
         }
     })
     const handleDeleteGenre = (genreId) =>{

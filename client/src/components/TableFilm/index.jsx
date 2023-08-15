@@ -91,6 +91,9 @@ export default function TableFilm({data,title,functionButton}) {
       setFilms(films.filter((film) => {
         return film.filmDetail.episode.id !== episodeId
       }))
+      setFilmsFilter(films.filter((film) => {
+        return film.filmDetail.episode.id !== episodeId
+      }))
     }
     const handleSearchChange = (e) =>{
       const listFilm = films
