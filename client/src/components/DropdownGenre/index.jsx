@@ -7,7 +7,7 @@ import Query from '../../query';
 
 const DropdownGenre = () => {
   const genres = useQuery(Query.qGenre);
-  if(genres.loading) return <></>;
+  if(genres.loading) return <><div>Thể loại</div></>;
   return (
     <div className="dropdown font-semibold hover:text-yellow-300 cursor-pointer">
       <div className="text-white py-2 px-4 inline-flex items-center">
