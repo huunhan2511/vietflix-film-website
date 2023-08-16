@@ -31,7 +31,7 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
             >   
                 <div className="relative md:h-[55%] cursor-pointer" >
                     <img
-                        src={data.film.img}
+                        src={data.film?.img}
                         alt="background"
                         className="h-full w-full brightness-[.45]"
                     />
@@ -49,7 +49,7 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
                             </div>
                             <span className='text-white text-[150%] xs:text-[150%] sm:text-left sm:text-[200%] md:text-[250%] lg:text[300%] font-semibold'>
                                 <p className='line-clamp-2'>
-                                    {data.film.name}
+                                    {data.film?.name}
                                 </p>
                             </span>
                             <div className=' w-[50%] p-1 sm:p-2 bg-red-600 xs:text-center md:w-[35%] lg:w-[25%] xl:w-[20%] flex items-stretch hover:bg-opacity-60'
@@ -64,20 +64,20 @@ export default function DetailFilm({isOpen,closeModal,filmId}) {
                 <div className='px-[2%] pt-[5%] flex flex-col'>
                     <span className='sm:text-lg text-white font-semibold'>Tóm tắt phim : </span>
                     <span className='sm:text-lg text-zinc-400 mt-5'>
-                        {!data.film.description ? "Không có thông tin tóm tắt phim " : data.film.description}
+                        {!data.film?.description ? "Không có thông tin tóm tắt phim " : data.film?.description}
                     </span>
             
                 </div>
                 { 
-                data.film.filmDetail.seasons.length 
+                data.film?.filmDetail.seasons.length 
                 &&
                 <div className='px-[2%] pt-[5%]'>
-                    <Episode seasons={data.film.filmDetail.seasons} img={data.film.img} filmId={data.film.id} />
+                    <Episode seasons={data.film?.filmDetail.seasons} img={data.film?.img} filmId={data.film?.id} />
                 </div>
                 }
                 
                 <div className='px-[2%] pt-[5%]'>
-                    <SimilarFilm genres={data.film.genres}/>
+                    <SimilarFilm genres={data.film?.genres}/>
                 </div>
                 <div className='h-14'/>
                 

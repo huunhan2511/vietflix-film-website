@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 import mutations from '../../mutations';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPenToSquare,faTrashCan,faSearch} from "@fortawesome/free-solid-svg-icons"
+import {faPenToSquare,faTrashCan} from "@fortawesome/free-solid-svg-icons"
 
 export default function TableFilm({data,title,functionButton}) { 
     const [films,setFilms] = useState(data)

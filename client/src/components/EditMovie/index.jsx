@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Query from '../../query'
 import Loadingitem from '../LoadingItem';
-import { EPISODES,MULTI_SELECT_GENRE,ACCESS_DENIED,TYPE_MOVIE,UPDATE_MOVIE_SUCCESS } from '../../constant';
+import { EPISODES,MULTI_SELECT_GENRE,ACCESS_DENIED,TYPE_MOVIE,UPDATE_MOVIE_SUCCESS,NOT_FOUND_MOVIE } from '../../constant';
 import { useMutation, useQuery } from '@apollo/client';
 import { MultiSelect } from "react-multi-select-component";
 import { useNavigate } from 'react-router-dom';
@@ -60,7 +60,14 @@ const EditMovie = ({filmId}) => {
         });
         setOptions(temp)
     }});
-    const {loading} = useQuery(Query.qGetDetailFilmEdit,{fetchPolicy: "no-cache", variables:{filmId},onCompleted: (data)=>{
+    const {loading} = useQuery(Query.qGetDetailFilmEdit,{fetchPolicy: "no-cache", variables:{filmId},onCompleted: async (data)=>{
+        if(!data.film){
+            toast.warning(NOT_FOUND_MOVIE)
+            await new Promise((resolve)=>{setTimeout(()=>{
+                navigate(-1)
+                return resolve;
+            },4000)})
+        }
         setFilm(data.film)
         setTime(
             {
@@ -76,8 +83,18 @@ const EditMovie = ({filmId}) => {
             })
         })
         setSelectedOptions(temp)
-    }});
+    }
+    });
     const handleChangeInput = (event) => {
+        if(event.target.name === Object.keys(EPISODES)[1]){
+            film.filmDetail.episode.link_embed = event.target.value
+        }
+        if(event.target.name === Object.keys(EPISODES)[0]){
+            film.filmDetail.episode.link_m3u8 = event.target.value
+        }
+        if(event.target.name === 'name'){
+            film.filmDetail.episode.name = event.target.value
+        }
         setFilm({
             ...film,
             [event.target.name]: event.target.value
@@ -134,7 +151,7 @@ const EditMovie = ({filmId}) => {
             genres.push(option.value)
         })
         const filmUpdate = {
-            desciption: filmId.desciption,
+            description: film.description,
             filmDetail: filmDetailId,
             filmType: TYPE_MOVIE,
             genres: genres,
@@ -153,7 +170,6 @@ const EditMovie = ({filmId}) => {
 
     }
     if (loading || optionQuery.loading) return <Loadingitem/>
-
     return (
         <div className='movie p-5'>
             <div>
@@ -216,6 +232,7 @@ const EditMovie = ({filmId}) => {
                                 <input  className='p-5 text-white bg-[#191919] border border-zinc-700 w-full' 
                                 value={ Object.keys(film).length === 0 ? "" : film.filmDetail.episode[item]}
                                 onChange={handleChangeInput}
+                                name = {item}
                                 />
                             </div>
                             )

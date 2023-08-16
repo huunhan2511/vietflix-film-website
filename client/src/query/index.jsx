@@ -225,6 +225,7 @@ const Query={
             link_embed
             link_m3u8
             time
+            name
           }
         }
         genres {

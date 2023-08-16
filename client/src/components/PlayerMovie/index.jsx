@@ -30,7 +30,7 @@ export default function PlayerMoive({filmType,filmId,episode=null}) {
           <ReactPlayer
               className="react-player"
               playing={true}
-              url= {filmType === "Movie" ? dataFilm.data.film.filmDetail.episode.link_m3u8 : dataFilm.data.film.filmDetail.seasons[0].episodes[0].link_m3u8}
+              url= {filmType === "Movie" ? dataFilm.data.film?.filmDetail.episode.link_m3u8 : dataFilm.data.film?.filmDetail.seasons[0].episodes[0].link_m3u8}
               controls
               width="100%"
               height="90vh"

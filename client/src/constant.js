@@ -21,6 +21,7 @@ export const MULTI_SELECT_GENRE = {
 export const ACCESS_DENIED = "ACCESS DENIED";
 export const TYPE_MOVIE = "626fe94b6bd3447a657b4a62";
 export const URL_OPHIM = "ophim1.com";
+export const NOT_FOUND_MOVIE = "Không tìm thấy thông tin phim"
 export const CLEAR_INPUT_SUCCESS = "Xóa thông tin nhập thành công";
 
 // handle film

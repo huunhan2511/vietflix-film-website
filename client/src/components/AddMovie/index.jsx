@@ -90,7 +90,7 @@ const AddMovie = () => {
     
     const handleAddEpisode = (episode) =>{
         episode = {
-            ...episode,
+            ...dataEpisode,
             time: time.hour+"h"+time.minute+"m"
         }
         mutationAddEpisode({
@@ -166,6 +166,18 @@ const AddMovie = () => {
         }
     }
     const handleChangeInput = (event) => {
+        if(event.target.name === Object.keys(EPISODES)[1]){
+            dataEpisode.link_embed = event.target.value
+            setDataEpisode(dataEpisode)
+        }
+        if(event.target.name === Object.keys(EPISODES)[0]){
+            dataEpisode.link_m3u8 = event.target.value
+            setDataEpisode(dataEpisode)
+        }
+        if(event.target.name === 'name'){
+            dataEpisode.name = event.target.value
+            setDataEpisode(dataEpisode)
+        }
         setDataFilm({
             ...dataFilm,
             [event.target.name]: event.target.value
@@ -194,6 +206,8 @@ const AddMovie = () => {
                 hour: 0
             })
         }
+        console.log(dataFilm)
+
     }
     const handleClearInput = () => {
         setDataFilm({

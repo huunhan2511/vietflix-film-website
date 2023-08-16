@@ -33,7 +33,7 @@ export default function WatchPage() {
         <div className="fixed px-6 min-w-full backdrop-blur shadow h-[7%] flex items-center justify-between">
           <div>
             <span className='text-neutral-400 text-[200%] font-semibold' >
-              {!location.state.nameEpisode ? data.film.name : location.state.nameEpisode}
+              {!location.state.nameEpisode ? data.film?.name : location.state.nameEpisode}
             </span>
           </div>
           <div className='text-xl rounded-full bg-zinc-700 px-2' onClick={previPage}>
@@ -43,7 +43,7 @@ export default function WatchPage() {
       </div>
       <div className="min-h-screen pt-[10%] xl:pt-[3%]"> 
         <div className='player-wrapper'> 
-          <PlayerMovie filmType={!location.state.nameEpisode ? data.film.filmType.name : null} filmId={filmId} episode={location.state.episode}/>
+          <PlayerMovie filmType={!location.state.nameEpisode ? data.film?.filmType.name : null} filmId={filmId} episode={location.state.episode}/>
         </div>
       </div>
     </div>
