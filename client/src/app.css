@@ -723,9 +723,6 @@ label:last-child span {
 .dropdown:hover span{
   color: #FDE047;
 }
-.dropdown:hover svg > path{
-  color: #FDE047;
-}
 
 .dropdown-menu::-webkit-scrollbar{
   width: 5px;
