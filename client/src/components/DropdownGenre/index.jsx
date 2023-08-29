@@ -10,7 +10,7 @@ const DropdownGenre = () => {
   const handleSelectGenre = (title,genreId) =>{
     navigate('/the-loai',{state: {title:title,genreId:genreId}})
   }
-  if(genres.loading) return <><div className="text-white py-2 px-4 inline-flex items-center">Thể loại</div></>;
+  if(genres.loading) return <><div className="text-white py-2 px-4 inline-flex items-center font-semibold">Thể loại</div></>;
   return (
     <div className="dropdown font-semibold hover:text-yellow-300 cursor-pointer">
       <div className="text-white py-2 px-4 inline-flex items-center" >

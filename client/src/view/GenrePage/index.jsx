@@ -56,7 +56,7 @@ const GenrePage = () => {
           <div className="min-h-screen px-20 py-20">
         <div className='py-5'>
             <span className='xl:text-[300%] md:text-[300%] xs:text-[200%] font-bold border-l-red-600 border-l-8'>
-                Danh sách phim {location.state.title}
+                Danh sách phim thể loại "{location.state.title}"
             </span>
         </div> 
         {
