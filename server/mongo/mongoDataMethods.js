@@ -19,12 +19,14 @@ const mongoDataMethods = {
 				conditions.quantity ? await Film.find().sort('-createdAt').limit(conditions.quantity) :
 			await Film.find({slug: new RegExp(conditions.search.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").split(" ").join("-"), 'i')})
 			.sort('-createdAt')
-		}
+		},
+		quantity: async (conditions, quantity) => await Film.find(conditions).sort('-createdAt').limit(quantity)
 	},
     getFilmById: async (id) => await Film.findById(id),
 
-    getAllGenres: async (conditions = null) => conditions === null ? await Genre.find() : await Genre.find().limit(conditions.quantityGenres),
-    getGenreById: async id => Genre.findById(id),
+	getAllGenres: async (conditions = null) => conditions === null ? await Genre.find() : await Genre.find(conditions),
+	getGenresWithQuantity: async ( quantity ) => await Genre.find().limit(quantity),
+	getGenreById: async id => Genre.findById(id),
 
     getAllFilmTypes: async () => await FilmType.find(),
     getFilmTypeById: async id => await FilmType.findById(id),
@@ -37,6 +39,9 @@ const mongoDataMethods = {
 
     getAllEpisodes: async (conditions = null) => conditions === null ? await Episode.find() : await Episode.find(conditions),
     getEpisodeById: async id => await Episode.findById(id),
+
+	getAllAdmins: async () => await Admin.find(),
+	getAdminById: async id => await Admin.findById(id),
 
     //Create
     createFilm: async args => {

@@ -7,7 +7,12 @@ import LoadingPage from '../LoadingPage';
 import Mylayout from '../../components/Mylayout';
 import { useNavigate } from 'react-router-dom';
 export default function TvShowPage() {
-  const genre = useQuery(Query.qGetAllGenre);
+  const genre = useQuery(Query.qGetGerneQuantityFilmQuantity,{
+    variables:{
+        "quantityGenres": 5,
+        "quantityFilms": 10
+    }
+  });
   const navigate = useNavigate();
   let [isOpen, setOpen] = React.useState(() => {
       let initState = false || JSON.parse(localStorage.getItem('isOpen'));

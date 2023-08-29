@@ -1,9 +1,14 @@
 import React from 'react'
-import {faBars,faSearch} from "@fortawesome/free-solid-svg-icons"
+import {faBars,faSearch,faChevronDown} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import logo from "../../img/320x80.png";
 import { Link,useNavigate } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import Query from '../../query';
+
 export default function HeaderSm() {
+    const genres = useQuery(Query.qGenre);
+
     const navigate = useNavigate();
     let menuItems = [
         {name: 'Trang chủ',path:"/"},
@@ -19,7 +24,8 @@ export default function HeaderSm() {
   const submitSearch = ()=>{
     navigate("/tim-kiem",{state:{inputSearch : currentSearch}})
   }
-    let Setting = "Navigation font-semibold text-base hover:text-red-500 px-2 text-white"
+    let Setting = "Navigation font-semibold text-base hover:text-yellow-300 px-2 text-white"
+    if(genres.loading) return <></>
   return (
     <div className="Header lg:hidden">
         <div className="grid grid-cols-5 gap-4 place-items-center">
@@ -48,6 +54,21 @@ export default function HeaderSm() {
                     </span>
                 )
             })}
+            <div className='dropdown'>
+              <button className="text-white py-2 px-4 inline-flex items-center hover:text-yellow-300">
+                <span className="mr-1 font-semibold">Thể loại</span>
+                <FontAwesomeIcon icon={faChevronDown}/>
+              </button>
+              <ul className="dropdown-menu hidden text-white bg-zinc-800 pt-1 max-h-[50vh] overflow-auto">
+                {
+                  genres.data.genres.map((genre,key) => {
+                    return (
+                      <li key={key}><a className="rounded-t font-semibold bg-zinc-800 hover:text-yellow-300 py-2 px-4 block whitespace-no-wrap" href="#"> + {genre.name}</a></li>
+                    )
+                  })
+                }
+              </ul>
+            </div>
         </div>
         <form className={isOpenSearch+" flex justify-end min-w-full px-[5%] sm:px-[5%] xs:px-[5%]"} onSubmit={submitSearch}>
             <input placeholder="Tìm kiếm..." required="" type="text" className='!bg-black p-4 text-white' onChange={onInputChange}/>

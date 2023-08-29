@@ -2,6 +2,7 @@ import React from 'react'
 import { Link,useNavigate } from 'react-router-dom';
 import logo from "../../img/320x80.png";
 import { useLocation } from 'react-router-dom';
+import  DropdownGenre from '../DropdownGenre';
 
 export default function Header() {
     const location = useLocation();
@@ -28,16 +29,17 @@ export default function Header() {
           </span>
           </Link>
         </div>
-        <div className="Nav grid gap-5 grid-cols-3 p-4 ">
+        <div className="Nav grid gap-5 grid-cols-4 p-4">
             {menuItems.map((item,key)=>{
                 return(
-                    <div className="text-center" key={key}>
+                    <div className="inline-flex items-center text-white py-2 px-4 " key={key}>
                       <Link to={item.path}>
                         <span className={(location.pathname === item.path ? 'text-yellow-300' : '') + Setting}>{item.name}</span>
                       </Link>  
                     </div>
                 )
             })}
+            <DropdownGenre/>
         </div>
         <form className="form p-4 w-64" onSubmit={submitSearch}>
           <input className="input" placeholder="Tìm kiếm..." required="" type="text" onChange={onInputChange} />
