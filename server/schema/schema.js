@@ -15,7 +15,7 @@ const typeDefs = gql`
     type Genre {
         id: ID,
         name: String,
-        films: [Film]
+        films (quantityFilms: Int): [Film]
     }
 
     type FilmType {
@@ -67,7 +67,7 @@ const typeDefs = gql`
         films(quantity: Int, search: String): [Film]
         film(id: ID): Film
 
-        genres: [Genre]
+        genres(quantityGenres: Int): [Genre]
         genre(id: ID): Genre
 
         filmTypes: [FilmType]
@@ -81,6 +81,9 @@ const typeDefs = gql`
 
         episodes: [Episode]
         episode(id: ID): Episode
+
+        getAllAdmins: [Admin] @isAuth
+        getAdmin(id: ID): Admin @isAuth
     }
 
     input FilmInput{

@@ -241,6 +241,25 @@ const Query={
       query qCheckToken{
         hello
       }
+    `,
+    qGetGerneQuantityFilmQuantity: gql`
+      query Genres($quantityGenres: Int, $quantityFilms: Int) {
+        genres(quantityGenres: $quantityGenres) {
+          id
+          name
+          films(quantityFilms: $quantityFilms) {
+            description
+            img
+            name
+            slug
+            id
+            filmType {
+              id
+              name
+            }
+          }
+        }
+      }
     `
 }
 export default Query

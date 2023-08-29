@@ -15,7 +15,11 @@ export default function HomePage() {
   
   const [lengthGenre, setlengthGenre] = useState();
   const navigate = useNavigate();
-  const genre = useQuery(Query.qGetAllGenre,{
+  const genre = useQuery(Query.qGetGerneQuantityFilmQuantity,{
+    variables:{
+        "quantityGenres": 5,
+        "quantityFilms": 10
+    },
     onCompleted : (data) =>{
       setlengthGenre(data.genres.length)
     }
