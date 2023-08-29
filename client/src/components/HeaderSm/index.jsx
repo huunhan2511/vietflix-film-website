@@ -55,15 +55,15 @@ export default function HeaderSm() {
                 )
             })}
             <div className='dropdown'>
-              <button class="text-white py-2 px-4 inline-flex items-center hover:text-yellow-300">
-                <span class="mr-1 font-semibold">Thể loại</span>
+              <button className="text-white py-2 px-4 inline-flex items-center hover:text-yellow-300">
+                <span className="mr-1 font-semibold">Thể loại</span>
                 <FontAwesomeIcon icon={faChevronDown}/>
               </button>
-              <ul class="dropdown-menu hidden text-white bg-zinc-800 pt-1 max-h-[50vh] overflow-auto">
+              <ul className="dropdown-menu hidden text-white bg-zinc-800 pt-1 max-h-[50vh] overflow-auto">
                 {
                   genres.data.genres.map((genre,key) => {
                     return (
-                      <li key={key}><a class="rounded-t font-semibold bg-zinc-800 hover:text-yellow-300 py-2 px-4 block whitespace-no-wrap" href="#"> + {genre.name}</a></li>
+                      <li key={key}><a className="rounded-t font-semibold bg-zinc-800 hover:text-yellow-300 py-2 px-4 block whitespace-no-wrap" href="#"> + {genre.name}</a></li>
                     )
                   })
                 }

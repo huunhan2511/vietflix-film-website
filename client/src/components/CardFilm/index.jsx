@@ -44,7 +44,7 @@ export default function CardFilm({openModal,film}) {
                   </p>
                 </span>
                 <span className='flex gap-8 justify-center'>
-                    <span className='sm:test-sm lg:text-xl text-red-600'>
+                    <span className='sm:test-sm lg:text-xl text-red-600 truncate'>
                         Thể loại : 
                     </span>
                     <span className='text-sm sm:test-sm lg:text-xl text-white'>
