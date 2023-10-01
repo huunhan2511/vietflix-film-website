@@ -35,8 +35,9 @@ export default function ListFilm({title,openModal,genreId,filmType=null,films=[]
             <Slide
               className="listFilm"
               slideToShow={4}
-              infinite={false} 
+              infinite={true} 
               dots={false}
+              slidesToScroll={4}
             >
               { 
                 filmType === null

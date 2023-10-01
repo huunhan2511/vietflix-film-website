@@ -18,13 +18,14 @@ const CustomNextArrow = (props) => {
   );
 }
 
-export default function Slide({ children, speed=800, autoplay=false, className = '', slideToShow, infinite=true, dots=true, arrows=true}) {
+export default function Slide({ children, speed=800, slidesToScroll = 1, autoplay=false, className = '', slideToShow, infinite=true, dots=true, arrows=true, focusOnSelect = true}) {
     const [settings ] = React.useState(() => {
         const initSettings = {
+            focusOnSelect : focusOnSelect,
             infinite: infinite,
             speed: speed,
             slidesToShow: slideToShow,
-            slidesToScroll: 1,
+            slidesToScroll: slidesToScroll,
             autoplay: autoplay,
             adaptiveHeight:false,
             className: className,

@@ -37,8 +37,8 @@ export default function HomePage() {
     return initState;
   });
   const openModal = (id) => {
-      setFilmId(id);
       setOpen(true);
+      setFilmId(id);
       localStorage.setItem('isOpen',true)
       document.body.style.overflow = 'hidden';
   }
