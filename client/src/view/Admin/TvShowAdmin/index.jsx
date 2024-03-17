@@ -26,7 +26,7 @@ export default function TvShowAdmin() {
     return <Loading />;
   }
   const addTvShow = () =>{
-    navigate('/admin/them-phim-le')
+    navigate('/admin/them-phim-bo')
   }
   return (
     <LayoutAdmin>

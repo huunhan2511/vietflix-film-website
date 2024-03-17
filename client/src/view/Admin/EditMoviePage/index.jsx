@@ -5,6 +5,9 @@ import {useLocation, useNavigate} from "react-router-dom";
 import { ACCESS_DENIED } from '../../../constant';
 import { useQuery } from '@apollo/client';
 import Query from '../../../query';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
+
 const EditMoviePage = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -33,7 +36,8 @@ const EditMoviePage = () => {
         <LayoutAdmin>
             <div className="flex justify-center min-h-screen bg-[#141414]">
                 <div className="w-full m-8 rounded-xl bg-[#191919]">
-                    <div className="header-content-admin text-white flex justify-between">
+                <div className="header-content-admin text-white flex justify-start">
+                        <FontAwesomeIcon icon={faChevronLeft} className='px-5' onClick={()=> navigate(-1)}/>
                         <div>Cập nhật thông tin phim</div>
                     </div>
                     <EditMovie filmId={idFilm}/>

@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import {useLocation} from "react-router-dom";
 import Query from '../../../query'
 import Loadingitem from '../../../components/LoadingItem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faChevronLeft} from "@fortawesome/free-solid-svg-icons"
 
 const EditGenrePage = () => {
     const navigate = useNavigate();
@@ -70,7 +72,8 @@ const EditGenrePage = () => {
         <LayoutAdmin>
             <div className="flex justify-center min-h-screen bg-[#141414]">
                 <div className="w-full m-8 rounded-xl bg-[#191919]">
-                    <div className="header-content-admin text-white flex justify-between">
+                    <div className="header-content-admin text-white flex justify-start">
+                        <FontAwesomeIcon icon={faChevronLeft} className='px-5' onClick={()=> navigate(-1)}/>
                         <div>Sửa thể loại</div>
                     </div>
                     <div className='p-5'>
@@ -84,7 +87,7 @@ const EditGenrePage = () => {
                             </div>
                         </form>
                         <div className='text-white flex justify-end mt-5'>
-                            <button className='px-10 py-4 bg-red-700 rounded-md disabled:opacity-50' 
+                            <button className='px-10 py-4 bg-red-700 rounded-md disabled:opacity-50 button-update' 
                             disabled={genre.name === '' ? true : false}
                             onClick={()=>handleUpdateGenre()}
                             >

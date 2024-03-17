@@ -1,6 +1,6 @@
 import React from 'react';
 import LayoutAdmin from '../../../components/LayoutAdmin';
-import AddMovie from '../../../components/AddMovie';
+import AddTvShow from '../../../components/AddTvShow';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import Query from '../../../query'
@@ -8,7 +8,7 @@ import { ACCESS_DENIED } from '../../../constant';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 
-const AddMoviePage = () => {
+const AddTvShowPage = () => {
     const navigate = useNavigate();
     const queryCheckToken = useQuery(Query.qCheckToken,{
         context: {
@@ -29,13 +29,13 @@ const AddMoviePage = () => {
                 <div className="w-full m-8 rounded-xl bg-[#191919]">
                     <div className="header-content-admin text-white flex justify-start">
                         <FontAwesomeIcon icon={faChevronLeft} className='px-5' onClick={()=> navigate(-1)}/>
-                        <div>Thêm phim lẻ</div>
+                        <div>Thêm phim bộ</div>
                     </div>
-                    <AddMovie/>
+                    <AddTvShow/>
                 </div>
             </div>
         </LayoutAdmin>
     );
 }
 
-export default AddMoviePage;
+export default AddTvShowPage;

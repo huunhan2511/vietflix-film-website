@@ -6,6 +6,8 @@ import mutations from '../../../mutations';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Query from '../../../query'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faChevronLeft} from "@fortawesome/free-solid-svg-icons"
 
 const AddGenrePage = () => {
     const navigate = useNavigate();
@@ -53,7 +55,8 @@ const AddGenrePage = () => {
         <LayoutAdmin>
             <div className="flex justify-center min-h-screen bg-[#141414]">
                 <div className="w-full m-8 rounded-xl bg-[#191919]">
-                    <div className="header-content-admin text-white flex justify-between">
+                    <div className="header-content-admin text-white flex justify-start">
+                        <FontAwesomeIcon icon={faChevronLeft} className='px-5' onClick={()=> navigate(-1)}/>
                         <div>Thêm thể loại</div>
                     </div>
                     <div className='p-5'>

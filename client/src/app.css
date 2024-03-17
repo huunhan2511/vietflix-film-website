@@ -237,6 +237,7 @@ body::-webkit-scrollbar-thumb {
   bottom: 0;
   background-color: rgba(27, 27, 27, 0.856);
   overflow: hidden;
+  z-index: 2;
 }
 
 .select-season select {
@@ -734,4 +735,29 @@ label:last-child span {
 .dropdown-menu::-webkit-scrollbar-thumb {
   background-color: #FDE047;
   border-radius: 5px;
+}
+
+.ModalTvShowEpisode {
+  position: fixed;
+  top: 25%;
+  left: 10%;
+  right: 10%;
+  background-color: #171717;
+  overflow: auto;
+  height: 50%;
+  border-radius: 1.5%;
+  outline: none;
+  border: none;
+  z-index: 1000;
+}
+@media screen and (min-width: 1280px) {
+  .ModalTvShowEpisode {
+    left: 26%;
+    right: 26%;
+  }
+}
+
+.ModalTvShowEpisode::-webkit-scrollbar {
+  width: 100%;
+  background: transparent; /* make scrollbar transparent */
 }
