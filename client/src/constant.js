@@ -34,3 +34,9 @@ export const ADD_GENRE_SUCCESS = "Thêm thể loại thành công";
 export const DELETE_GENRE_SUCCESS = "Xoá thể loại thành công";
 export const UPDATE_GENRE_SUCCESS = "Cập nhật thể loại thành công";
 export const WARNING_GENRE_NOT_CAN_DELETE = "Không thể xóa thể loại đã tồn tại phim";
+
+//handle TVShow
+export const VALIDATE_TVSHOW_INFORMATION = "Vui lòng nhập thông tin phim";
+export const VALIDATE_DATA_TVSHOW = "Vui lòng nhập toàn bộ thông tin phim, mùa và tập phim";
+export const ADD_TVSHOW_SUCCESS = "Thêm phim bộ thành công";
+export const TYPE_TVSHOW = "6270979651e4036f47581774";

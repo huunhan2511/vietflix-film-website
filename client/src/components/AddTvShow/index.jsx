@@ -1,50 +1,82 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import StepProgress from '../StepProgress';
-import { ACCESS_DENIED,MULTI_SELECT_GENRE } from '../../constant';
-import { useQuery } from '@apollo/client';
+import { ACCESS_DENIED, VALIDATE_TVSHOW_INFORMATION,VALIDATE_DATA_TVSHOW,TYPE_TVSHOW,ADD_TVSHOW_SUCCESS } from '../../constant';
+import { useQuery,useMutation } from '@apollo/client';
+import mutations from '../../mutations';
 import Query from '../../query'
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 import SeasonInformation from '../SeasonInformation';
 import TvShowInformation from '../TvShowInformation';
+import { toast } from 'react-toastify';
 
 const seasonDefault = {
     nameSeason: "",
     episodes : [
         {
             name: "",
-            hour: 0,
-            minute: 0,
+            hour: "",
+            minute: "",
             link_embed: "",
             link_m3u8: ""
         }
     ]
 }
 const tvShowDefault = 
-    {
-        nameTvShow: "",
-        genres : [],
-        img: "",
-        description : "",
-        seasons: [
-            seasonDefault
-        ]
-    }
-    const handleInitialIsOpen = (newseasons) =>{
-        let initialIsOpen = [];
-        newseasons.forEach((season, index) => {
-            initialIsOpen[index] = Array(season.episodes.length).fill(false);
-        });
-        console.log(initialIsOpen)
-        return initialIsOpen;
-    }
-    const AddTvShow = () => {
-        const step = 2;
-        const navigate = useNavigate();
-        const [progress,setProgress] = useState(1);
-        const [tvShow,setTvShow] = useState(tvShowDefault);
-        const [isOpen,setIsOpen] = useState([[false]]);
+{
+    nameTvShow: "",
+    genres : [],
+    img: "",
+    description : "",
+    seasons: [
+        seasonDefault
+    ]
+}
+const handleInitialIsOpen = (newseasons) =>{
+    let initialIsOpen = [];
+    newseasons.forEach((season, index) => {
+        initialIsOpen[index] = Array(season.episodes.length).fill(false);
+    });
+    return initialIsOpen;
+}
+const AddTvShow = () => {
+    const step = 2;
+    const navigate = useNavigate();
+    const [progress,setProgress] = useState(1);
+    const [tvShow,setTvShow] = useState(tvShowDefault);
+    const [isOpen,setIsOpen] = useState([[false]]);
+    // const [episodes,setEpisodes] = useState([]);
+    const [mutationCreateEpisode] = useMutation(mutations.createEpisode,
+        {onError : (error) => {
+            if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+                localStorage.removeItem("token")
+                navigate("/login-admin")
+            }
+            toast.error(error.graphQLErrors[0].message);
+        }
+    });
+
+    const [mutationCreateSeason] = useMutation(mutations.createSeason,
+        {onError : (error) => {
+            if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+                localStorage.removeItem("token")
+                navigate("/login-admin")
+            }
+            toast.error(error.graphQLErrors[0].message);
+        }
+    });
+
+    const [mutationCreateFilm] = useMutation(mutations.createFilm,{
+        onError : (error) => {
+            if(error.graphQLErrors[0].extensions.code === ACCESS_DENIED){
+                localStorage.removeItem("token")
+                navigate("/login-admin")
+            }
+            toast.error(error.graphQLErrors[0].message);
+        }
+    })
+    const [mutationCreateFilmDetail] = useMutation(mutations.createFilmDetail);
 
     const queryCheckToken = useQuery(Query.qCheckToken,{
         context: {
@@ -62,10 +94,18 @@ const tvShowDefault =
 
     
     const handleStep = (index) =>{
+        if(!validateTvShowInformation()){
+            toast.warning(VALIDATE_TVSHOW_INFORMATION);
+            return;
+        }
         if(index+1 === progress) return;
         setProgress(index+1);
     }
     const nextStep = () =>{
+        if(!validateTvShowInformation()){
+            toast.warning(VALIDATE_TVSHOW_INFORMATION);
+            return;
+        }
         var next = progress + 1;
         setProgress(next);
     }
@@ -133,6 +173,12 @@ const tvShowDefault =
             [event.target.name]: event.target.value
         })
     }
+    const handleChangeGenre = (dataGenres) =>{
+        setTvShow({
+            ...tvShow,
+            genres : dataGenres
+        })
+    }
 
     // Function to handle change in nameSeason
     const handleChangeNameSeason = (index, newName) => {
@@ -188,6 +234,141 @@ const tvShowDefault =
             return newState;
         });
     }
+
+    const validateDataTvShow = () =>{
+        for (let key in tvShow){
+            if(key === 'seasons'){
+                for (let season of tvShow.seasons) {
+                    const validateSeason = validateSeasonEpisodes(season);
+                    if (!validateSeason) {
+                        return false;
+                    }
+                }
+            }
+            if(tvShow[key] === ""){
+                return false;
+            }
+        }
+        return true;
+    }
+    const validateTvShowInformation = () =>{
+        for (let key in tvShow){
+            if(key === "seasons") continue;
+            if(key === 'genres'){
+                if(tvShow[key].length === 0){
+                    return false;
+                }
+            }
+            if(tvShow[key] === ""){
+                return false;
+            }
+        }
+        return true;
+    }
+    const validateSeasonEpisodes = (season) => {
+        if (season.nameSeason === "") {
+            return false;
+        }
+        for (let episode of season.episodes) {
+            for(let key in episode){
+              if(key === "link_m3u8" || key==="link_embed") continue;
+                if(episode[key] === ""){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    const handleCreateTvShow = async () => {
+        if (!validateDataTvShow()) {
+            toast.warning(VALIDATE_DATA_TVSHOW);
+            return;
+        }
+        document.getElementById('loader').classList.add('active');
+        const seasonsPromises = tvShow.seasons.map(async (season) => {
+            const episodesPromises = season.episodes.map(async (episode) => {
+                const episodeData = {
+                    name: episode.name,
+                    time: episode.hour + "h" + episode.minute + "m",
+                    link_m3u8: episode.link_m3u8,
+                    link_embed: episode.link_embed
+                };
+                try {
+                    const response = await mutationCreateEpisode({
+                        variables: { input: episodeData },
+                        context: { headers: { authorization: localStorage.getItem("token") } }
+                    });
+                    return response.data.createEpisode.id;
+                } catch{
+                    return null;
+                }
+            });
+            const episodeIds = await Promise.all(episodesPromises);
+            if (episodeIds.some(id => id === null)) {
+                document.getElementById('loader').classList.remove('active');
+                return null; // Skip this season if there was an error creating an episode
+            }
+            const seasonData = {
+                name: season.nameSeason,
+                total_episodes: episodeIds.length,
+                episodes: episodeIds
+            };
+            try {
+                const response = await mutationCreateSeason({
+                    variables: { input: seasonData },
+                    context: { headers: { authorization: localStorage.getItem("token") } }
+                });
+                return response.data.createSeason.id;
+            } catch{
+                return null;
+            }
+        });
+    
+        const seasonIds = await Promise.all(seasonsPromises);
+        if (seasonIds.some(id => id === null)) {
+            document.getElementById('loader').classList.remove('active');
+            // If there was an error creating a season, return without creating the film detail
+            return;
+        }
+    
+        const filmDetailData = {
+            total_seasons: seasonIds.length,
+            seasons: seasonIds,
+            episode: null
+        };
+    
+        try {
+            const response = await mutationCreateFilmDetail({
+                variables: { input: filmDetailData },
+                context: { headers: { authorization: localStorage.getItem("token") } }
+            });
+            const dataFilm = {
+                description: tvShow.description,
+                filmType: TYPE_TVSHOW,
+                filmDetail: response.data.createFilmDetail.id,
+                genres: tvShow.genres.map(genre => {return genre.value}),
+                img: tvShow.img,
+                name: tvShow.nameTvShow
+            }
+            const result = await mutationCreateFilm({
+                variables: { input: dataFilm },
+                context: {
+                    headers: {
+                        authorization: localStorage.getItem("token"),
+                    },
+                }
+            })
+            if(result.data){
+                toast.success(ADD_TVSHOW_SUCCESS)
+                document.getElementById('loader').classList.remove('active');
+                setTvShow(tvShowDefault)
+            }
+        } catch (error) {
+            document.getElementById('loader').classList.remove('active');
+        }
+    };
+    
+    
     return (
         <div className='p-5'>
             <StepProgress 
@@ -206,6 +387,7 @@ const tvShowDefault =
                     nextStep={nextStep} 
                     tvShow={tvShow}
                     handleChangeInput = {handleChangeTvShowInformation}
+                    handleChangeGenre = {handleChangeGenre}
                 />
             </div>
 
@@ -232,12 +414,20 @@ const tvShowDefault =
                  />
                 ))}
             </div>
-
-            <div className='text-white text-xl flex justify-end'>
-                    <button className='button-update !py-4 !px-6' onClick={()=>{console.log(tvShow)}}>Hoàn tất</button>
-            </div>
+            {
+                progress === step
+                 &&  
+                <div className='text-white text-xl flex justify-end'>
+                    <button className='button-add !py-4 !px-6 disabled:opacity-50' 
+                    onClick={handleCreateTvShow}>Hoàn tất</button>
+                </div>
+            }
+           
         </div>
     );
 }
 
 export default AddTvShow;
+
+
+//65055db7b78cf153bcdcb117

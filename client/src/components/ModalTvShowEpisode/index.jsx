@@ -5,8 +5,8 @@ import { EPISODES } from '../../constant';
 const episodeDefault =  
     {
         name: "",
-        hour: 0,
-        minute: 0,
+        hour: "",
+        minute: "",
         link_embed: "",
         link_m3u8: ""
     };
@@ -30,16 +30,32 @@ const ModalTvShowEpisode = ({
     closeModal();
   }
   const handleChangeEpisodeInformation = (indexSeason,indexEpisode, name,value) =>{
+    if (name === "minute") {
+      value = parseInt(value) > 59 ? 59 : parseInt(value) < 0 ? 0 : value;
+    } else if (name === "hour") {
+        value = parseInt(value) < 0 ? 0 : value;
+    }
     setDataEpisode({...dataEpisode, [name]:value});
     handleChangeEpisode(indexSeason,indexEpisode, name,value);
   }
+
+  const validateDataEpisode = () => {
+    for (let key in dataEpisode) {
+      if(key === "link_m3u8" || key==="link_embed") continue;
+      if (dataEpisode[key] === "") {
+          return false;
+      }
+    }
+    return true;
+  }
   return(
     <Modal
-                ariaHideApp={false}
-                className="ModalTvShowEpisode"
-                overlayClassName="Overlay"
-                isOpen={isOpen}
-            >
+        ariaHideApp={false}
+        className="ModalTvShowEpisode"
+        overlayClassName="Overlay"
+        isOpen={isOpen}
+        onRequestClose = {closeModal}
+    >
       <div className='h-5/6 text-white flex items-center justify-center align-middle'>
         <form>
           <div className='w-full flex'>
@@ -94,7 +110,8 @@ const ModalTvShowEpisode = ({
             >
                 Xóa tập
             </button>
-            <button className='button-edit px-10 py-4 bg-red-700 rounded-md disabled:opacity-50 mx-5' 
+            <button className='button-edit px-10 py-4 bg-red-700 rounded-md disabled:opacity-50 mx-5'
+              disabled = {!validateDataEpisode() ? true : false } 
               onClick={handleConfirmEpisode}
             >
                 Thêm phim

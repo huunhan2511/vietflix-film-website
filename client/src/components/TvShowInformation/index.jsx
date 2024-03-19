@@ -10,7 +10,7 @@ const tvShowDefault =
         img: "",
         description : "",
     }
-const TvShowInformation = ({nextStep,tvShow=tvShowDefault, handleChangeInput = () =>{}}) => {
+const TvShowInformation = ({nextStep,tvShow=tvShowDefault, handleChangeInput = () =>{}, handleChangeGenre = ()=>{}}) => {
     const [options,setOptions] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
     const {loading} = useQuery(Query.qGenre,{fetchPolicy: "no-cache", onCompleted: (data)=>{
@@ -26,6 +26,7 @@ const TvShowInformation = ({nextStep,tvShow=tvShowDefault, handleChangeInput = (
     const handleSelectGenre = (selected) =>{
         if(selectedOptions.length === options.length) return;
         setSelectedOptions(selected)
+        handleChangeGenre(selected)
     }
     return (
     <>

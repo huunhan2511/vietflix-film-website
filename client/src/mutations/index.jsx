@@ -8,7 +8,6 @@ const mutations = {
         }
     `,
     createFilmDetail: gql`
-    ,
         mutation CreateFilmDetail($input: FilmDetailInput){
             createFilmDetail(input: $input){
                 id
@@ -16,7 +15,6 @@ const mutations = {
         }
     `,
     createFilm: gql`
-    ,
         mutation CreateFilm($input: FilmInput){
             createFilm(input: $input){
                 id
@@ -89,6 +87,14 @@ const mutations = {
                 id
             }
         }
+    `,
+    createSeason: gql`
+        mutation CreateSeason($input: SeasonInput){
+            createSeason(input: $input){
+                id
+            }
+        }
+    
     `
 }
 export default mutations;

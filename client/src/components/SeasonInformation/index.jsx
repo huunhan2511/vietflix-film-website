@@ -7,8 +7,8 @@ const seasonDefault = {
     episodes : [
         {
             name: "",
-            hour: 0,
-            minute: 0,
+            hour: "",
+            minute: "",
             link_embed: "",
             link_m3u8: ""
         }
@@ -42,19 +42,19 @@ const SeasonInformation = (
         setDataSeason({...dataSeason,
             episodes: [...dataSeason.episodes, {
                 name: "",
-                hour: 0,
-                minute: 0,
+                hour: "",
+                minute: "",
                 link_embed: "",
                 link_m3u8: ""
             }]}
             )
     }
     const handleDeleteDataEpisode = (indexSeason,indexEpisode) =>{
-        if(dataSeason.lenght <= 1) return;
+        if(dataSeason.episodes.length <= 1) return;
         handleDeleteEpisode(indexSeason,indexEpisode);
         setDataSeason({
             ...dataSeason,
-            episodes : dataSeason.episodes.filter((episode,index) =>{return index != indexEpisode})
+            episodes : dataSeason.episodes.filter((episode,index) =>{return index !== indexEpisode})
         })
     }
     const handleChangeSeasonInformation = (index, newName) => {
