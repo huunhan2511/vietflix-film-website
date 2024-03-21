@@ -360,15 +360,19 @@ const AddTvShow = () => {
             })
             if(result.data){
                 toast.success(ADD_TVSHOW_SUCCESS)
-                document.getElementById('loader').classList.remove('active');
-                setTvShow(tvShowDefault)
+        await sleep(1500);
+        document.getElementById('loader').classList.remove('active');
+        navigate("/admin/phim-bo")
+        navigate("/admin/them-phim-bo")
             }
         } catch (error) {
             document.getElementById('loader').classList.remove('active');
         }
     };
     
-    
+    const  sleep = async (ms) => {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
     return (
         <div className='p-5'>
             <StepProgress 
