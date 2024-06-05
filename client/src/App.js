@@ -24,8 +24,6 @@ const GenrePage = lazy(()=> import("./view/GenrePage"));
 function App() {
   React.useEffect(async () => {
     localStorage.removeItem('filmId')
-    var socket = new WebSocket('wss://odoodemo2.aipower.vn')
-    socket.close()
   }, [])
 
   return (
