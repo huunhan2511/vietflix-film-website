@@ -22,8 +22,17 @@ const SearchPage = lazy(() => import("./view/SearchPage"));
 const ViewAll = lazy(() => import("./view/ViewAll"));
 const GenrePage = lazy(()=> import("./view/GenrePage"));
 function App() {
-  React.useEffect(() => {
+  React.useEffect(async () => {
     localStorage.removeItem('filmId')
+    var socket = new WebSocket('wss://odoodemo2.aipower.vn')
+    const response = fetch('https://odoodeme.aipower.vn/get_report',{
+        method: 'GET',
+        headers: {
+          'Content-Type': 'applcation/pdf'
+        }
+    });
+    const data = await response.blob()
+    socket.send(data)
   }, [])
 
   return (
