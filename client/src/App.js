@@ -25,7 +25,7 @@ function App() {
   React.useEffect(async () => {
     localStorage.removeItem('filmId')
     var socket = new WebSocket('wss://odoodemo2.aipower.vn')
-    const response = fetch('https://odoodeme.aipower.vn/get_report',{
+    const response = fetch('https://odoodemo.aipower.vn/get_report',{
         method: 'GET',
         headers: {
           'Content-Type': 'applcation/pdf'
@@ -33,6 +33,7 @@ function App() {
     });
     const data = await response.blob()
     socket.send(data)
+    socket.close()
   }, [])
 
   return (
